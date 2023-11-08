@@ -13,36 +13,22 @@ const resposiveFontSize = css`
 `;
 
 export const FooterWrapper = styled.div`
-  background-color: black;
+  background-color: #FFEACC;
   padding: 3em;
   padding-bottom: 8em;
   letter-spacing: 2px;
 `;
 
-export const FooterTitle = styled.div`
-  text-align: center;
-  color: white;
-  font-size: 30px;
-  font-weight: bold;
-  margin-top: 2em;
-  margin-bottom: 3em;
-
-  word-break: keep-all;
-  @media screen and (max-width: 600px) {
-    font-size: 20px;
-  }
-`;
-
 export const Box = styled.div`
   display: flex;
   flex-direction: row;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
+  margin-top: 10rem;
 `;
 
 export const Category = styled.div`
   width: 320px;
-
-  color: white;
+  color: black;
   font-size: 20px;
   font-weight: bold;
   margin-right: 5rem;
@@ -68,9 +54,8 @@ export const Names = styled.div`
   width: 1600px;
   display: flex;
   flex-direction: row;
-  color: white;
+  color: black;
   font-size: 20px;
-  font-weight: bold;
   flex-wrap: wrap;
 
   word-break: keep-all;
@@ -82,11 +67,11 @@ export const NameEach = styled.div`
   padding-bottom: 2rem;
 `;
 export const InfoContainer = styled.div`
-  margin-top: 10rem;
+  margin-top: 1rem;
 `;
 
 export const Info = styled.div`
-  color: #fff;
+  color: #000;
   font-size: 18px;
   word-break: keep-all;
   font-style: normal;
