@@ -1,7 +1,7 @@
-
+import List from './../components/Main/List'
 export default function Main() {
   return (
-    <>메인페이지</>
+    <List></List>
 
     );
 }

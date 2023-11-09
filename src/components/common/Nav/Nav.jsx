@@ -1,13 +1,15 @@
 
 import * as N from './NavStyle';
-
+import LogoImage from '/logo.png';
 const Nav = () => {
 
 
   return (
     <N.NavWrapper>
       <N.NavContent>
-        <N.NavTag href="/">MAIN</N.NavTag>
+        <a href="/">
+          <N.LogoImage src={LogoImage} alt="로고 이미지" />
+        </a>
         <input type="text" placeholder="검색" />
         <N.NavTag href="/mypage">MYPAGE</N.NavTag>
         <N.NavTag href="/login">LOGIN</N.NavTag>

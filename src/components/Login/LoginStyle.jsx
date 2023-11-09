@@ -6,10 +6,10 @@ export const LogoContainer = styled.div`
   display: flex;
   justify-content: center; /* 가로 가운데 정렬 */
 `;
+
 export const LogoImage = styled.img`
   width: 100px;
   height: auto;
-
 
 `;
 export const Title = styled.div`

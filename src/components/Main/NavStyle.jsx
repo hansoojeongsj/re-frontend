@@ -11,17 +11,33 @@ export const NavWrapper = styled.div`
 
 export const NavContent = styled.div`
   display: flex;
+  align-items: center; /* 추가 */
+  justify-content: space-between; /* 변경 */
   margin-bottom: 90px;
-  justify-content: end;
 `;
+
 export const LogoImage = styled.img`
-  width: 100px;
-  height: auto; 
-`
+  width: 200px;
+  height: auto;
+`;
+export const NavInput = styled.input`
+  width: 700px;
+  height: 60px;
+  border-radius: 20px;
+  padding: 0 10px;
+  color: black;
+  background-color: #D9D9D9;
+  font-size: 17px;
+  font-weight: bold;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); /* 그림자 효과 */
+
+  /* 기타 스타일들 */
+`;
+
 export const NavTag = styled.a`
-  width: 150px;
-  height: 45px;
-  border-radius: 50px;
+  width: 80px;
+  height: 80px;
+  border-radius: 20px;
   background: #D9D9D9;
 
   display: flex;
@@ -32,15 +48,13 @@ export const NavTag = styled.a`
   text-align: center;
   font-size: 20px;
   font-weight: 700;
-  text-align: center;
 
   &:hover {
     color: white;
-    box-shadow: 0px 4px 4px 4px rgba(0, 0, 0, 0.25) inset;
+    box-shadow: 0px 4px 4px 4px rgba(0, 0, 0, 0.25); /* 그림자 효과 */
   }
 
   @media screen and (max-width: 900px) {
     display: none;
   }
-
 `;
