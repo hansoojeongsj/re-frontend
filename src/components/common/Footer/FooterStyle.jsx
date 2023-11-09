@@ -15,15 +15,16 @@ const resposiveFontSize = css`
 export const FooterWrapper = styled.div`
   background-color: #FFEACC;
   padding: 3em;
-  padding-bottom: 8em;
+  padding-bottom: 2em;
   letter-spacing: 2px;
 `;
+
 
 export const Box = styled.div`
   display: flex;
   flex-direction: row;
   margin-bottom: 2rem;
-  margin-top: 10rem;
+  margin-top: 2rem;
 `;
 
 export const Category = styled.div`
