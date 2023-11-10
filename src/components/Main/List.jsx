@@ -1,11 +1,17 @@
-
-// import * as N from './NavStyle';
+import Container from './Container';
 import Nav from './Nav';
+import MenuImage from './MenuImage';
+
 const List = () => {
 
 
   return (
-    <Nav></Nav>
+    <Container>
+      <Nav>
+      </Nav>
+      <MenuImage>
+      </MenuImage>
+    </Container>
   );
 };
 

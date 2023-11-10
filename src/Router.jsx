@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import {  Route, Routes } from 'react-router-dom';
 import Main from './page/Main';
 import Detail from './page/Detail';
 import Login from './page/Login';
@@ -7,13 +7,12 @@ import Paying from './page/Paying';
 import Signin from './page/Signin';
 //import Nav from './components/common/Nav/Nav';
 import Footer from './components/common/Footer/Footer';
-import List from './components/Main/List';
+//import List from './components/Main/List';
 
 
 function AppNavigation() {
   return (
     <>
-      <List />
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/login" element={<Login />} />

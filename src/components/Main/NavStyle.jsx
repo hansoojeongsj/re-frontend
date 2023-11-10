@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const NavWrapper = styled.div`
-  background-color: white;
+  background-color: #Fff;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -12,16 +12,17 @@ export const NavContent = styled.div`
   display: flex;
   align-items: center; /* 추가 */
   justify-content: space-between; /* 변경 */
+  width: 100%;
 `;
 
 export const LogoImage = styled.img`
   width: 200px;
   height: auto;
-  @media screen and (max-width: 550px){
-    width: 115px;
+  @media screen and (max-width: 650px){
+    width: 100px;
 
   }
-  @media screen and (min-width: 550px) and (max-width: 800px){
+  @media screen and (min-width: 650px) and (max-width: 800px){
     width: 150px;
 
   }
@@ -32,7 +33,10 @@ export const SearchWrapper = styled.div`
   align-items: center;
   justify-content: center;
   min-width: 140px;
+  @media screen and (max-width: 650px) {
+    min-width: 115px;
 
+  }
 `;
 
 export const GrayBox = styled.div`
@@ -47,11 +51,17 @@ export const GrayBox = styled.div`
   color: #FFAC33;
   font-size: 30px;
   padding-left: 20px;
+  @media screen and (max-width: 650px) {
+  font-size: 20px; 
+  padding-left: 10px;
+  margin-right: 15px; 
+
+  }
 `;
 
 export const NavInput = styled.input`
   width: calc(100% - 40px);
-  height: 70px;
+  height: 60px;
   border-radius: 20px;
   padding: 0 10px;
   padding-left: 10px;
@@ -60,13 +70,17 @@ export const NavInput = styled.input`
   background-color: #D9D9D9;
   font-size: 17px;
   font-weight: bold;
+  @media screen and (max-width: 650px) {
+  padding-left: 5px;
+  font-size: 15px;
 
+  }
 
 `;
 
 export const NavTag = styled.a`
   width: 75px;
-  height: 75px;
+  height: 65px;
   border-radius: 20px;
   background: #D9D9D9;
 
@@ -83,12 +97,15 @@ export const NavTag = styled.a`
     color: #FFEACC;
   }
   
-  @media screen and (max-width: 600px) {
-    width: 45px; /* 창의 너비가 500px 미만이면 40px로 설정 */
+  @media screen and (max-width: 650px) {
+    width: 30px; /* 창의 너비가 500px 미만이면 40px로 설정 */
+    font-size: 20px; 
+    margin-right: 15px;
+
   }
 
-  @media screen and (min-width: 600px) and (max-width: 700px) {
-    width: 60px; /* 창의 너비가 500px 이상 700px 미만이면 60px로 설정 */
+  @media screen and (min-width: 650px) and (max-width: 800px) {
+    width: 40px; /* 창의 너비가 500px 이상 700px 미만이면 60px로 설정 */
   }
 `;
 
