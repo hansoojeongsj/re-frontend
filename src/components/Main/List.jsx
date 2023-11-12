@@ -1,6 +1,7 @@
+import { Category } from '../common/Footer/FooterStyle';
 import Container from './Container';
+import MenuCategory from './MenuCategory';
 import Nav from './Nav';
-import MenuImage from './MenuImage';
 
 const List = () => {
 
@@ -9,8 +10,7 @@ const List = () => {
     <Container>
       <Nav>
       </Nav>
-      <MenuImage>
-      </MenuImage>
+      <MenuCategory /> 
     </Container>
   );
 };
