@@ -1,11 +1,8 @@
 import styled from 'styled-components';
 
 export const NavWrapper = styled.div`
-  background-color: #Fff;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   padding: 3em;
+  position: relative;
 `;
 
 export const NavContent = styled.div`
@@ -119,4 +116,38 @@ export const TodayMenuImage = styled.img`
   width: 100%; // 이미지 너비를 100%로 설정
   height: 200px; // 이미지 높이를 자동으로 조정
 
+`;
+export const ModalWrapper = styled.div`
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 50%;
+  background-color: rgba(0, 0, 0, 0); /* 완전히 투명한 배경 */
+  display: flex;
+  justify-content: flex-end;
+  z-index: 999;
+`;
+
+export const ModalContent = styled.div`
+  width: 66.66%; /* 모달의 2/3 */
+  background-color: #FFFAF3;
+  color:  #FFAC33;
+  font-size:30px;
+  font-weight: bold;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 20px;
+`;
+
+// 추가로 모달 닫기 버튼을 스타일링
+export const CloseButton = styled.button`
+  background-color: #FFAC33;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
 `;

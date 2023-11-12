@@ -10,7 +10,7 @@ export const categories = [
         title: '파스타',
         menu: [
             { post_id: '3',name: '고기리들기름파스타', price: '6000원', image: '/babybamsik.jpg' },
-            { post_id: '4',name: '우삽겹알리오올리오', price: '6500원.', image: '/babybamsik.jpg' },
+            { post_id: '4',name: '우삽겹알리오올리오', price: '6500원', image: '/babybamsik.jpg' },
             { post_id: '5',name: '클래식토마토파스타', price: '6500원', image: '/hwasa-image.jpg' },
             { post_id: '6',name: '트러플버섯크림파스타', price: '6500원' , image: '/hwasa-image.jpg'},
             { post_id: '7',name: '4분돼지김치파스타', price: '7500원' , image: '/hwasa-image.jpg'},

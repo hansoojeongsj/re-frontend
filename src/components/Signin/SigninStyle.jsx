@@ -41,40 +41,49 @@ export const Title = styled.div`
     font-size: 60px;
   }
 `;
-
 export const IvoryBox = styled.div`
   font-family: 'Pretendard', sans-serif;
   background-color: #f9f1e4;
   width: 1300px;
-  height: 400px;
+  height: 500px;
   resize: none;
   border-radius: 45px;
   max-width: 100%;
   max-height: 100%;
-  margin: 0 auto; /* 가운데 정렬을 위한 margin 설정 */
+  margin: 0 auto;
   margin-bottom: 30px;
   padding: 50px;
   box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.25), 5px 0px 5px -3px rgba(0, 0, 0, 0.25);
+
   display: flex;
-  flex-direction: column; 
-  justify-content: space-around; 
-  align-items: center;
-`;
-
-
-export const LoginContent = styled.a`
-  color:  #FFAC33;
-  font-size: 20px;
-  font-weight: bold;
+  flex-direction: column;
+  justify-content: space-between;
   @media screen and (max-width: 600px) {
-    font-size: 18px;
+    height: 550px;
   }
 `;
 
-export const InputBox = styled.input`
+export const SubConainer = styled.div`
+
   display: flex;
-  align-items: center;
-  width: 500px;
+  flex-direction: column;
+  `;
+
+
+export const SigninContent = styled.a`
+  color:  #FFAC33;
+  font-size: 20px;
+  font-weight: bold;
+  flex: 0.4;
+  @media screen and (max-width: 600px) {
+    font-size: 18px;
+    
+  }
+
+`;
+
+export const InputBox = styled.input`
+  width: 100%;
   height: 40px;
   border: 2px solid #FFC672;
   border-radius: 20px;
@@ -83,13 +92,27 @@ export const InputBox = styled.input`
   font-size: 20px; 
   margin: 15px; 
   color: #FFAC33;
-  max-width: 100%;
+  max-width: 500px;
+
+  @media screen and (max-width: 600px) {
+    font-size: 18px;
+  }
+`;
+
+export const InputContainer = styled.div`
+  display: flex;
+  align-items: center;
   
+  @media screen and (max-width: 600px) {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+  }
 `;
 
 
-export const LoginButton = styled.button`
-  width: 90%;
+export const SigninButton = styled.button`
+  width: 100%;
   max-width: 380px;
   height: 75px;
   background-color: #FFAC33;
@@ -105,12 +128,14 @@ export const LoginButton = styled.button`
   font-family: 'Pretendard', sans-serif;
   margin-top: 15px;
   @media screen and (max-width: 600px) {
+    width: 100%;
+    max-width: 300px;
     height: 60px;
-    font-size: 22px;
+    font-size: 25px;
   }
 `;
 
-export const SigninButton = styled.button`
+export const LoginButton = styled.button`
   width: 90%;
   max-width: 380px;
   height: 60px;
@@ -129,7 +154,7 @@ export const SigninButton = styled.button`
   margin-bottom: 10px;
   @media screen and (max-width: 600px) {
     height: 50px;
-    font-size: 22px;
+    font-size: 25px;
   }
 
 `;

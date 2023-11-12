@@ -23,6 +23,43 @@ export const LogoImage = styled.img`
     width: 100px;
   }
 `;
+export const NavTag = styled.button`
+  width: 75px;
+  height: 65px;
+  border-radius: 20px;
+  background: #D9D9D9;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20px;
+  color: #FFAC33;
+  text-align: center;
+  font-size: 30px; 
+  box-shadow: 0px 4px 4px 4px rgba(0, 0, 0, 0.25); /* 그림자 효과 */
+
+  &:hover {
+    color: #FFEACC;
+  }
+  
+  @media screen and (max-width: 650px) {
+    width: 30px; /* 창의 너비가 500px 미만이면 40px로 설정 */
+    font-size: 20px; 
+    margin-right: 15px;
+
+  }
+
+  @media screen and (min-width: 650px) and (max-width: 800px) {
+    width: 40px; /* 창의 너비가 500px 이상 700px 미만이면 60px로 설정 */
+  }
+`;
+
+export const NavTagContainer = styled.div`
+  display: flex;
+  align-items: flex-start; 
+  justify-content: flex-end; 
+`;
+
 export const Title = styled.div`
   color: #FFAC33;
   text-align: center;
@@ -41,55 +78,30 @@ export const Title = styled.div`
     font-size: 60px;
   }
 `;
-
 export const IvoryBox = styled.div`
   font-family: 'Pretendard', sans-serif;
   background-color: #f9f1e4;
   width: 1300px;
-  height: 400px;
+  height: 500px;
   resize: none;
   border-radius: 45px;
   max-width: 100%;
   max-height: 100%;
-  margin: 0 auto; /* 가운데 정렬을 위한 margin 설정 */
+  margin: 0 auto;
   margin-bottom: 30px;
   padding: 50px;
   box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.25), 5px 0px 5px -3px rgba(0, 0, 0, 0.25);
+
   display: flex;
-  flex-direction: column; 
-  justify-content: space-around; 
-  align-items: center;
-`;
-
-
-export const LoginContent = styled.a`
-  color:  #FFAC33;
-  font-size: 20px;
-  font-weight: bold;
+  flex-direction: column;
+  justify-content: space-between;
   @media screen and (max-width: 600px) {
-    font-size: 18px;
+    height: 550px;
   }
 `;
 
-export const InputBox = styled.input`
-  display: flex;
-  align-items: center;
-  width: 500px;
-  height: 40px;
-  border: 2px solid #FFC672;
-  border-radius: 20px;
-  background-color: white;
-  padding: 20px; 
-  font-size: 20px; 
-  margin: 15px; 
-  color: #FFAC33;
-  max-width: 100%;
-  
-`;
-
-
-export const LoginButton = styled.button`
-  width: 90%;
+export const ModifyButton=styled.button`
+  width: 100%;
   max-width: 380px;
   height: 75px;
   background-color: #FFAC33;
@@ -105,31 +117,9 @@ export const LoginButton = styled.button`
   font-family: 'Pretendard', sans-serif;
   margin-top: 15px;
   @media screen and (max-width: 600px) {
+    width: 100%;
+    max-width: 300px;
     height: 60px;
-    font-size: 22px;
+    font-size: 25px;
   }
-`;
-
-export const SigninButton = styled.button`
-  width: 90%;
-  max-width: 380px;
-  height: 60px;
-  font-size: 30px;
-  color: #FFAC33;
-  display: block;
-  border-radius: 50px;
-  font-weight: bold;
-  margin: 0 auto;
-  font-family: 'Pretendard', sans-serif;
-  background-color: white;
-  border: 2px solid #FFAC33;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 10px;
-  @media screen and (max-width: 600px) {
-    height: 50px;
-    font-size: 22px;
-  }
-
 `;

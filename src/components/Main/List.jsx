@@ -1,4 +1,3 @@
-import { Category } from '../common/Footer/FooterStyle';
 import Container from './Container';
 import MenuCategory from './MenuCategory';
 import Nav from './Nav';

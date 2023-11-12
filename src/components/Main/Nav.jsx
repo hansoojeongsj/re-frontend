@@ -1,3 +1,6 @@
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faSignInAlt, faShoppingCart, faSearch } from '@fortawesome/free-solid-svg-icons';
 
@@ -6,6 +9,15 @@ import LogoImage from '/logo.png';
 import TodayMenuImage from '/today-menu.jpg';
 const Nav = () => {
 
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
 
   return (
     <N.NavWrapper>
@@ -22,19 +34,28 @@ const Nav = () => {
           </N.GrayBox>
         </N.SearchWrapper>
         <N.NavTagContainer>
-          <N.NavTag href="/mypage">
+          <N.NavTag as={Link} to ="/mypage">
             <FontAwesomeIcon icon={faUser} /> {/* MYPAGE 아이콘 */}
           </N.NavTag>
-          <N.NavTag href="/login">
+          <N.NavTag as={Link} to="/login">
             <FontAwesomeIcon icon={faSignInAlt} /> {/* LOGIN 아이콘 */}
           </N.NavTag>
-          <N.NavTag>
+          <N.NavTag onClick={openModal}>
             <FontAwesomeIcon icon={faShoppingCart} /> {/* CART 아이콘 */}
           </N.NavTag>
         </N.NavTagContainer>
       </N.NavContent>
       <N.TodayMenuImage src={TodayMenuImage} alt="Today's Menu" />
 
+      {isModalOpen && (
+        <N.ModalWrapper>
+          <N.ModalContent>
+            <FontAwesomeIcon icon={faShoppingCart} /> {/* CART 아이콘 */}
+            <h1>장바구니</h1>
+            <N.CloseButton onClick={closeModal}>우선은 모달 창 닫기</N.CloseButton>
+          </N.ModalContent>
+        </N.ModalWrapper>
+      )}
     </N.NavWrapper>
   );
 };
