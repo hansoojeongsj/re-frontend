@@ -1,6 +1,6 @@
 import * as C from './ContainerStyle';
 import Nav from './Nav';
-import MenuImage from './MenuImage';
+import MenuImage from './MenuCategory';
 const Container = () => {
 
   return(
