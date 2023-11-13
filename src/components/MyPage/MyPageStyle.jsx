@@ -68,6 +68,7 @@ export const Title = styled.div`
   font-weight: bold;
   white-space: nowrap;
   padding: 20px;
+  margin-bottom: 25px;
   @media screen and (min-width: 0px) and (max-width: 374px) {
     font-size: 40px;
   }
