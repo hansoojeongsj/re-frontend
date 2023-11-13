@@ -20,36 +20,28 @@ export default function Signin() {
 
         <L.Title>SignIn</L.Title>
         <L.IvoryBox>
-          <L.SubConainer>
-          <L.InputContainer>
 
-            <L.SigninContent>EMAIL</L.SigninContent>
+            <L.LoginContent>EMAIL</L.LoginContent>
             <L.InputBox></L.InputBox>
-          </L.InputContainer>
 
-          <L.InputContainer>
-            <L.SigninContent>PASSWORD</L.SigninContent>
+            <L.LoginContent>PASSWORD</L.LoginContent>
             <L.InputBox></L.InputBox>
-          </L.InputContainer>
-
-          <L.InputContainer>
-            <L.SigninContent>PHONE NUMBER</L.SigninContent>
+        
+            <L.LoginContent>PHONE NUMBER</L.LoginContent>
             <L.InputBox></L.InputBox>
-          </L.InputContainer>
-
-          <L.InputContainer>
-            <L.SigninContent>NINKNAME</L.SigninContent>
+          
+            <L.LoginContent>NINKNAME</L.LoginContent>
             <L.InputBox></L.InputBox>
-          </L.InputContainer>
-          <L.SigninButton>
+          
+          <L.LoginButton>
               SignIn
-            </L.SigninButton>
-            </L.SubConainer>
+            </L.LoginButton>
+            
         </L.IvoryBox>
         <a href="/login">
-          <L.LoginButton>
+          <L.SigninButton>
             로그인
-          </L.LoginButton>
+          </L.SigninButton>
         </a>
 
       </L.ContentContainer>

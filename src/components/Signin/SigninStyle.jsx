@@ -30,6 +30,7 @@ export const Title = styled.div`
   font-size: 70px;
   font-weight: bold;
   white-space: nowrap;
+  margin-bottom: 25px;
   padding: 20px;
   @media screen and (min-width: 0px) and (max-width: 374px) {
     font-size: 40px;
@@ -41,49 +42,40 @@ export const Title = styled.div`
     font-size: 60px;
   }
 `;
+
 export const IvoryBox = styled.div`
   font-family: 'Pretendard', sans-serif;
   background-color: #f9f1e4;
   width: 1300px;
-  height: 500px;
+  height: 600px;
   resize: none;
   border-radius: 45px;
   max-width: 100%;
   max-height: 100%;
-  margin: 0 auto;
+  margin: 0 auto; /* 가운데 정렬을 위한 margin 설정 */
   margin-bottom: 30px;
   padding: 50px;
   box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.25), 5px 0px 5px -3px rgba(0, 0, 0, 0.25);
-
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  @media screen and (max-width: 600px) {
-    height: 550px;
-  }
+  flex-direction: column; 
+  justify-content: space-around; 
+  align-items: center;
 `;
 
-export const SubConainer = styled.div`
 
-  display: flex;
-  flex-direction: column;
-  `;
-
-
-export const SigninContent = styled.a`
+export const LoginContent = styled.a`
   color:  #FFAC33;
   font-size: 20px;
   font-weight: bold;
-  flex: 0.4;
   @media screen and (max-width: 600px) {
     font-size: 18px;
-    
   }
-
 `;
 
 export const InputBox = styled.input`
-  width: 100%;
+  display: flex;
+  align-items: center;
+  width: 500px;
   height: 40px;
   border: 2px solid #FFC672;
   border-radius: 20px;
@@ -92,27 +84,13 @@ export const InputBox = styled.input`
   font-size: 20px; 
   margin: 15px; 
   color: #FFAC33;
-  max-width: 500px;
-
-  @media screen and (max-width: 600px) {
-    font-size: 18px;
-  }
-`;
-
-export const InputContainer = styled.div`
-  display: flex;
-  align-items: center;
+  max-width: 100%;
   
-  @media screen and (max-width: 600px) {
-    display: flex;
-    flex-direction: column; 
-    align-items: center;
-  }
 `;
 
 
-export const SigninButton = styled.button`
-  width: 100%;
+export const LoginButton = styled.button`
+  width: 90%;
   max-width: 380px;
   height: 75px;
   background-color: #FFAC33;
@@ -128,14 +106,12 @@ export const SigninButton = styled.button`
   font-family: 'Pretendard', sans-serif;
   margin-top: 15px;
   @media screen and (max-width: 600px) {
-    width: 100%;
-    max-width: 300px;
     height: 60px;
-    font-size: 25px;
+    font-size: 22px;
   }
 `;
 
-export const LoginButton = styled.button`
+export const SigninButton = styled.button`
   width: 90%;
   max-width: 380px;
   height: 60px;
@@ -154,7 +130,7 @@ export const LoginButton = styled.button`
   margin-bottom: 10px;
   @media screen and (max-width: 600px) {
     height: 50px;
-    font-size: 25px;
+    font-size: 22px;
   }
 
 `;
