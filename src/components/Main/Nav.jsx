@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faSignInAlt, faShoppingCart, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faSignInAlt, faShoppingCart, faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 import * as N from './NavStyle';
 import LogoImage from '/logo.png';
@@ -17,6 +17,12 @@ const Nav = () => {
 
   const closeModal = () => {
     setModalOpen(false);
+  };
+  const handleModalWrapperClick = (e) => {
+    // 모달 외부를 클릭했을 때 모달을 닫기
+    if (e.target.classList.contains('modal-wrapper')) {
+      closeModal();
+    }
   };
 
   return (
@@ -48,11 +54,37 @@ const Nav = () => {
       <N.TodayMenuImage src={TodayMenuImage} alt="Today's Menu" />
 
       {isModalOpen && (
-        <N.ModalWrapper>
+        <N.ModalWrapper className="modal-wrapper" onClick={handleModalWrapperClick}>
           <N.ModalContent>
-            <FontAwesomeIcon icon={faShoppingCart} /> {/* CART 아이콘 */}
-            <h1>장바구니</h1>
-            <N.CloseButton onClick={closeModal}>우선은 모달 창 닫기</N.CloseButton>
+            <N.ModalCloseButton onClick={closeModal}>
+              {/* 모달 창 닫기 버튼 */}
+              <FontAwesomeIcon icon={faTimes} />
+            </N.ModalCloseButton>
+            <FontAwesomeIcon icon={faShoppingCart} />{/* CART 아이콘 */}
+              <N.ModalTitle>장바구니</N.ModalTitle>
+              <N.CartListContainer>
+                <N.CartList>
+
+                </N.CartList>
+                <N.CartList>
+                
+                </N.CartList>
+                <N.CartList>
+                
+                </N.CartList>
+                <N.CartList>
+                
+                </N.CartList>
+                <N.CartList>
+                  
+                </N.CartList>
+              </N.CartListContainer>
+              <N.ModalContainer>
+              <N.CartTotal>
+                
+              </N.CartTotal>
+              <N.PayingButton as={Link} to="/paying">주문하기</N.PayingButton>
+            </N.ModalContainer>
           </N.ModalContent>
         </N.ModalWrapper>
       )}

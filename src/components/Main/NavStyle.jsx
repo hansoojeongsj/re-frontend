@@ -3,6 +3,9 @@ import styled from 'styled-components';
 export const NavWrapper = styled.div`
   padding: 3em;
   position: relative;
+  @media screen and (max-width: 370px){
+    padding: 1em;
+  }
 `;
 
 export const NavContent = styled.div`
@@ -10,12 +13,19 @@ export const NavContent = styled.div`
   align-items: center; /* 추가 */
   justify-content: space-between; /* 변경 */
   width: 100%;
+  @media screen and (max-width: 650px){
+    margin-bottom: 7px;
+}
 `;
 
 export const LogoImage = styled.img`
   width: 200px;
   height: auto;
-  @media screen and (max-width: 650px){
+  @media screen and (max-width: 370px){
+    width: 70px;
+
+  }
+  @media screen and (min-width: 370px) and (max-width: 650px){
     width: 100px;
 
   }
@@ -23,6 +33,7 @@ export const LogoImage = styled.img`
     width: 150px;
 
   }
+
 `;
 export const SearchWrapper = styled.div`
   width: 100%;
@@ -30,8 +41,12 @@ export const SearchWrapper = styled.div`
   align-items: center;
   justify-content: center;
   min-width: 140px;
-  @media screen and (max-width: 650px) {
+  @media screen and (min-width: 481px) and (max-width: 650px) {
     min-width: 115px;
+
+  }
+  @media screen and (max-width: 480px) {
+    display: none;
 
   }
 `;
@@ -76,6 +91,8 @@ export const NavInput = styled.input`
 `;
 
 export const NavTag = styled.a`
+  cursor: pointer;
+
   width: 75px;
   height: 65px;
   border-radius: 20px;
@@ -93,16 +110,22 @@ export const NavTag = styled.a`
   &:hover {
     color: #FFEACC;
   }
-  
-  @media screen and (max-width: 650px) {
-    width: 30px; /* 창의 너비가 500px 미만이면 40px로 설정 */
+  @media screen and (max-width: 370px) {
+    width: 20px; 
+    height: 50px;
+    font-size: 15px; 
+    margin-right: 15px;
+
+  }
+  @media screen and (min-width: 30px) and (max-width: 650px) {
+    width: 25px; 
     font-size: 20px; 
     margin-right: 15px;
 
   }
 
   @media screen and (min-width: 650px) and (max-width: 800px) {
-    width: 40px; /* 창의 너비가 500px 이상 700px 미만이면 60px로 설정 */
+    width: 40px; 
   }
 `;
 
@@ -127,27 +150,106 @@ export const ModalWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   z-index: 999;
+  @media screen and (min-width: 800px) and (max-width:1120px) {
+    width: 70%;
+  }
+  @media screen and (min-width: 600px) and (max-width:800px) {
+    width: 80%;
+  }
+  @media screen and (max-width: 600px) {
+    width: 140%;
+  }
 `;
-
 export const ModalContent = styled.div`
-  width: 66.66%; /* 모달의 2/3 */
+  width: 66.66%;
   background-color: #FFFAF3;
-  color:  #FFAC33;
-  font-size:30px;
+  color: #FFAC33;
+  font-size: 30px;
   font-weight: bold;
   text-align: center;
   padding: 20px;
   box-sizing: border-box;
   border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
-// 추가로 모달 닫기 버튼을 스타일링
-export const CloseButton = styled.button`
+
+export const ModalCloseButton = styled.button`
+  display: flex;
+  font-size: 20px;
+  padding:10px;
+  color:  #FFAC33;
+  cursor: pointer;
+  align-self: flex-start;
+
+`;
+
+export const ModalTitle = styled.a`
+  margin: 10px;
+`;
+
+export const CartListContainer = styled.div`
+  width: 100%;
+  overflow-y: auto; /* 수직 스크롤 활성화 */
+  overflow-x: hidden; /* 가로 스크롤 방지 */
+
+  &::-webkit-scrollbar {
+  width: 7px; 
+}
+
+&::-webkit-scrollbar-thumb {
+  background-color: #FFAC33;
+  border-radius: 5px;
+  backdrop-filter: blur(50px);
+}
+
+&::-webkit-scrollbar-track {
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.2) inset;
+}
+
+`;
+
+export const CartList = styled.div`
+  width: 90%;
+  height: 80px;
+  background-color: white;
+  border: 1.5px solid #FFAC33;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+  margin: 20px;
+`;
+
+export const ModalContainer = styled.div`
+  width: 90%;
+  margin-top: auto;
+  margin-bottom: 20px;  
+
+`;
+
+export const CartTotal = styled.div`
+  width: 100%;
+  height: 80px;
+  background-color: white;
+  border: 2.5px solid #FFAC33;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+  margin-bottom: 20px;
+  margin-top:20px;
+  `;
+export const PayingButton = styled.button`
   background-color: #FFAC33;
   color: white;
   border: none;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 10px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 18px;
 `;
