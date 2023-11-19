@@ -50,7 +50,6 @@ export const SearchWrapper = styled.div`
 
   }
 `;
-
 export const GrayBox = styled.div`
   width: 100%;
   display: flex;
@@ -80,7 +79,7 @@ export const NavInput = styled.input`
 
   color: black;
   background-color: #D9D9D9;
-  font-size: 17px;
+  font-size: 15px;
   font-weight: bold;
   @media screen and (max-width: 650px) {
   padding-left: 5px;
@@ -187,7 +186,12 @@ export const ModalCloseButton = styled.button`
 `;
 
 export const ModalTitle = styled.a`
-  margin: 10px;
+  margin: 15px;
+  font-size: 40px;
+  @media screen and (max-width: 800px) {
+    font-size: 30px;
+
+  }
 `;
 
 export const CartListContainer = styled.div`
@@ -196,7 +200,7 @@ export const CartListContainer = styled.div`
   overflow-x: hidden; /* 가로 스크롤 방지 */
 
   &::-webkit-scrollbar {
-  width: 7px; 
+  width: 8px; 
 }
 
 &::-webkit-scrollbar-thumb {
@@ -215,7 +219,7 @@ export const CartListContainer = styled.div`
 
 export const CartList = styled.div`
   width: 90%;
-  height: 80px;
+  height: 90px;
   background-color: white;
   border: 1.5px solid #FFAC33;
   display: flex;
@@ -241,15 +245,31 @@ export const CartTotal = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 30px;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
   margin-top:20px;
   `;
 export const PayingButton = styled.button`
   background-color: #FFAC33;
   color: white;
   border: none;
-  padding: 10px;
-  border-radius: 10px;
   cursor: pointer;
   font-size: 18px;
+  width: 90%;
+  height: 70px;
+  font-size: 30px;
+  border-radius: 50px;
+  font-weight: bold;
+  margin: 0 auto;
+  font-family: 'Pretendard', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding:10px;
+
+  @media screen and (max-width: 600px){
+    width: 60%;
+    height: 60px;
+    font-size: 25px;
+
+  }
 `;

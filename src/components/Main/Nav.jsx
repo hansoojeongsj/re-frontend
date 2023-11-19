@@ -39,6 +39,7 @@ const Nav = () => {
             <N.NavInput type="text" placeholder="검색어를 입력해주세요." />
           </N.GrayBox>
         </N.SearchWrapper>
+        
         <N.NavTagContainer>
           <N.NavTag as={Link} to ="/mypage">
             <FontAwesomeIcon icon={faUser} /> {/* MYPAGE 아이콘 */}
@@ -83,8 +84,9 @@ const Nav = () => {
               <N.CartTotal>
                 
               </N.CartTotal>
+              </N.ModalContainer>
+
               <N.PayingButton as={Link} to="/paying">주문하기</N.PayingButton>
-            </N.ModalContainer>
           </N.ModalContent>
         </N.ModalWrapper>
       )}
@@ -93,3 +95,5 @@ const Nav = () => {
 };
 
 export default Nav;
+
+
