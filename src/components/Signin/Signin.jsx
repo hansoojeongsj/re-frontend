@@ -1,4 +1,4 @@
-import * as L from './SigninStyle';
+import * as L from '../Login/LoginStyle';
 import LogoImage from './../Login/logo.png';
 import * as C from './../Main/ContainerStyle';
 
@@ -17,22 +17,29 @@ export default function Signin() {
           alt="로고"
         />
         </L.LogoContainer>
-
         <L.Title>SignIn</L.Title>
         <L.IvoryBox>
+          <L.LoginRow>
 
             <L.LoginContent>EMAIL</L.LoginContent>
             <L.InputBox></L.InputBox>
+          </L.LoginRow>
+          <L.LoginRow>
 
             <L.LoginContent>PASSWORD</L.LoginContent>
             <L.InputBox></L.InputBox>
-        
+          </L.LoginRow>
+          <L.LoginRow>
+
             <L.LoginContent>PHONE NUMBER</L.LoginContent>
             <L.InputBox></L.InputBox>
-          
+          </L.LoginRow>
+          <L.LoginRow>
+
             <L.LoginContent>NINKNAME</L.LoginContent>
             <L.InputBox></L.InputBox>
-          
+          </L.LoginRow>
+
           <L.LoginButton>
               SignIn
             </L.LoginButton>

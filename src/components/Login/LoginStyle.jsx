@@ -30,8 +30,8 @@ export const Title = styled.div`
   font-size: 70px;
   font-weight: bold;
   white-space: nowrap;
-  padding: 20px;
   margin-bottom: 25px;
+  padding: 20px;
   @media screen and (min-width: 0px) and (max-width: 374px) {
     font-size: 40px;
   }
@@ -47,7 +47,7 @@ export const IvoryBox = styled.div`
   font-family: 'Pretendard', sans-serif;
   background-color: #f9f1e4;
   width: 1300px;
-  height: 400px;
+  max-height: 480px;
   resize: none;
   border-radius: 45px;
   max-width: 100%;
@@ -63,29 +63,35 @@ export const IvoryBox = styled.div`
 `;
 
 
-export const LoginContent = styled.a`
-  color:  #FFAC33;
+export const LoginRow = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px; /* 필요에 따라 조정 */
+`;
+
+export const LoginContent = styled.label`
+  color: #FFAC33;
   font-size: 20px;
   font-weight: bold;
+  width: 160px; /* 예시로 설정한 고정된 너비 */
+  margin-right: 15px; /* 간격 조절 */
   @media screen and (max-width: 600px) {
-    font-size: 18px;
+    width: 160px;
+    font-size: 15px;
+    margin-right: 1px; /* 간격 조절 */
   }
 `;
 
 export const InputBox = styled.input`
-  display: flex;
-  align-items: center;
-  width: 500px;
+  width: 80%;
   height: 40px;
   border: 2px solid #FFC672;
   border-radius: 20px;
   background-color: white;
-  padding: 20px; 
-  font-size: 20px; 
-  margin: 15px; 
+  padding: 0 20px; /* padding 수정 */
+  font-size: 20px;
   color: #FFAC33;
-  max-width: 100%;
-  
+  max-width: 600px; /* 최대 너비 설정 */
 `;
 
 
@@ -105,7 +111,7 @@ export const LoginButton = styled.button`
   margin: 0 auto;
   font-family: 'Pretendard', sans-serif;
   margin-top: 15px;
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 768px) {
     height: 60px;
     font-size: 22px;
   }
@@ -117,7 +123,6 @@ export const SigninButton = styled.button`
   height: 60px;
   font-size: 30px;
   color: #FFAC33;
-  display: block;
   border-radius: 50px;
   font-weight: bold;
   margin: 0 auto;

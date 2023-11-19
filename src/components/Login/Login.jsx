@@ -20,11 +20,16 @@ export default function Login() {
 
         <L.Title>LogIn</L.Title>
         <L.IvoryBox>
+          <L.LoginRow>
+
             <L.LoginContent>EMAIL</L.LoginContent>
             <L.InputBox></L.InputBox>
-          
+          </L.LoginRow>
+          <L.LoginRow>
+
             <L.LoginContent>PASSWORD</L.LoginContent>
             <L.InputBox></L.InputBox>
+          </L.LoginRow>
 
           
             <L.LoginButton>
