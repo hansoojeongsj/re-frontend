@@ -59,7 +59,6 @@ export const NavTagContainer = styled.div`
   align-items: flex-start; 
   justify-content: flex-end; 
 `;
-
 export const Title = styled.div`
   color: #FFAC33;
   text-align: center;
@@ -67,8 +66,8 @@ export const Title = styled.div`
   font-size: 70px;
   font-weight: bold;
   white-space: nowrap;
-  padding: 20px;
   margin-bottom: 25px;
+  padding: 20px;
   @media screen and (min-width: 0px) and (max-width: 374px) {
     font-size: 40px;
   }
@@ -79,26 +78,83 @@ export const Title = styled.div`
     font-size: 60px;
   }
 `;
+
 export const IvoryBox = styled.div`
   font-family: 'Pretendard', sans-serif;
   background-color: #f9f1e4;
   width: 1300px;
-  height: 500px;
+  max-height: 480px;
   resize: none;
   border-radius: 45px;
   max-width: 100%;
   max-height: 100%;
-  margin: 0 auto;
+  margin: 0 auto; /* 가운데 정렬을 위한 margin 설정 */
   margin-bottom: 30px;
   padding: 50px;
   box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.25), 5px 0px 5px -3px rgba(0, 0, 0, 0.25);
-
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  @media screen and (max-width: 600px) {
-    height: 550px;
+  flex-direction: column; 
+  justify-content: space-around; 
+  align-items: center;
+`;
+export const ButtonContainer = styled.div`
+  display: flex;
+  align-items: center; /* 세로 정렬을 위한 설정 */
+  margin-bottom: 15px;
+`;
+
+export const MypageButton = styled.button`
+  width: 90px;
+  height: 90px;
+  margin: 15px;
+  border: 2px solid ${props => (props.selected ? "#FFF1DC" : "#FFAC33")};
+  background-color: ${props => (props.selected ? "#FFAC33" : "#FFF1DC")};
+  color: black;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #FFAC33;
+    border-color: #FFF1DC;
   }
+  @media screen and (max-width: 600px) {
+    width: 70px;
+    height: 70px;
+    font-size: 13px;
+  }
+`;
+export const MypageRow = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px; /* 필요에 따라 조정 */
+`;
+
+export const MypageContent = styled.label`
+  color: #FFAC33;
+  font-size: 20px;
+  font-weight: bold;
+  width: 300px; /* 예시로 설정한 고정된 너비 */
+  margin-right: 20px; /* 간격 조절 */
+  @media screen and (max-width: 600px) {
+    width: 160px;
+    font-size: 15px;
+    margin-right: 1px; /* 간격 조절 */
+
+  }
+`;
+
+export const InputBox = styled.input`
+  width: 80%;
+  height: 40px;
+  border: 2px solid #FFC672;
+  border-radius: 20px;
+  background-color: white;
+  padding: 0 20px; /* padding 수정 */
+  font-size: 20px;
+  color: #FFAC33;
+  max-width: 600px; /* 최대 너비 설정 */
 `;
 
 export const ModifyButton=styled.button`
@@ -119,8 +175,62 @@ export const ModifyButton=styled.button`
   margin-top: 15px;
   @media screen and (max-width: 600px) {
     width: 100%;
-    max-width: 300px;
-    height: 60px;
-    font-size: 25px;
+    max-width: 100px;
+    height: 50px;
+    font-size: 20px;
+  }
+`;
+
+export const ReviewContainer = styled.div`
+  width: 100%;
+
+`;
+
+export const ReviewList = styled.div`
+  width: 80%;
+  max-width: 800px;
+  height: 90px;
+  background-color: white;
+  border: 1.5px solid #FFAC33;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+  margin: 20px auto; /* 수평 중앙 정렬을 위한 축약형 사용 */
+
+`;
+export const Pagination = styled.div`
+  margin-top: 20px;
+  ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+
+    li {
+      margin: 0 5px;
+      cursor: pointer;
+      font-size: 18px;
+      color: #FFAC33;
+      border-radius: 10px;
+      padding: 5px 10px;
+      transition: background-color 0.3s, color 0.3s;
+
+
+      &:hover {
+        background-color: #FFAC33;
+        color: white;
+        border: 1px solid #FFAC33;
+        box-shadow: 0 0 5px rgba(255, 188, 87, 0.7);
+      }
+
+      &.active {
+        background-color: #FFAC33;
+        color: white;
+        border: 1px solid #FFAC33;
+        box-shadow: 0 0 5px rgba(255, 188, 87, 0.7);
+      }
+    }
   }
 `;
