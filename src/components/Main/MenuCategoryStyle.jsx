@@ -10,14 +10,35 @@ export const MenuCategoryContainer = styled.div` // 토글메뉴 전체
     @media screen and (max-width: 900px) {
         padding: 1em;
     }
+
 `;
+
+
+export const CategoryButtonsWrapper = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+
+    /* 각 버튼이 가로로 균등하게 확장되도록 설정 */
+    > button {
+        flex-grow: 1;
+    }
+    margin-bottom: 10px; /* 적절한 간격 조정을 위해 마진을 추가했습니다. */
+
+    > div {
+        margin: 5px;
+        flex-shrink: 1;
+    }
+
+`;
+
 
 export const MenuBox = styled.div`
     background-color: #ffffff;
     border-radius: 20px;
     padding: 20px;
     margin: 5px;
-    width: ${({ menuBoxWidth }) => menuBoxWidth};
+    width: 240px;
     cursor: pointer;
     text-align: center;
     overflow: visible; // 이미지가 테두리에 걸치게
@@ -63,35 +84,24 @@ export const StyledButton = styled.button`  // 토글 카테고리
     background: ${({ selected }) => (selected ? '#FFEACC' : 'transparent')};
     font-weight: bold;
     font-size: ${({ buttonFontSize }) => buttonFontSize};
-    width: 100%;  
+    width: auto;  
     box-sizing: border-box;
-
-    @media screen and (min-width: 370px) and (max-width: 650px) {
-        width: 50%;
-        font-size: 12px; 
-    }
-
-    @media screen and (min-width: 650px) and (max-width: 800px) {
-        width: 70%;
-    }
+    white-space: nowrap;   /* 텍스트 가로 */
 
     @media screen and (max-width: 900px) {
         font-size: 16px;
     }
+
+    @media screen and (min-width: 650px) and (max-width: 800px) {
+        max-width: 70%;
+        font-size: 13px;
+    }
+
+
+    @media screen  and (max-width: 650px) {
+        max-width: 50%;
+        font-size: 12px; 
+    }
+
 `;
 
-
-// @media screen and (max-width: 370px) {
-//     width: 30%; 
-//     font-size: 5px; 
-
-// }
-// @media screen and (min-width: 30px) and (max-width: 650px) {
-//     width: 50%;
-//     font-size: 13px; 
-// }
-
-// @media screen and (min-width: 650px) and (max-width: 800px) {
-//     font-size: 16px; 
-//     width: 70%;
-// }

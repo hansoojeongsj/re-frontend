@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { categories } from './data';
 import { useNavigate } from 'react-router-dom'; 
-import { MenuCategoryContainer, MenuBox, StyledButton } from './MenuCategoryStyle';
+import { MenuCategoryContainer, MenuBox, StyledButton, CategoryButtonsWrapper} from './MenuCategoryStyle';
 
 const MenuCategory = () => {
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
   const navigate = useNavigate(); 
   const [buttonFontSize, setButtonFontSize] = useState('20px');
-  const [menuBoxWidth, setMenuBoxWidth] = useState('200px');
+  // const [menuBoxWidth, setMenuBoxWidth] = useState('200px');
 
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
@@ -22,10 +22,8 @@ const MenuCategory = () => {
       // 화면 폭에 따라 버튼의 글꼴 크기를 동적으로 조정
       if (window.innerWidth <= 900) {
         setButtonFontSize('16px');
-        setMenuBoxWidth('100%'); 
       } else {
         setButtonFontSize('20px');
-        setMenuBoxWidth('200px');
       }
     };
 
@@ -40,18 +38,20 @@ const MenuCategory = () => {
 
   return (
     <MenuCategoryContainer>
-      <div style={{ display: 'flex', justifyContent: 'left', fontWeight: 'bold' }}>
-        {categories.map((category) => (
-          <StyledButton
-            key={category.title}
-            onClick={() => handleCategoryClick(category)}
-            selected={selectedCategory === category}
-            buttonFontSize={buttonFontSize}
-          >
-            {category.title}
-          </StyledButton>
-        ))}
-      </div>
+      <CategoryButtonsWrapper>
+        <div>
+          {categories.map((category) => (
+            <StyledButton
+              key={category.title}
+              onClick={() => handleCategoryClick(category)}
+              selected={selectedCategory === category}
+              buttonFontSize={buttonFontSize}
+            >
+              {category.title}
+            </StyledButton>
+          ))}
+        </div>
+      </CategoryButtonsWrapper>
     
       <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'left' }}>
         {selectedCategory.menu.map((item) => (
