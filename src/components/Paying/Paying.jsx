@@ -2,11 +2,12 @@ import {useState} from 'react';
 import { Link } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSignInAlt, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { faSignInAlt, faShoppingCart, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
 import * as P from '../Paying/PayingStyle';
 import LogoImage from './../Login/logo.png';
 import * as C from './../Main/ContainerStyle';
+import { useAuth } from './../Login/AuthContext';
 
 export default function Paying() {
 
@@ -15,6 +16,8 @@ export default function Paying() {
   const handlePaymentChange = (method) => {
     setPaymentMethod(method);
   };
+  const { isLoggedIn, logout } = useAuth();
+
   return (
     <C.Container>
       <C.WhiteBox>
@@ -23,9 +26,15 @@ export default function Paying() {
             <P.BackButton>⬅ BACK TO MENU</P.BackButton>
           </a>
           <P.NavTagContainer>
-            <P.NavTag as={Link} to="/login">
-              <FontAwesomeIcon icon={faSignInAlt} /> {/* LOGIN 아이콘 */}
-            </P.NavTag>
+          {isLoggedIn ? (
+              <P.NavTag onClick={logout}>
+                <FontAwesomeIcon icon={faSignOutAlt} />
+              </P.NavTag>
+            ) : (
+              <P.NavTag as={Link} to="/login">
+                <FontAwesomeIcon icon={faSignInAlt} />
+              </P.NavTag>
+            )}
             <P.NavTag as={Link} to="/">
               <FontAwesomeIcon icon={faShoppingCart} /> {/* CART 아이콘 */}
             </P.NavTag>
@@ -37,7 +46,7 @@ export default function Paying() {
             />
           </P.LogoContainer>
 
-          <P.Title>MyPage</P.Title>
+          <P.Title>Paying</P.Title>
           <P.IvoryBox>
           <P.PayingContainer>
             <P.PayingContent>
