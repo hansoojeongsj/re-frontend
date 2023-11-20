@@ -1,6 +1,8 @@
 import * as L from '../Login/LoginStyle';
 import LogoImage from './../Login/logo.png';
 import * as C from './../Main/ContainerStyle';
+import { Link } from 'react-router-dom';
+
 
 export default function Signin() {
 
@@ -40,16 +42,14 @@ export default function Signin() {
             <L.InputBox></L.InputBox>
           </L.LoginRow>
 
-          <L.LoginButton>
+          <L.LoginButton as={Link} to ="/login">
               SignIn
             </L.LoginButton>
             
         </L.IvoryBox>
-        <a href="/login">
-          <L.SigninButton>
+          <L.SigninButton as={Link} to ="/login">
             로그인
           </L.SigninButton>
-        </a>
 
       </L.ContentContainer>
       </C.WhiteBox>
