@@ -114,7 +114,6 @@ export const NavTag = styled.a`
     height: 50px;
     font-size: 15px; 
     margin-right: 15px;
-
   }
   @media screen and (min-width: 30px) and (max-width: 650px) {
     width: 25px; 
@@ -126,6 +125,7 @@ export const NavTag = styled.a`
   @media screen and (min-width: 650px) and (max-width: 800px) {
     width: 40px; 
   }
+
 `;
 
 export const NavTagContainer = styled.div`
