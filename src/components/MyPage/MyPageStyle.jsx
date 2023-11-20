@@ -206,10 +206,11 @@ export const Pagination = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0;
+    padding: 10px;
+    flex-wrap: wrap; 
 
     li {
-      margin: 0 5px;
+      margin: 0 3px;
       cursor: pointer;
       font-size: 18px;
       color: #FFAC33;
@@ -232,5 +233,22 @@ export const Pagination = styled.div`
         box-shadow: 0 0 5px rgba(255, 188, 87, 0.7);
       }
     }
+    
+  }
+  @media (max-width: 600px) {
+    ul li {
+      font-size: 14px; /* 원하는 작은 폰트 크기로 조절하세요. */
+    }
+  }
+`;
+
+export const LoginMessage = styled.div`
+  color: #FFAC33;
+  font-size: 20px;
+  text-align: center;
+  font-family: 'Pretendard', sans-serif;
+  font-weight: bold;
+  @media screen and (max-width: 600px) {
+    font-size: 16px;
   }
 `;
