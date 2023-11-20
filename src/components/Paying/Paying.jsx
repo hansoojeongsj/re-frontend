@@ -37,7 +37,7 @@ export default function Paying() {
             />
           </P.LogoContainer>
 
-          <P.Title>MyPage</P.Title>
+          <P.Title>Paying</P.Title>
           <P.IvoryBox>
           <P.PayingContainer>
             <P.PayingContent>
