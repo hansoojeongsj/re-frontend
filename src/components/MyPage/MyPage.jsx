@@ -9,6 +9,10 @@ import LogoImage from './../Login/logo.png';
 import * as M from './MyPageStyle';
 import { useAuth } from './../Login/AuthContext';
 
+import Tooltip from './../common/Tooltip';
+
+import Modal from './../common/Modal/Modal'; // Modal 컴포넌트 import
+
 const EditProfileContent = () => {
   return (
     <div>
@@ -41,7 +45,7 @@ const ReviewManagementContent = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   // 총 항목 수
-  const totalEntries = 44;  // 예시로 17개로 설정
+  const totalEntries = 44;  // 예시로 44개로 설정
 
   // 전체 페이지 수 계산
   const totalPages = Math.ceil(totalEntries / itemsPerPage);
@@ -89,10 +93,15 @@ const ReviewManagementContent = () => {
     </M.ReviewContainer>
   );
 };
+
+
 export default function MyPage() {
   const [isEditing, setIsEditing] = useState(true);
   const [isReviewManaging, setIsReviewManaging] = useState(false);
   const { isLoggedIn, logout } = useAuth();
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [tooltipVisible, setTooltipVisible] = useState(false);
+  const [tooltipPosition, setTooltipPosition] = useState({ top: 0, left: 0 });
 
   const handleEditButtonClick = () => {
     setIsEditing(true);
@@ -104,6 +113,30 @@ export default function MyPage() {
     setIsReviewManaging(true);
   };
 
+  const openModal = () => {
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+  const handleLogoutButtonClick = () => {
+    logout();
+    setTooltipVisible(false); // 로그아웃 버튼을 클릭하면 tooltip을 강제로 닫음
+  };
+
+  const handleLogoutButtonMouseEnter = (e) => {
+    setTooltipPosition({ top: e.clientY, left: e.clientX });
+    setTooltipVisible(true);
+  };
+  
+  const handleLogoutButtonMouseLeave = () => {
+    setTooltipVisible(false);
+  };
+
+  const handleTooltipMouseLeave = () => {
+    setTooltipVisible(false);
+  };
   return (
     <C.Container>
       <C.WhiteBox>
@@ -112,18 +145,37 @@ export default function MyPage() {
             <M.BackButton>⬅ BACK TO MENU</M.BackButton>
           </a>
           <M.NavTagContainer>
-            {isLoggedIn ? (
-              <M.NavTag onClick={logout}>
-                <FontAwesomeIcon icon={faSignOutAlt} />
-              </M.NavTag>
+          {isLoggedIn ? (
+              <M.NavTag
+              id="logout-button" // 버튼에 ID 추가
+              onClick={handleLogoutButtonClick}
+              onMouseEnter={handleLogoutButtonMouseEnter}
+              onMouseLeave={handleLogoutButtonMouseLeave}
+            >
+              <FontAwesomeIcon icon={faSignOutAlt} />
+            </M.NavTag>
+            
             ) : (
               <M.NavTag as={Link} to="/login">
                 <FontAwesomeIcon icon={faSignInAlt} />
               </M.NavTag>
             )}
-            <M.NavTag as={Link} to="/">
-              <FontAwesomeIcon icon={faShoppingCart} />
-            </M.NavTag>
+            
+            {/* Tooltip 렌더링 */}
+            {tooltipVisible && (
+              <Tooltip
+                text="로그아웃"
+                visible={tooltipVisible}
+                position={tooltipPosition}
+                onMouseLeave={handleTooltipMouseLeave} // 추가
+              >
+                {/* 내용 */}
+            </Tooltip>
+          )}
+
+          <M.NavTag onClick={openModal}>
+            <FontAwesomeIcon icon={faShoppingCart} />
+          </M.NavTag>
           </M.NavTagContainer>
           <M.LogoContainer>
             <M.LogoImage src={LogoImage} alt="로고" />
@@ -162,8 +214,13 @@ export default function MyPage() {
               </M.LoginMessage>
             )}
           </M.IvoryBox>
+          {isModalOpen && 
+            <Modal isModalOpen={isModalOpen} closeModal={closeModal} />
+          }
+
         </M.ContentContainer>
       </C.WhiteBox>
     </C.Container>
   );
 }
+
