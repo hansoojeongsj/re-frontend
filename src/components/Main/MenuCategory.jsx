@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { categories } from './data';
 import { useNavigate } from 'react-router-dom'; 
-import { MenuCategoryContainer, MenuBox } from './MenuCategoryStyle';
+import { MenuCategoryContainer, MenuBox, StyledButton, CategoryButtonsWrapper} from './MenuCategoryStyle';
 
 const MenuCategory = () => {
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
   const navigate = useNavigate(); 
   const [buttonFontSize, setButtonFontSize] = useState('20px');
+  // const [menuBoxWidth, setMenuBoxWidth] = useState('200px');
 
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
@@ -37,34 +38,32 @@ const MenuCategory = () => {
 
   return (
     <MenuCategoryContainer>
-      <div style={{ display: 'flex', justifyContent: 'left', fontWeight: 'bold' }}>
-        {categories.map((category) => (
-          <button
-            key={category.title}
-            onClick={() => handleCategoryClick(category)}
-            style={{
-              padding: '10px',
-              margin: '5px',
-              background: selectedCategory === category ? '#FFEACC' : 'transparent',
-              fontWeight: 'bold',
-              fontSize: buttonFontSize,
-            }}
-          >
-            {category.title}
-          </button>
-        ))}
-      </div>
+      <CategoryButtonsWrapper>
+        <div>
+          {categories.map((category) => (
+            <StyledButton
+              key={category.title}
+              onClick={() => handleCategoryClick(category)}
+              selected={selectedCategory === category}
+              buttonFontSize={buttonFontSize}
+            >
+              {category.title}
+            </StyledButton>
+          ))}
+        </div>
+      </CategoryButtonsWrapper>
     
       <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'left' }}>
         {selectedCategory.menu.map((item) => (
           <MenuBox
             key={item.name}
             onClick={() => handleMenuClick(item)}
+            
           >
           
             <div className="menu-info">
               <img src={item.image} alt={item.name} />
-              <div className="menu-name">
+              <div className="menu-name" >
                 <strong>{item.name}</strong>
               </div>
               <div className="menu-price">{item.price}</div>
