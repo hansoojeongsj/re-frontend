@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Slider from "react-slick";
 
 export const NavWrapper = styled.div`
   padding: 3em;
@@ -136,8 +137,26 @@ export const NavTagContainer = styled.div`
   justify-content: flex-end; /* 아이콘들을 오른쪽으로 정렬 */
 
 `;
-export const TodayMenuImage = styled.img`
-  width: 100%; // 이미지 너비를 100%로 설정
-  height: 200px; // 이미지 높이를 자동으로 조정
 
+
+export const StyledCarousel = styled(Slider)`
+
+    .carousel-inner {
+      width: 100%;
+      height: 150px; /* 이미지 높이 변경 */
+      padding-left: 20px;
+    }
+
+    .slick-prev:before, .slick-next:before{ //얘는 양옆 버튼. 커스텀 해줘야 보임
+        font-family: 'slick';
+        font-size: 40px;
+        line-height: 1;
+        opacity: .75;
+        color: #FFAC33;
+        -webkit-font-smoothing: antialiased;
+    }
 `;
+
+
+
+

@@ -8,6 +8,7 @@ import TodayMenuImage from '/today-menu.jpg';
 import { useAuth } from './../Login/AuthContext';
 import CartModal from './../common/Modal/CartModal';
 import Tooltip from './../common/Tooltip';
+import CarouselComponent from './Carousel';
 
 const Nav = () => {
   const { isLoggedIn, logout } = useAuth();
@@ -91,7 +92,7 @@ const Nav = () => {
           </N.NavTag>
         </N.NavTagContainer>
       </N.NavContent>
-      <N.TodayMenuImage src={TodayMenuImage} alt="Today's Menu" />
+      <CarouselComponent />
       {isModalOpen && (
       <CartModal isModalOpen={isModalOpen} closeModal={closeModal} />
       )}
