@@ -11,7 +11,8 @@ import { useAuth } from './../Login/AuthContext';
 
 import Tooltip from './../common/Tooltip';
 
-import Modal from '../common/Modal/CartModal'; // Modal 컴포넌트 import
+import CartModal from '../common/Modal/CartModal'; // Modal 컴포넌트 import
+import PayingModal from './PayingModal';
 
 export default function Paying() {
 
@@ -27,28 +28,26 @@ export default function Paying() {
 
   const handleLogoutButtonClick = () => {
     logout();
-    setTooltipVisible(false); // 로그아웃 버튼을 클릭하면 tooltip을 강제로 닫음
+    setTooltipVisible(false);
   };
 
   const handleLogoutButtonMouseEnter = (e) => {
     setTooltipPosition({ top: e.clientY, left: e.clientX });
     setTooltipVisible(true);
   };
-  
+
   const handleLogoutButtonMouseLeave = () => {
     setTooltipVisible(false);
   };
 
-  const handleTooltipMouseLeave = () => {
-    setTooltipVisible(false);
-  };
-  const [isModalOpen, setModalOpen] = useState(false);
-  const openModal = () => {
-    setModalOpen(true);
+  const [activeModal, setActiveModal] = useState(null);
+
+  const openModal = (modalType) => {
+    setActiveModal(modalType);
   };
 
   const closeModal = () => {
-    setModalOpen(false);
+    setActiveModal(null);
   };
 
   return (
@@ -79,12 +78,11 @@ export default function Paying() {
                 text="로그아웃"
                 visible={tooltipVisible}
                 position={tooltipPosition}
-                onMouseLeave={handleTooltipMouseLeave} // 추가
               >
                 {/* 내용 */}
             </Tooltip>
           )}
-            <P.NavTag onClick={openModal}>
+            <P.NavTag onClick={() => openModal('cart')}>
               <FontAwesomeIcon icon={faShoppingCart} />
             </P.NavTag>
           </P.NavTagContainer>
@@ -142,15 +140,17 @@ export default function Paying() {
               </P.RightContainer>
             </P.BottomContainer>
           </P.PayingContainer>
-          <P.PayingButton>결제하기</P.PayingButton>
+          <P.PayingButton onClick={() => openModal('paying')}>결제하기</P.PayingButton>
+          {activeModal === 'paying' && (
+            <PayingModal isModalOpen={activeModal === 'paying'} closeModal={closeModal} />
+          )}
+          {activeModal === 'cart' && (
+            <CartModal isModalOpen={activeModal === 'cart'} closeModal={closeModal} />
+          )}
+        </P.IvoryBox>
 
-          </P.IvoryBox>
-
-          {isModalOpen && 
-            <Modal isModalOpen={isModalOpen} closeModal={closeModal} />
-          }
       </P.ContentContainer>
     </C.WhiteBox>
-    </C.Container>
-);
+  </C.Container>
+  );
 }
