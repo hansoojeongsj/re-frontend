@@ -59,6 +59,7 @@ export const NavTagContainer = styled.div`
   align-items: flex-start; 
   justify-content: flex-end; 
 `;
+
 export const Title = styled.div`
   color: #FFAC33;
   text-align: center;
