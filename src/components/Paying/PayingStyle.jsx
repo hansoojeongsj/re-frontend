@@ -104,7 +104,7 @@ export const PayingContainer=styled.div`
 `;
 export const PayingContent = styled.div`
   width: 100%;
-  height: 80px;
+  height: 100px;
   background-color: white;
   border: 1.5px solid #FFAC33;
   display: flex;
@@ -156,5 +156,28 @@ export const PayingButton = styled.button`
     font-size: 22px;
     margin-top:20px;
 
+  }
+`;
+export const RadioWrapper = styled.div`
+  margin-top: 10px;
+  
+  label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    input {
+      margin-right: 5px;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid #FFAC33;
+      outline: none;
+
+      &:checked {
+        background-color: #FFAC33;
+      }
+    }
   }
 `;

@@ -9,6 +9,10 @@ import LogoImage from './../Login/logo.png';
 import * as C from './../Main/ContainerStyle';
 import { useAuth } from './../Login/AuthContext';
 
+import Tooltip from './../common/Tooltip';
+
+import Modal from './../common/Modal/Modal'; // Modal 컴포넌트 import
+
 export default function Paying() {
 
   const [paymentMethod, setPaymentMethod] = useState('general');
@@ -18,25 +22,70 @@ export default function Paying() {
   };
   const { isLoggedIn, logout } = useAuth();
 
+  const [tooltipVisible, setTooltipVisible] = useState(false);
+  const [tooltipPosition, setTooltipPosition] = useState({ top: 0, left: 0 });
+
+  const handleLogoutButtonClick = () => {
+    logout();
+    setTooltipVisible(false); // 로그아웃 버튼을 클릭하면 tooltip을 강제로 닫음
+  };
+
+  const handleLogoutButtonMouseEnter = (e) => {
+    setTooltipPosition({ top: e.clientY, left: e.clientX });
+    setTooltipVisible(true);
+  };
+  
+  const handleLogoutButtonMouseLeave = () => {
+    setTooltipVisible(false);
+  };
+
+  const handleTooltipMouseLeave = () => {
+    setTooltipVisible(false);
+  };
+  const [isModalOpen, setModalOpen] = useState(false);
+  const openModal = () => {
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
   return (
     <C.Container>
       <C.WhiteBox>
         <P.ContentContainer>
-          <a href="/">
-            <P.BackButton>⬅ BACK TO MENU</P.BackButton>
-          </a>
+            <P.BackButton as={Link} to="/">⬅ BACK TO MENU</P.BackButton>
           <P.NavTagContainer>
           {isLoggedIn ? (
-              <P.NavTag onClick={logout}>
-                <FontAwesomeIcon icon={faSignOutAlt} />
-              </P.NavTag>
+              <P.NavTag
+              id="logout-button" // 버튼에 ID 추가
+              onClick={handleLogoutButtonClick}
+              onMouseEnter={handleLogoutButtonMouseEnter}
+              onMouseLeave={handleLogoutButtonMouseLeave}
+            >
+              <FontAwesomeIcon icon={faSignOutAlt} />
+            </P.NavTag>
+            
             ) : (
               <P.NavTag as={Link} to="/login">
                 <FontAwesomeIcon icon={faSignInAlt} />
               </P.NavTag>
             )}
-            <P.NavTag as={Link} to="/">
-              <FontAwesomeIcon icon={faShoppingCart} /> {/* CART 아이콘 */}
+            
+            {/* Tooltip 렌더링 */}
+            {tooltipVisible && (
+              <Tooltip
+                text="로그아웃"
+                visible={tooltipVisible}
+                position={tooltipPosition}
+                onMouseLeave={handleTooltipMouseLeave} // 추가
+              >
+                {/* 내용 */}
+            </Tooltip>
+          )}
+            <P.NavTag onClick={openModal}>
+              <FontAwesomeIcon icon={faShoppingCart} />
             </P.NavTag>
           </P.NavTagContainer>
           <P.LogoContainer>
@@ -60,7 +109,8 @@ export default function Paying() {
                 </P.PayingContent>
                 <P.PayingContent>
                   결제수단
-                  <div>
+                  
+                  <P.RadioWrapper>
                     <label>
                       <input
                         type="radio"
@@ -68,10 +118,10 @@ export default function Paying() {
                         checked={paymentMethod === 'general'}
                         onChange={() => handlePaymentChange('general')}
                       />
-                      일반결제
+                      <span>일반결제</span>
                     </label>
-                  </div>
-                  <div>
+                  </P.RadioWrapper>
+                  <P.RadioWrapper>
                     <label>
                       <input
                         type="radio"
@@ -79,10 +129,11 @@ export default function Paying() {
                         checked={paymentMethod === 'kakaoPay'}
                         onChange={() => handlePaymentChange('kakaoPay')}
                       />
-                      카카오페이
+                      <span>카카오페이</span>
                     </label>
-                  </div>
+                  </P.RadioWrapper>
                 </P.PayingContent>
+
               </P.LeftContainer>
               <P.RightContainer>
                 <P.PayingContent>
@@ -95,7 +146,9 @@ export default function Paying() {
 
           </P.IvoryBox>
 
-
+          {isModalOpen && 
+            <Modal isModalOpen={isModalOpen} closeModal={closeModal} />
+          }
       </P.ContentContainer>
     </C.WhiteBox>
     </C.Container>
