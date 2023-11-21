@@ -11,7 +11,7 @@ import { useAuth } from './../Login/AuthContext';
 
 import Tooltip from './../common/Tooltip';
 
-import Modal from '../common/Modal/CartModal'; // Modal 컴포넌트 import
+import CartModal from '../common/Modal/CartModal'; // Modal 컴포넌트 import
 
 const EditProfileContent = () => {
   return (
@@ -213,7 +213,7 @@ export default function MyPage() {
             )}
           </M.IvoryBox>
           {isModalOpen && 
-            <Modal isModalOpen={isModalOpen} closeModal={closeModal} />
+            <CartModal isModalOpen={isModalOpen} closeModal={closeModal} />
           }
 
         </M.ContentContainer>

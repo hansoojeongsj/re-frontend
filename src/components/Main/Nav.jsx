@@ -6,7 +6,7 @@ import * as N from './NavStyle';
 import LogoImage from '/logo.png';
 import TodayMenuImage from '/today-menu.jpg';
 import { useAuth } from './../Login/AuthContext';
-import Modal from './../common/Modal/CartModal';
+import CartModal from './../common/Modal/CartModal';
 import Tooltip from './../common/Tooltip';
 
 const Nav = () => {
@@ -93,7 +93,7 @@ const Nav = () => {
       </N.NavContent>
       <N.TodayMenuImage src={TodayMenuImage} alt="Today's Menu" />
       {isModalOpen && (
-      <Modal isModalOpen={isModalOpen} closeModal={closeModal} />
+      <CartModal isModalOpen={isModalOpen} closeModal={closeModal} />
       )}
     </N.NavWrapper>
   );
