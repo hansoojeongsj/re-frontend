@@ -5,7 +5,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 3em;
+  padding: 2em;
 `;
 export const WhiteBox = styled.div`
   background-color: #ffffff;
