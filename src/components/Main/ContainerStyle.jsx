@@ -5,7 +5,11 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 2em;
+  padding: 3em;
+  @media screen and (max-width: 700px) {
+    padding: 2em;
+
+  }
 `;
 export const WhiteBox = styled.div`
   background-color: #ffffff;
