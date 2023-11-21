@@ -141,9 +141,7 @@ export default function MyPage() {
     <C.Container>
       <C.WhiteBox>
         <M.ContentContainer>
-          <a href="/">
-            <M.BackButton>⬅ BACK TO MENU</M.BackButton>
-          </a>
+            <M.BackButton as={Link} to="/">⬅ BACK TO MENU</M.BackButton>
           <M.NavTagContainer>
           {isLoggedIn ? (
               <M.NavTag
