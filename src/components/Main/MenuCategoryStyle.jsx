@@ -75,7 +75,6 @@ export const MenuBox = styled.div`
         margin-bottom: 30px;
     }
 
-
 `;
 
 export const StyledButton = styled.button`  // 토글 카테고리 
@@ -99,7 +98,8 @@ export const StyledButton = styled.button`  // 토글 카테고리
 
 
     @media screen  and (max-width: 650px) {
-        max-width: 50%;
+        max-width: 60%;
+        margin-right: 0;
         font-size: 12px; 
     }
 
