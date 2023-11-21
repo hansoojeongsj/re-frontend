@@ -36,12 +36,12 @@ export const NavTag = styled.button`
   color: #FFAC33;
   text-align: center;
   font-size: 30px; 
-  box-shadow: 0px 4px 4px 4px rgba(0, 0, 0, 0.25); /* 그림자 효과 */
+  background: #D9D9D9; 
 
   &:hover {
-    color: #FFEACC;
+    color: #FFAC33;
+    background:#FFEACC; /* 호버 시 그라데이션 변경 */
   }
-  
   @media screen and (max-width: 650px) {
     width: 30px; /* 창의 너비가 500px 미만이면 40px로 설정 */
     font-size: 20px; 
@@ -120,9 +120,11 @@ export const MypageButton = styled.button`
     border-color: #FFF1DC;
   }
   @media screen and (max-width: 600px) {
-    width: 70px;
-    height: 70px;
+    width: 80px;
+    height: 80px;
     font-size: 13px;
+    margin: 10px;
+
   }
 `;
 export const MypageRow = styled.div`
@@ -197,7 +199,10 @@ export const ReviewList = styled.div`
   align-items: center;
   border-radius: 30px;
   margin: 20px auto; /* 수평 중앙 정렬을 위한 축약형 사용 */
+  @media screen and (max-width:600px) {
+    width: 100%;
 
+  }
 `;
 export const Pagination = styled.div`
   margin-top: 20px;

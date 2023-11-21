@@ -36,12 +36,13 @@ export const NavTag = styled.button`
   color: #FFAC33;
   text-align: center;
   font-size: 30px; 
-  box-shadow: 0px 4px 4px 4px rgba(0, 0, 0, 0.25); /* 그림자 효과 */
+
+  background: #D9D9D9; 
 
   &:hover {
-    color: #FFEACC;
+    color: #FFAC33;
+    background:#FFEACC; /* 호버 시 그라데이션 변경 */
   }
-  
   @media screen and (max-width: 650px) {
     width: 30px; /* 창의 너비가 500px 미만이면 40px로 설정 */
     font-size: 20px; 
@@ -142,6 +143,14 @@ export const PayingButton = styled.button`
   border-radius: 50px;
   font-weight: bold;
   margin-top:25px;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s; /* 호버 시에 애니메이션을 부드럽게 적용하기 위한 transition */
+
+  &:hover {
+    background-color: white;
+    border: 2px solid #FFAC33;
+    color: #FFAC33;
+    box-shadow: 0px 4px 4px 2px rgba(255, 172, 51, 0.25); /* 그림자 효과 */
+  }
   @media screen and (max-width: 768px) {
     height: 60px;
     font-size: 22px;

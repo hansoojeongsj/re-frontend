@@ -111,6 +111,15 @@ export const LoginButton = styled.button`
   margin: 0 auto;
   font-family: 'Pretendard', sans-serif;
   margin-top: 15px;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s; /* 호버 시에 애니메이션을 부드럽게 적용하기 위한 transition */
+
+&:hover {
+  background-color: white;
+  border: 2px solid #FFAC33;
+  color: #FFAC33;
+  box-shadow: 0px 4px 4px 2px rgba(255, 172, 51, 0.25); /* 그림자 효과 */
+}
+
   @media screen and (max-width: 768px) {
     height: 60px;
     font-size: 22px;
@@ -133,6 +142,14 @@ export const SigninButton = styled.button`
   justify-content: center;
   align-items: center;
   margin-bottom: 10px;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s; /* 호버 시에 애니메이션을 부드럽게 적용하기 위한 transition */
+
+&:hover {
+  background-color: #FFAC33;
+  color: white;
+  box-shadow: 0px 4px 4px 2px rgba(255, 172, 51, 0.25); /* 그림자 효과 */
+}
+
   @media screen and (max-width: 600px) {
     height: 50px;
     font-size: 22px;
