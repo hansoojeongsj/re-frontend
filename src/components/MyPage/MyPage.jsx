@@ -11,7 +11,7 @@ import { useAuth } from './../Login/AuthContext';
 
 import Tooltip from './../common/Tooltip';
 
-import Modal from './../common/Modal/Modal'; // Modal 컴포넌트 import
+import Modal from '../common/Modal/CartModal'; // Modal 컴포넌트 import
 
 const EditProfileContent = () => {
   return (

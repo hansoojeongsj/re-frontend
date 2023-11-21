@@ -2,8 +2,8 @@ import PropTypes from 'prop-types'; // Import prop-types
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
-import * as M from './ModalStyle';
-import { useAuth } from './../../Login/AuthContext';
+import * as M from './CartModalStyle';
+import { useAuth } from '../../Login/AuthContext';
 
 
 const Modal = ({ isModalOpen, closeModal }) => {

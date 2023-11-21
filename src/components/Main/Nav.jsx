@@ -6,7 +6,7 @@ import * as N from './NavStyle';
 import LogoImage from '/logo.png';
 import TodayMenuImage from '/today-menu.jpg';
 import { useAuth } from './../Login/AuthContext';
-import Modal from './../common/Modal/Modal';
+import Modal from './../common/Modal/CartModal';
 import Tooltip from './../common/Tooltip';
 
 const Nav = () => {
