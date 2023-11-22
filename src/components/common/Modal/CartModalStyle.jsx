@@ -38,7 +38,7 @@ export const ModalContent = styled.div`
 
 export const ModalCloseButton = styled.button`
   display: flex;
-  font-size: 20px;
+  font-size: 25px;
   padding:10px;
   color:  #FFAC33;
   cursor: pointer;
@@ -46,7 +46,7 @@ export const ModalCloseButton = styled.button`
   transition: transform 0.3s; /* 호버 시에 애니메이션을 부드럽게 적용하기 위한 transition */
 
   &:hover {
-    transform: scale(1.2); /* 호버 시에 크기를 1.2배로 확대 */
+    transform: scale(1.3); /* 호버 시에 크기를 1.2배로 확대 */
   }
 
 `;
