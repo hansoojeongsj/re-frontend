@@ -49,6 +49,24 @@ export default function Paying() {
   const closeModal = () => {
     setActiveModal(null);
   };
+  const [editablePhoneNumber, setEditablePhoneNumber] = useState('010-0000-7455');
+  const [isEditingPhoneNumber, setIsEditingPhoneNumber] = useState(false);
+
+  const handleEditPhoneNumber = () => {
+    setIsEditingPhoneNumber(true);
+  };
+
+  const handleSavePhoneNumber = () => {
+    // 여기에서 입력값을 어떻게 처리할지 정의하십시오.
+    // 이 예시에서는 그냥 상태를 업데이트하지만, 실제로는 서버로 전송하거나 다른 작업이 필요할 수 있습니다.
+    setIsEditingPhoneNumber(false);
+  };
+
+  const handlePhoneNumberChange = (e) => {
+    // 숫자와 -만 입력 허용 (정규표현식 사용)
+    const value = e.target.value.replace(/[^0-9-]/g, '').slice(0, 15);
+    setEditablePhoneNumber(value);
+  };
 
   return (
     <C.Container>
@@ -102,11 +120,27 @@ export default function Paying() {
             </P.PayingContent>
             <P.BottomContainer>
               <P.LeftContainer>
+              <P.PayingContent>
+                <P.NumberTitle>전화번호 &nbsp;&nbsp;&nbsp;{' '}</P.NumberTitle>
+              {isEditingPhoneNumber ? (
+                    <>
+                      <P.NumberInput
+                        type="text"
+                        value={editablePhoneNumber}
+                        onChange={handlePhoneNumberChange}
+                      />
+                      
+                      <P.NumberButton onClick={handleSavePhoneNumber}>저장</P.NumberButton>
+                    </>
+                  ) : (
+                    <>
+                      {editablePhoneNumber}
+                      <P.NumberButton onClick={handleEditPhoneNumber}>수정</P.NumberButton>
+                    </>
+                  )}
+              </P.PayingContent>
                 <P.PayingContent>
-                  전화번호 : 010-0000-7455
-                </P.PayingContent>
-                <P.PayingContent>
-                  결제수단
+                  <P.NumberTitle>결제수단</P.NumberTitle>
                   
                   <P.RadioWrapper>
                     <label>

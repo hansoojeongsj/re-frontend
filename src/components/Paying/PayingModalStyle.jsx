@@ -35,6 +35,19 @@ export const CloseButton = styled.button`
   }
 
 `;
+
+export const ModalTitle = styled.a`
+  font-size: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  padding: 10px;
+  @media screen and (max-width: 600px){
+    font-size: 30px;
+
+  }
+`;
 export const OkButton = styled.button`
   background-color: #FFAC33;
   color: white;

@@ -84,11 +84,10 @@ export const IvoryBox = styled.div`
   font-family: 'Pretendard', sans-serif;
   background-color: #f9f1e4;
   width: 1300px;
-  max-height: 480px;
+  height: auto;
   resize: none;
   border-radius: 45px;
   max-width: 100%;
-  max-height: 100%;
   margin: 0 auto; /* 가운데 정렬을 위한 margin 설정 */
   margin-bottom: 30px;
   padding: 50px;
@@ -97,22 +96,40 @@ export const IvoryBox = styled.div`
   flex-direction: column; 
   justify-content: space-around; 
   align-items: center;
+  @media screen and (max-width: 900px) {
+    padding: 30px;
+  }
 `;
 export const PayingContainer=styled.div`
-  width: 90%;
+  width: 100%;
   align-items: center;
 `;
 export const PayingContent = styled.div`
   width: 100%;
-  height: 100px;
+  height: auto;
+  min-height: 130px;
   background-color: white;
   border: 1.5px solid #FFAC33;
-  display: flex;
   justify-content: center;
-  align-items: center;
   border-radius: 30px;
   margin: 10px 0; 
   font-size: 15px;
+  align-items: flex-start; /* 세로 정렬시 왼쪽 정렬 */
+  padding:10%;
+  font-size: 18px;
+  @media screen and (max-width: 1200px) {
+    font-size: 16px;
+
+  }
+
+  @media screen and (max-width: 900px) {
+    flex-direction: column; /* 화면이 좁아질 때 세로로 정렬 */
+    align-items: flex-start; /* 세로 정렬시 왼쪽 정렬 */
+    padding:10%;
+    font-size: 13px;
+
+  }
+
 `;
 
 export const BottomContainer = styled.div`
@@ -127,8 +144,47 @@ export const LeftContainer = styled.div`
 
 export const RightContainer = styled.div`
   width: calc(50% - 10px); /* 조정: 여백 고려하여 50%로 설정 */
+  height: 100%;
 `;
 
+export const NumberButton = styled.button`
+  border-radius: 20px;
+  background-color: #FFAC33;
+  color: white;
+  width: 70px;
+  height: 35px;
+  margin-left: 30px;
+  margin-right: 10px; /* 항상 오른쪽 마진 10px으로 설정 */
+  margin-top: 10px;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+  font-weight: bold;
+
+  &:hover {
+    background-color: white;
+    border: 2px solid #FFAC33;
+    color: #FFAC33;
+    box-shadow: 0px 4px 4px 2px rgba(255, 172, 51, 0.25);
+  }
+
+  @media screen and (max-width: 900px) {
+    width: 60px;
+    height: 25px;
+    margin-left: 70%;
+    margin-right: 10px; /* 화면이 좁아질 때 오른쪽 마진을 10px으로 설정 */
+    margin-top: 10px;
+  }
+`;
+export const NumberInput = styled.input`
+
+`;
+export const NumberTitle= styled.a`
+  white-space: nowrap; /* 변경된 부분 */
+  font-weight: bold;
+  @media screen and (max-width: 900px) {
+    margin-left:0px;
+  }
+  
+`;
 export const PayingButton = styled.button`
   width: 100%;
   max-width: 380px;

@@ -12,9 +12,9 @@ const PayingModal = ({ isModalOpen, closeModal }) => {
             <P.CloseButton onClick={closeModal}>
               <FontAwesomeIcon icon={faTimes} />
             </P.CloseButton>
-            <p>주문완료</p>
+              <P.ModalTitle>주문완료</P.ModalTitle>
 
-            <p>103</p>
+              <P.ModalTitle>103</P.ModalTitle>
             <P.OkButton>
               확인
             </P.OkButton>
