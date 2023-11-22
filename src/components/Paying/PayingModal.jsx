@@ -1,16 +1,25 @@
 import PropTypes from 'prop-types'; // PropTypes 추가
-import { ModalOverlay, ModalContent, CloseButton } from './PayingModalStyle';
-
+import * as P from './PayingModalStyle';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 const PayingModal = ({ isModalOpen, closeModal }) => {
+
   return (
     <>
       {isModalOpen && (
-        <ModalOverlay>
-          <ModalContent>
-            <CloseButton onClick={closeModal}>&times;</CloseButton>
-            <p>모달 내용을 여기에 작성하세요.</p>
-          </ModalContent>
-        </ModalOverlay>
+        <P.ModalOverlay>
+          <P.ModalContent>
+            <P.CloseButton onClick={closeModal}>
+              <FontAwesomeIcon icon={faTimes} />
+            </P.CloseButton>
+            <p>주문완료</p>
+
+            <p>103</p>
+            <P.OkButton>
+              확인
+            </P.OkButton>
+          </P.ModalContent>
+        </P.ModalOverlay>
       )}
     </>
   );
