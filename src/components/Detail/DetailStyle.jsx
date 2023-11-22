@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 export const ContentContainer = styled.div`
+    width: 100%;
+    overflow-x: hidden; /* This will hide horizontal scrollbar */
+
 `;
 
 export const TopContainer = styled.div`
@@ -34,12 +37,13 @@ export const LogoContainer = styled.div`
 `;
 
 export const LogoImage = styled.img`
-    width: 100px;
+    width: 150px;
     height: auto;
     @media screen and (max-width: 480px) {
         width: 100px;
     }
 `;
+
 export const NavTag = styled.button`
     width: 75px;
     height: 65px;
@@ -80,7 +84,7 @@ export const NavTagContainer = styled.div`
 
 export const MenuContainer = styled.div`
     text-align: center;
-    margin-top: 60px;
+    margin-top: 40px;
 `;
 
 export const MenuName = styled.h2`

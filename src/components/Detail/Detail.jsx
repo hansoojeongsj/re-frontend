@@ -1,4 +1,3 @@
-import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { categories } from '../Main/data';
@@ -40,7 +39,6 @@ export default function DetailPage() {
     const menuName = selectedMenu ? selectedMenu.name : "Not Found";
     const menuImage = selectedMenu ? selectedMenu.image : null;
     const menuPrice = selectedMenu ? selectedMenu.price : "Not Found";
-    const menuDescription = selectedMenu ? selectedMenu.description : "Not Found";
 
 
     const handleReviewSubmit = (newReview) => {
@@ -53,9 +51,6 @@ export default function DetailPage() {
                 <D.ContentContainer>
                     <D.TopContainer>
                         <D.BackButton as={Link} to="/">⬅ BACK TO MENU</D.BackButton>
-                        <D.LogoContainer>
-                            <D.LogoImage src={LogoImage} alt="로고" />
-                        </D.LogoContainer>
                         <D.NavTagContainer>
                             <D.NavTag onClick={openModal}>
                                 <FontAwesomeIcon icon={faShoppingCart} />
@@ -63,7 +58,9 @@ export default function DetailPage() {
                         </D.NavTagContainer>
                         
                     </D.TopContainer>
-                        
+                    <D.LogoContainer>
+                            <D.LogoImage src={LogoImage} alt="로고" />
+                        </D.LogoContainer>
                     {isModalOpen && 
                         <Modal isModalOpen={isModalOpen} closeModal={closeModal} />
                     }
