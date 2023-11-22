@@ -3,6 +3,7 @@ import * as D from './DetailStyle';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { FaStar } from 'react-icons/fa';
+import PropTypes from 'prop-types';
 
 const ReviewForm = ({ onReviewSubmit }) => {
     const [reviewText, setReviewText] = useState('');
@@ -25,6 +26,7 @@ const ReviewForm = ({ onReviewSubmit }) => {
             rating,
             content,
         };
+
         onReviewSubmit(newReview);
 
         // 입력 필드 초기화
@@ -34,12 +36,20 @@ const ReviewForm = ({ onReviewSubmit }) => {
         }
     };
 
+    // 전송버튼 이벤트 
     const handleSendReview = () => {
         // 리뷰를 전송하는 로직 작성
         console.log('Sending review:', reviewText);
-        // 전송 후 필요한 작업 수행
-        setReviewText(''); // 리뷰 전송 후 입력창 초기화
+
+        onReviewSubmit({ username, rating, content });
+
+        // 입력창 초기화
+        setUsername('');
+        setRating(0);
+        setContent('');
     };
+
+
 
     return (
         <D.ReviewFormContainer>
@@ -56,22 +66,34 @@ const ReviewForm = ({ onReviewSubmit }) => {
                         />
                     ))}
                 </div>
+                <form onSubmit={handleSubmit}>
+                    <D.ReviewTextContainer>
+                        <D.ReviewNameInput
+                            type="text"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            placeholder="Your Name"
+                        />
+                        <D.ReviewContentInput
+                            value={content}
+                            onChange={(e) => setContent(e.target.value)}
+                            placeholder="Write a review..."
+                        />
+                    </D.ReviewTextContainer>
+                    
+                    <button type="submit">
+                        <FontAwesomeIcon icon={faPaperPlane} />
+                    </button> 
+                </form>
 
-                <input
-                    type="text"
-                    value={reviewText}
-                    onChange={(e) => setReviewText(e.target.value)}
-                    placeholder="Write a review..."
-                />
-
-                <button>
-                    <FontAwesomeIcon icon={faPaperPlane} />
-                </button>  
+                
             </D.ReviewInputBox>
-
-
         </D.ReviewFormContainer>
     );
+};
+
+ReviewForm.propTypes = {
+    onReviewSubmit: PropTypes.func.isRequired,
 };
 
 export default ReviewForm;

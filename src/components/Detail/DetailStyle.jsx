@@ -190,43 +190,114 @@ export const ReviewList = styled.div`
 
 export const ReviewFormContainer = styled.div`
     margin-top: 20px;
-    width: 100vw;
+    width: 100%;
+
 `;
 
 export const ReviewInputBox = styled.div`
     display: flex;
     align-items: center;
-    width: 100vw;
-    height: 35px;
+    justify-content: flex-start;
+    width: 100%; 
     border: 2px solid #FFCF88;
     border-radius: 20px;
     background-color: #FFFAF2;
     padding: 0 20px;
-    margin-bottom: 20px; 
-    font-size: 20px;
+    margin-bottom: 20px;
+    font-size: 16px;
     color: #000000;
-    max-width: 600px;
     justify-content: space-between;
 
-
-    input {
-        margin-left: 10px;
-        flex-grow: 1;
-        height: 100%;
-        border: none;
-        background-color: transparent;
-        outline: none;
+    div{
+        margin-right: auto;
+        
     }
 
     button {
         background: none;
         border: none;
         cursor: pointer;
-        
+        margin-right: auto;
     }
 
-    // 아이콘 색상 설정
+    form {
+        display: flex;
+        gap: 10px;
+    }
+
+    // 아이콘
     svg {
         color: #FFAC33;
+        width: 20px; 
+        height: 20px;
+    }
+
+`;
+
+export const ReviewTextContainer= styled.div`
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: flex-start;
+
+`
+
+export const ReviewNameInput = styled.input`
+    flex-grow: 1;
+    height: 100%;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    resize: none; /* 사용자 크기 조정 비활성화 */
+    font-size: 16px; 
+    font-weight: bold;
+    flex-direction: column;
+    color: black;
+
+    &:focus {
+        outline: none;
+    }
+    &::placeholder {
+        color: #000000;
+    }
+    @media screen and (max-width: 412px) {
+        font-size: 13px; /* 작은 화면에서 폰트 크기 조절 */
+    }
+`;
+
+export const ReviewContentInput = styled.textarea`
+    font-family: 'Pretendard', sans-serif;
+    width: 100%;
+    height: 87%;
+    background-color: transparent;
+    color: black;
+    border: none;
+    font-size: 16px;
+    resize: none; /* 사용자 크기 조정 비활성화 */
+    outline: none; /* 포커스 효과 제거 */
+
+    &::placeholder {
+        color: #000000;
+    }
+    &:focus {
+        outline: none; /* 포커스 효과 제거 */
+    }
+    @media screen and (max-width: 412px) {
+        font-size: 15px; /* 작은 화면에서 폰트 크기 조절 */
+    }
+    &::-webkit-scrollbar {
+        width: 10px; /* 스크롤바의 두께 지정 */
+        border-radius: 5px; /* 스크롤바 모서리를 둥글게 만듭니다. */
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #595959;
+        border-radius: 5px;
+        backdrop-filter: blur(50px);
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color: #acacac; /* 스크롤바 트랙 색상 지정 */
+        border-radius: 5px; /* 스크롤바 모서리를 둥글게 만듭니다. */
     }
 `;
