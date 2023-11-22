@@ -114,12 +114,16 @@ export default function Paying() {
           <P.Title>Paying</P.Title>
           <P.IvoryBox>
           <P.PayingContainer>
-            <P.PayingContent>
-              여긴 장바구니 담은거
+            <P.TopContent>
+              <P.PayingContent>
+                여긴 장바구니 담은거
 
-            </P.PayingContent>
+              </P.PayingContent>
+            </P.TopContent>
+
             <P.BottomContainer>
-              <P.LeftContainer>
+            <P.LeftContainer>
+
               <P.PayingContent>
                 <P.NumberTitle>전화번호 &nbsp;&nbsp;&nbsp;{' '}</P.NumberTitle>
               {isEditingPhoneNumber ? (
@@ -134,7 +138,7 @@ export default function Paying() {
                     </>
                   ) : (
                     <>
-                      {editablePhoneNumber}
+                      <P.NumberFont>{editablePhoneNumber}</P.NumberFont>
                       <P.NumberButton onClick={handleEditPhoneNumber}>수정</P.NumberButton>
                     </>
                   )}
@@ -165,16 +169,16 @@ export default function Paying() {
                     </label>
                   </P.RadioWrapper>
                 </P.PayingContent>
+                </P.LeftContainer>
 
-              </P.LeftContainer>
-              <P.RightContainer>
-                  <P.PayingDetail>
+                <P.RightContainer>
+                  <P.PayingContent>
                     <P.NumberTitle>
                       결제 상세
                     </P.NumberTitle>
 
-                  </P.PayingDetail>
-              </P.RightContainer>
+                  </P.PayingContent>
+                </P.RightContainer>
             </P.BottomContainer>
           </P.PayingContainer>
           <P.PayingButton onClick={() => openModal('paying')}>결제하기</P.PayingButton>

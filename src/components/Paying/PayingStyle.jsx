@@ -90,55 +90,76 @@ export const IvoryBox = styled.div`
   max-width: 100%;
   margin: 0 auto; /* 가운데 정렬을 위한 margin 설정 */
   margin-bottom: 30px;
-  padding: 50px;
+  padding: 60px;
   box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.25), 5px 0px 5px -3px rgba(0, 0, 0, 0.25);
   display: flex;
   flex-direction: column; 
   justify-content: space-around; 
   align-items: center;
+
   @media screen and (max-width: 900px) {
     padding: 30px;
   }
 `;
-export const PayingContainer=styled.div`
+export const PayingContainer = styled.div`
   width: 100%;
   align-items: center;
 `;
+
 export const PayingContent = styled.div`
   width: 100%;
   height: auto;
-  min-height: 120px;
+  min-height: 70px;
   background-color: white;
   border: 1.5px solid #FFAC33;
   justify-content: center;
   border-radius: 30px;
-  margin: 10px 0; 
+  margin-bottom: 20px;
   font-size: 15px;
-  align-items: center; /* Center items vertically */
-  padding:10%;
+  align-items: center;
+  padding: 10%;
   font-size: 18px;
-  justify-content: space-between; /* Use space-between to push items to the sides */
-  display: flex; /* Add display: flex to enable flex properties */
+  justify-content: space-between;
+  display: flex;
+  min-width: 220px;
 
-  @media screen and (max-width: 1200px) {
-    font-size: 16px;
-
+  @media screen and (max-width: 376px) {
+    font-size: 9px;
+    padding: 5%;
   }
 
   @media screen and (max-width: 900px) {
-    flex-direction: column; /* 화면이 좁아질 때 세로로 정렬 */
-    align-items: flex-start; /* 세로 정렬시 왼쪽 정렬 */
-    padding:10%;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10%;
     font-size: 13px;
-
   }
 
+  @media screen and (max-width: 1200px) {
+    font-size: 16px;
+  }
+
+`;
+export const TopContent = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around; /* Center the containers and provide space around them */
+  margin-top: 20px; /* Add some top margin for better separation */
+  max-width: 100%;
+  @media screen and (max-width: 575px) {
+    justify-content: center; /* Center the containers when screen width is below 575px */
+  }
 `;
 
 export const BottomContainer = styled.div`
   display: flex;
-  flex-wrap: wrap; /* Allow items to wrap to the next line if the width is reduced */
-  justify-content: space-between;
+  flex-wrap: wrap;
+  justify-content: space-around; /* Center the containers and provide space around them */
+  gap: 20px; /* Add a gap between containers for better separation */
+  max-width: 100%;
+  @media screen and (max-width: 575px) {
+    justify-content: center; /* Center the containers when screen width is below 575px */
+  }
 `;
 
 export const LeftContainer = styled.div`
@@ -146,7 +167,7 @@ export const LeftContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin-right: 10px; /* Add a margin between LeftContainer and RightContainer */
+  margin-bottom: -20px;
 `;
 
 export const RightContainer = styled.div`
@@ -154,7 +175,13 @@ export const RightContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin-left: 10px; /* Add a margin between LeftContainer and RightContainer */
+
+`;
+
+
+export const NumberFont = styled.a`
+  width: 200px;
+  font-size: 15px ;
 `;
 
 export const NumberButton = styled.button`
@@ -167,13 +194,19 @@ export const NumberButton = styled.button`
   height: 35px;
   transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
   font-weight: bold;
+  align-self: flex-end; 
   &:hover {
     background-color: white;
     border: 2px solid #FFAC33;
     color: #FFAC33;
     box-shadow: 0px 4px 4px 2px rgba(255, 172, 51, 0.25);
   }
+  @media screen and (max-width: 400px) {
+    width: 40px;
+    margin-top:10px;
 
+    height: 20px;
+  }
   @media screen and (max-width: 900px) {
     width: 60px;
     min-width: 60px; /* Set a min-width to prevent it from becoming too small */
@@ -183,26 +216,25 @@ export const NumberButton = styled.button`
   }
 `;
 
+export const NumberTitle = styled.a`
+  white-space: nowrap;
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 15px;
+`;
+
 export const NumberInput = styled.input`
-  width: 120px;
-  margin-right: 10px; /* Adjust the margin as needed */
+  width: 140px;
+  margin-right: 10px;
+  font-size: 13px;
+
   @media screen and (max-width: 370px) {
     font-size: 10px;
   }
+
   @media screen and (max-width: 380px) {
     font-size: 12px;
   }
-
-`;
-export const NumberTitle= styled.a`
-  white-space: nowrap; /* 변경된 부분 */
-  font-weight: bold;
-  margin-bottom: 10px;
-
-  @media screen and (max-width: 600px) {
-    margin-bottom:0px;
-  }
-  
 `;
 export const PayingButton = styled.button`
   width: 100%;
@@ -217,21 +249,22 @@ export const PayingButton = styled.button`
   border: none;
   border-radius: 50px;
   font-weight: bold;
-  margin-top:25px;
-  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s; /* 호버 시에 애니메이션을 부드럽게 적용하기 위한 transition */
+  margin-top: 40px;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
 
   &:hover {
     background-color: white;
     border: 2px solid #FFAC33;
     color: #FFAC33;
-    box-shadow: 0px 4px 4px 2px rgba(255, 172, 51, 0.25); /* 그림자 효과 */
+    box-shadow: 0px 4px 4px 2px rgba(255, 172, 51, 0.25);
   }
+
   @media screen and (max-width: 768px) {
     height: 60px;
     font-size: 22px;
   }
-
 `;
+
 export const RadioWrapper = styled.div`
   margin-top: 10px;
   
@@ -253,31 +286,5 @@ export const RadioWrapper = styled.div`
         background-color: #FFAC33;
       }
     }
-  }
-`;
-
-export const PayingDetail=styled.div`
-  min-height: 250px; 
-  height: auto; 
-  background-color: white;
-  border: 1.5px solid #FFAC33;
-  border-radius: 30px;
-  margin: 10px 0;
-  font-size: 15px;
-  padding: 10%;
-  font-size: 18px;
-  justify-content: space-between;
-  display: flex;
-
-  @media screen and (max-width: 1200px) {
-    font-size: 16px;
-
-  }
-
-  @media screen and (max-width: 900px) {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 10%;
-    font-size: 13px;
   }
 `;
