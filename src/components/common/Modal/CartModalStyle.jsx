@@ -46,7 +46,7 @@ export const ModalCloseButton = styled.button`
   transition: transform 0.3s; /* 호버 시에 애니메이션을 부드럽게 적용하기 위한 transition */
 
   &:hover {
-    transform: scale(1.3); /* 호버 시에 크기를 1.2배로 확대 */
+    transform: scale(1.3);
   }
 
 `;
@@ -84,6 +84,8 @@ export const CartListContainer = styled.div`
 `;
 
 export const CartList = styled.div`
+  color: black;
+
   width: 90%;
   height: 90px;
   background-color: white;
@@ -92,8 +94,27 @@ export const CartList = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 30px;
-  margin: 20px;
+  margin: 10px;
+  position: relative;
+  justify-content: flex-start; /* 이 부분을 수정해서 내용물을 왼쪽으로 정렬합니다. */
+  padding: 3%;
 `;
+export const ListDeleteButton = styled.button`
+  position: absolute; /* 부모 요소를 기준으로 위치를 조절합니다. */
+  top: 5px; /* 원하는 상단 여백 값으로 조절하세요 */
+  right: 10px; /* 원하는 우측 여백 값으로 조절하세요 */
+  display: flex;
+  font-size: 20px;
+  padding: 10px;
+  color: #FFAC33;
+  cursor: pointer;
+  transition: transform 0.3s;
+
+  &:hover {
+    transform: scale(1.3);
+  }
+  `;
+
 
 export const ModalContainer = styled.div`
   width: 90%;
@@ -102,18 +123,22 @@ export const ModalContainer = styled.div`
 
 `;
 
+
 export const CartTotal = styled.div`
-  width: 100%;
-  height: 80px;
-  background-color: white;
+  color: black;
   border: 2.5px solid #FFAC33;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background-color: white;
   border-radius: 30px;
-  margin-bottom: 0px;
-  margin-top:20px;
-  `;
+  margin-top: 20px;
+  margin-bottom: 5px;
+  align-items: center; /* 수평 가운데 정렬 */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 15px; /* 적절한 패딩 설정 */
+`;
+
+
 export const PayingButton = styled.button`
   background-color: #FFAC33;
   color: white;
@@ -177,3 +202,45 @@ export const LoginButton=styled.button`
 
 }
 `;
+
+export const CartItemImage = styled.img`
+  height: 100%;
+  border-radius: 50%;
+  margin-right: 20px; /* 사진 오른쪽 여백 설정 */
+  width: 25%;
+`;
+
+export const CartItemContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+
+`;
+
+export const CartItemName = styled.a`
+  font-size: 17px;
+  margin-bottom: 5px; /* 아이템 이름과 가격 사이 여백 설정 */
+`;
+
+export const CartItemPrice = styled.a`
+  font-size: 15px;
+  font-weight: normal;
+
+`;
+export const TotalTitle = styled.div`
+  font-size: 20px;
+  font-weight: bold;
+`;
+
+export const TotalNum = styled.div`
+  font-weight: normal;
+`;
+
+export const TotalInfo = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%; /* 또는 적절한 폭 설정 */
+  padding: 10px; /* 적절한 패딩 설정 */
+  font-size: 17px;
+  `;
