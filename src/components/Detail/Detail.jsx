@@ -43,6 +43,7 @@ export default function DetailPage() {
 
     const handleReviewSubmit = (newReview) => {
         setReviews([...reviews, newReview]);
+        console.log('Submitting review to the backend:', newReview);  // console 테스트
     };
 
     return (
