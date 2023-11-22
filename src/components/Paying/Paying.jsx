@@ -168,9 +168,12 @@ export default function Paying() {
 
               </P.LeftContainer>
               <P.RightContainer>
-                <P.PayingContent>
-                  결제 상세
-                </P.PayingContent>
+                  <P.PayingDetail>
+                    <P.NumberTitle>
+                      결제 상세
+                    </P.NumberTitle>
+
+                  </P.PayingDetail>
               </P.RightContainer>
             </P.BottomContainer>
           </P.PayingContainer>

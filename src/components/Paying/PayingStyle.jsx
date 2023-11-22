@@ -107,16 +107,19 @@ export const PayingContainer=styled.div`
 export const PayingContent = styled.div`
   width: 100%;
   height: auto;
-  min-height: 130px;
+  min-height: 120px;
   background-color: white;
   border: 1.5px solid #FFAC33;
   justify-content: center;
   border-radius: 30px;
   margin: 10px 0; 
   font-size: 15px;
-  align-items: flex-start; /* 세로 정렬시 왼쪽 정렬 */
+  align-items: center; /* Center items vertically */
   padding:10%;
   font-size: 18px;
+  justify-content: space-between; /* Use space-between to push items to the sides */
+  display: flex; /* Add display: flex to enable flex properties */
+
   @media screen and (max-width: 1200px) {
     font-size: 16px;
 
@@ -140,6 +143,7 @@ export const BottomContainer = styled.div`
 
 export const LeftContainer = styled.div`
   width: calc(50% - 10px); /* 조정: 여백 고려하여 50%로 설정 */
+  height: 100%;
 `;
 
 export const RightContainer = styled.div`
@@ -147,18 +151,17 @@ export const RightContainer = styled.div`
   height: 100%;
 `;
 
+
 export const NumberButton = styled.button`
   border-radius: 20px;
   background-color: #FFAC33;
   color: white;
   width: 70px;
+  min-width: 70px; /* Set a min-width to prevent it from becoming too small */
+
   height: 35px;
-  margin-left: 30px;
-  margin-right: 10px; /* 항상 오른쪽 마진 10px으로 설정 */
-  margin-top: 10px;
   transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
   font-weight: bold;
-
   &:hover {
     background-color: white;
     border: 2px solid #FFAC33;
@@ -168,20 +171,31 @@ export const NumberButton = styled.button`
 
   @media screen and (max-width: 900px) {
     width: 60px;
+    min-width: 60px; /* Set a min-width to prevent it from becoming too small */
+    margin-top:10px;
+
     height: 25px;
-    margin-left: 70%;
-    margin-right: 10px; /* 화면이 좁아질 때 오른쪽 마진을 10px으로 설정 */
-    margin-top: 10px;
   }
 `;
+
 export const NumberInput = styled.input`
+  width: 120px;
+  margin-right: 10px; /* Adjust the margin as needed */
+  @media screen and (max-width: 370px) {
+    font-size: 10px;
+  }
+  @media screen and (max-width: 380px) {
+    font-size: 12px;
+  }
 
 `;
 export const NumberTitle= styled.a`
   white-space: nowrap; /* 변경된 부분 */
   font-weight: bold;
-  @media screen and (max-width: 900px) {
-    margin-left:0px;
+  margin-bottom: 10px;
+
+  @media screen and (max-width: 600px) {
+    margin-bottom:0px;
   }
   
 `;
@@ -210,9 +224,8 @@ export const PayingButton = styled.button`
   @media screen and (max-width: 768px) {
     height: 60px;
     font-size: 22px;
-    margin-top:20px;
-
   }
+
 `;
 export const RadioWrapper = styled.div`
   margin-top: 10px;
@@ -235,5 +248,31 @@ export const RadioWrapper = styled.div`
         background-color: #FFAC33;
       }
     }
+  }
+`;
+
+export const PayingDetail=styled.div`
+  min-height: 250px; 
+  height: auto; 
+  background-color: white;
+  border: 1.5px solid #FFAC33;
+  border-radius: 30px;
+  margin: 10px 0;
+  font-size: 15px;
+  padding: 10%;
+  font-size: 18px;
+  justify-content: space-between;
+  display: flex;
+
+  @media screen and (max-width: 1200px) {
+    font-size: 16px;
+
+  }
+
+  @media screen and (max-width: 900px) {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10%;
+    font-size: 13px;
   }
 `;
