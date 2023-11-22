@@ -18,7 +18,13 @@ export const ModalContent = styled.div`
   padding: 20px;
   border-radius: 10px;
   width: 40%;
-  height: 60%;
+  height: auto;
+  @media screen and (min-width: 600px) and (max-width:800px) {
+    width: 60%;
+  }
+  @media screen and (max-width: 600px) {
+    width: 80%;
+  }
 `;
 
 export const CloseButton = styled.button`
@@ -49,12 +55,55 @@ export const ModalTitle = styled.a`
 }
 `;
 export const PayingList = styled.div`
+margin-top: 10px;
+margin-bottom: 10px;
+`;
+export const PayingMenu = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%; /* 또는 적절한 폭 설정 */
+  padding: 10px; /* 적절한 패딩 설정 */
+  font-size: 17px;
+  `;
+export const DivWrapper = styled.div`
+  white-space: pre-line;
+`;
+export const MKTitle = styled.a`
+  width: 100px;
+  text-align: center;
+`;
+export const PayingListTitle = styled.a`
+  width: 100px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  text-align: center;
+`;
+export const PayingCount = styled.a`
+  display: flex;
+  align-items: center;
+`;
+export const PayingPrice = styled.a`
+  display: flex;
+  align-items: center;
+  `;
+export const PayingTotal = styled.div`
+  align-items: center; /* 수평 가운데 정렬 */
+  width: 80%;
+  margin: 0 auto; /* 가로 중앙 정렬 */
+  display: flex;
+  flex-direction: column;
+  padding: 10px; /* 적절한 패딩 설정 */
+margin-bottom: 20px;
+`;
+
+export const BottomTitle= styled.a`
+  font-weight: bold;
 
 `;
-export const PayingListTitle = styled.div``;
-export const PayingCount = styled.div``;
-export const PayingPrice = styled.div``;
-export const PayingTotal = styled.div``;
+export const BottomNum= styled.a``;
+
+
 export const OkButton = styled.button`
   background-color: #FFAC33;
   color: white;

@@ -19,14 +19,43 @@ const PayingModal = ({ isModalOpen, closeModal }) => {
 
               <P.ModalTitle>103</P.ModalTitle>
               <P.PayingList>
-                <P.PayingListTitle></P.PayingListTitle>
-                <P.PayingCount></P.PayingCount>
-                <P.PayingPrice></P.PayingPrice>
+                <P.PayingMenu>
+                  <P.DivWrapper>
+                  <P.MKTitle>한우사골마라탕
+                  <br />
 
-                <P.PayingTotal></P.PayingTotal>
-                <P.PayingTotal></P.PayingTotal>
+                  </P.MKTitle>
+                  <P.PayingListTitle>마라탕</P.PayingListTitle>
+                  </P.DivWrapper>
+                  <P.PayingCount>1개</P.PayingCount>
+                  <P.PayingPrice>6000원</P.PayingPrice>
+                </P.PayingMenu>
+                <P.PayingMenu>
+                <P.DivWrapper>
+                  <P.MKTitle>한우사골마라탕
+                  <br />
 
+                  </P.MKTitle>
+                  <P.PayingListTitle>마라샹궈</P.PayingListTitle>
+                  </P.DivWrapper>
+                  <P.PayingCount>1개</P.PayingCount>
+                  <P.PayingPrice>8000원</P.PayingPrice>
+                </P.PayingMenu>
               </P.PayingList>
+
+                <P.PayingTotal>
+                  <P.PayingMenu>
+                    <P.BottomTitle>총 수량 </P.BottomTitle>
+                    <P.BottomNum> 2개</P.BottomNum>
+                  </P.PayingMenu>
+
+                  <P.PayingMenu>
+                      <P.BottomTitle>주문금액</P.BottomTitle>
+                      <P.BottomNum> 14000원</P.BottomNum>
+                    </P.PayingMenu>
+
+                </P.PayingTotal>
+
             <P.OkButton as={Link} to="/">
               확인
             </P.OkButton>
