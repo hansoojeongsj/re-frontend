@@ -137,6 +137,77 @@ export const ReviewLineBottom = styled.div`
     color: #666;
 `;
 
+export const ReviewAvgContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+    
+`
+
+export const ReviewAvg = styled.div`
+    margin-left: 230px;
+    margin-top: 40px;
+    flex-direction: column;
+    align-items: center;
+
+    .AvgText{
+        font-weight: bold;
+        font-size: 40px;
+        color: black;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    .star-container-avg {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+        margin-left: 0;
+    }
+
+    svg {
+        color: #FFAC33;
+        width: 27px; 
+        height: 28px;
+        margin-right: 5px;
+    }
+`;
+
+export const ReviewRatingBar = styled.div`
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+    margin-right: 400px;
+
+    span {
+        display: block;
+        height: 20px;
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 8px;
+
+        .grey-bar {
+            background: #FFFAF2;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .yellow-bar {
+            background-color: #FFAC33;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: block;
+        }
+    }
+`;
+
+
+
 export const ReviewList = styled.div`
     display: flex;
     flex-direction: column;
@@ -156,17 +227,17 @@ export const ReviewList = styled.div`
             margin-bottom: 8px;
         }
 
+        p.date {
+            font-size: 10px;
+            color: #858585;
+            margin-bottom: 8px;
+        }
+
         div.star-container {
             display: flex;
             align-items: center;
             flex-direction: row;
-            margin-bottom: 8px;
-        }
-
-        p.date {
-            font-size: 10px;
-            color: #858585;
-            margin-bottom: 18px;
+            margin-bottom: 20px;
         }
 
         p.content {
@@ -186,12 +257,17 @@ export const ReviewList = styled.div`
     p {
         text-align: left;  
     }
+
+    svg {
+        color: #FFAC33;
+        width: 15px; 
+        height: 15px;
+    }
 `;
 
 export const ReviewFormContainer = styled.div`
     margin-top: 20px;
     width: 100%;
-
 `;
 
 export const ReviewInputBox = styled.div`
@@ -206,23 +282,17 @@ export const ReviewInputBox = styled.div`
     margin-bottom: 20px;
     font-size: 16px;
     color: #000000;
-    justify-content: space-between;
-
+    
     div{
         margin-right: auto;
-        
-    }
-
-    button {
-        background: none;
-        border: none;
-        cursor: pointer;
-        margin-right: auto;
+        width: 15%;
     }
 
     form {
         display: flex;
+        width: 100%;
         gap: 10px;
+        justify-content: space-between;
     }
 
     // 아이콘
@@ -234,11 +304,25 @@ export const ReviewInputBox = styled.div`
 
 `;
 
+export const ReviewButton = styled.div`
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-right: auto;
+    padding: 20px 0px 20px 20px;
+
+    label{
+        margin-right: 25px;
+    }
+
+`
+
 export const ReviewTextContainer= styled.div`
     display: flex;
     flex-grow: 1;
     flex-direction: column;
     justify-content: flex-start;
+    margin-left: 30px;
 
 `
 
@@ -276,8 +360,9 @@ export const ReviewContentInput = styled.textarea`
     resize: none; /* 사용자 크기 조정 비활성화 */
     outline: none; /* 포커스 효과 제거 */
 
+
     &::placeholder {
-        color: #000000;
+        color: #A1A0A0;
     }
     &:focus {
         outline: none; /* 포커스 효과 제거 */
@@ -301,3 +386,4 @@ export const ReviewContentInput = styled.textarea`
         border-radius: 5px; /* 스크롤바 모서리를 둥글게 만듭니다. */
     }
 `;
+

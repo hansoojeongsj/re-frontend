@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { categories } from '../Main/data';
 import * as D from './DetailStyle';
 import LogoImage from '/logo.png';
@@ -11,6 +11,22 @@ import {  faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { FaStar } from 'react-icons/fa';
 import ReviewForm from './ReviewForm';
 import { ReviewData } from './Reviewdata';
+
+const RatingBar = ({ ratings }) => {
+    const totalRatings = ratings.reduce((acc, rating) => acc + rating.count, 0);
+
+    return (
+        <D.ReviewRatingBar>
+            {ratings.map((rating, index) => (
+                <span key={index}>
+                    <span className="grey-bar"></span>
+                    <span className="yellow-bar" style={{ width: `${(rating.count / totalRatings) * 100}%` }}></span>
+                </span>
+            ))}
+        </D.ReviewRatingBar>
+    );
+};
+
 
 export default function DetailPage() {
     const { post_id } = useParams();
@@ -30,6 +46,14 @@ export default function DetailPage() {
         setModalOpen(false);
     };
 
+    const ratings = [
+        { rating: 1, count: 0 },
+        { rating: 2, count: 1 },
+        { rating: 3, count: 0 },
+        { rating: 4, count: 1 },
+        { rating: 5, count: 5 },
+    ];
+
 
     // categories 배열에서 post_id에 해당하는 메뉴 객체 찾기
     const selectedMenu = categories
@@ -44,6 +68,15 @@ export default function DetailPage() {
     const handleReviewSubmit = (newReview) => {
         setReviews([...reviews, newReview]);
         console.log('Submitting review to the backend:', newReview);  // console 테스트
+    };
+
+    const calculateAverageRating = () => { // 평점 평균
+        if (reviews.length === 0) {
+            return 0;
+        }
+
+        const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
+        return totalRating / reviews.length;
     };
 
     return (
@@ -76,11 +109,30 @@ export default function DetailPage() {
                     <D.ReviewContainer>
                         <D.ReviewTitle>REVIEW</D.ReviewTitle>
                         <D.ReviewLineTop><hr /></D.ReviewLineTop>
+                            <D.ReviewAvgContainer>
+                                <D.ReviewAvg>
+                                    <div className='AvgText'>{calculateAverageRating().toFixed(1)}</div>
+                                    <div className='star-container-avg'>
+                                        {[1, 2, 3, 4, 5].map((star) => (
+                                            <FaStar
+                                                key={star}
+                                                size="20"
+                                                color={star <= calculateAverageRating() ? '#FFAC33' : '#DDDDDD'}
+                                            />
+                                        ))}
+                                    </div>
+                                </D.ReviewAvg>
+                                <D.ReviewRatingBar>
+                                    <RatingBar ratings={ratings} />
+                                </D.ReviewRatingBar>
+                    
+                            </D.ReviewAvgContainer>
                         <D.ReviewLineBottom><hr /></D.ReviewLineBottom>
                         <D.ReviewList>
                             {reviews.map((review) => (
                                 <div key={review.id}>
                                     <p className="username">{review.username}</p>
+                                    <p className="date">{review.date}</p>
                                     <div className='star-container'>
                                         {[1, 2, 3, 4, 5].map((star) => (
                                             <FaStar
@@ -90,15 +142,14 @@ export default function DetailPage() {
                                             />
                                         ))}
                                     </div>
-                                    <p className="date">{review.date}</p>
                                     <p className="content">{review.content}</p>
-                                    <img src={review.image} alt="Review" />
+                                    {/* 이미지가 있을 때만 출력 */}
+                                    {review.image && <img src={review.image} alt="Review" />}
                                 </div>
                             ))}
                         </D.ReviewList>
-
+                        {/* 폼으로 리뷰 작성 */}
                         <ReviewForm onReviewSubmit={handleReviewSubmit} />
-
                     </D.ReviewContainer>
 
                 </D.ContentContainer>
