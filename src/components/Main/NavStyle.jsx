@@ -2,7 +2,9 @@ import styled from 'styled-components';
 import Slider from "react-slick";
 
 export const NavWrapper = styled.div`
-  padding: 3em;
+  padding-top: 1em;
+  padding-left: 3em;
+  padding-right: 3em;
   position: relative;
   @media screen and (max-width: 370px){
     padding: 1em;
