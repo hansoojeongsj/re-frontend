@@ -136,21 +136,26 @@ export const PayingContent = styled.div`
 `;
 
 export const BottomContainer = styled.div`
-  width: 100%;
   display: flex;
-  justify-content: space-between; /* 조정: 여백 조절을 위해 space-between으로 변경 */
+  flex-wrap: wrap; /* Allow items to wrap to the next line if the width is reduced */
+  justify-content: space-between;
 `;
 
 export const LeftContainer = styled.div`
-  width: calc(50% - 10px); /* 조정: 여백 고려하여 50%로 설정 */
-  height: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-right: 10px; /* Add a margin between LeftContainer and RightContainer */
 `;
 
 export const RightContainer = styled.div`
-  width: calc(50% - 10px); /* 조정: 여백 고려하여 50%로 설정 */
-  height: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 10px; /* Add a margin between LeftContainer and RightContainer */
 `;
-
 
 export const NumberButton = styled.button`
   border-radius: 20px;

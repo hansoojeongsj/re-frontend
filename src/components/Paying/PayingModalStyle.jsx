@@ -46,8 +46,15 @@ export const ModalTitle = styled.a`
   @media screen and (max-width: 600px){
     font-size: 30px;
 
-  }
+}
 `;
+export const PayingList = styled.div`
+
+`;
+export const PayingListTitle = styled.div``;
+export const PayingCount = styled.div``;
+export const PayingPrice = styled.div``;
+export const PayingTotal = styled.div``;
 export const OkButton = styled.button`
   background-color: #FFAC33;
   color: white;
