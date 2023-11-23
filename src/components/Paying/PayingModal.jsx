@@ -19,6 +19,39 @@ const PayingModal = ({ isModalOpen, closeModal }) => {
 
               <P.ModalTitle>103</P.ModalTitle>
               <P.PayingList>
+              <P.PayingMenu>
+                  <P.DivWrapper>
+                  <P.MKTitle>한우사골마라탕
+                  <br />
+
+                  </P.MKTitle>
+                  <P.PayingListTitle>마라탕</P.PayingListTitle>
+                  </P.DivWrapper>
+                  <P.PayingCount>1개</P.PayingCount>
+                  <P.PayingPrice>6000원</P.PayingPrice>
+                </P.PayingMenu>
+                <P.PayingMenu>
+                  <P.DivWrapper>
+                  <P.MKTitle>한우사골마라탕
+                  <br />
+
+                  </P.MKTitle>
+                  <P.PayingListTitle>마라탕</P.PayingListTitle>
+                  </P.DivWrapper>
+                  <P.PayingCount>1개</P.PayingCount>
+                  <P.PayingPrice>6000원</P.PayingPrice>
+                </P.PayingMenu>
+                <P.PayingMenu>
+                  <P.DivWrapper>
+                  <P.MKTitle>한우사골마라탕
+                  <br />
+
+                  </P.MKTitle>
+                  <P.PayingListTitle>마라탕</P.PayingListTitle>
+                  </P.DivWrapper>
+                  <P.PayingCount>1개</P.PayingCount>
+                  <P.PayingPrice>6000원</P.PayingPrice>
+                </P.PayingMenu>
                 <P.PayingMenu>
                   <P.DivWrapper>
                   <P.MKTitle>한우사골마라탕
@@ -41,7 +74,20 @@ const PayingModal = ({ isModalOpen, closeModal }) => {
                   <P.PayingCount>1개</P.PayingCount>
                   <P.PayingPrice>8000원</P.PayingPrice>
                 </P.PayingMenu>
+                <P.PayingMenu>
+                <P.DivWrapper>
+                  <P.MKTitle>한우사골마라탕
+                  <br />
+
+                  </P.MKTitle>
+                  <P.PayingListTitle>마라샹궈</P.PayingListTitle>
+                  </P.DivWrapper>
+                  <P.PayingCount>1개</P.PayingCount>
+                  <P.PayingPrice>8000원</P.PayingPrice>
+                </P.PayingMenu>
+                
               </P.PayingList>
+
 
                 <P.PayingTotal>
                   <P.PayingMenu>

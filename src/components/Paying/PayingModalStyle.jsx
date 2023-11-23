@@ -19,6 +19,7 @@ export const ModalContent = styled.div`
   border-radius: 10px;
   width: 40%;
   height: auto;
+  
   @media screen and (min-width: 600px) and (max-width:800px) {
     width: 60%;
   }
@@ -54,9 +55,31 @@ export const ModalTitle = styled.a`
 
 }
 `;
+
 export const PayingList = styled.div`
-margin-top: 10px;
-margin-bottom: 10px;
+  width: 100%;
+  overflow-y: auto; /* Vertical scrolling enabled */
+  overflow-x: hidden; /* Horizontal scrolling disabled */
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: auto;
+  max-height: 180px;
+  &::-webkit-scrollbar {
+  width: 8px; 
+}
+
+&::-webkit-scrollbar-thumb {
+  background-color: #FFAC33;
+  border-radius: 5px;
+  backdrop-filter: blur(50px);
+}
+
+&::-webkit-scrollbar-track {
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.2) inset;
+}
+
 `;
 export const PayingMenu = styled.div`
   display: flex;
