@@ -45,7 +45,7 @@ const MenuCategory = () => {
               key={category.title}
               onClick={() => handleCategoryClick(category)}
               selected={selectedCategory === category}
-              buttonFontSize={buttonFontSize}
+              data-button-font-size={buttonFontSize}
             >
               {category.title}
             </StyledButton>
