@@ -1,20 +1,38 @@
 import React, { useState, useEffect } from 'react';
 import { categories } from './data';
 import { useNavigate } from 'react-router-dom'; 
-import { MenuCategoryContainer, MenuBox, StyledButton, CategoryButtonsWrapper} from './MenuCategoryStyle';
+import * as M from './MenuCategoryStyle';
+import DetailModal from './DetailModal';
 
 const MenuCategory = () => {
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
-  const navigate = useNavigate(); 
+  //const navigate = useNavigate(); 
   const [buttonFontSize, setButtonFontSize] = useState('20px');
   // const [menuBoxWidth, setMenuBoxWidth] = useState('200px');
+
+  const [activeModal, setActiveModal] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedMenu, setSelectedMenu] = useState(null);
+
+  const openModal = (menu) => {
+    setSelectedMenu(menu); // 클릭한 메뉴 정보를 상태에 저장
+    setActiveModal(menu.post_id);
+    setIsModalOpen(true); // 모달을 열 때 isModalOpen 상태를 true로 변경
+  };
+
+  const closeModal = () => {
+    setActiveModal(null);
+    setIsModalOpen(false); // 모달을 닫을 때 isModalOpen 상태를 false로 변경
+  };
+
 
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
   };
 
   const handleMenuClick = (item) => {
-    navigate(`/detail/${item.post_id}`); 
+    //navigate(`/detail/${item.post_id}`); 
+    openModal(item);
   };
 
   useEffect(() => {
@@ -37,28 +55,28 @@ const MenuCategory = () => {
   }, []);
 
   return (
-    <MenuCategoryContainer>
-      <CategoryButtonsWrapper>
+    <M.MenuCategoryContainer>
+      <M.CategoryButtonsWrapper>
         <div>
           {categories.map((category) => (
-            <StyledButton
+            <M.StyledButton
               key={category.title}
               onClick={() => handleCategoryClick(category)}
               selected={selectedCategory === category}
               data-button-font-size={buttonFontSize}
             >
               {category.title}
-            </StyledButton>
+            </M.StyledButton>
           ))}
         </div>
-      </CategoryButtonsWrapper>
+      </M.CategoryButtonsWrapper>
     
       <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'left' }}>
         {selectedCategory.menu.map((item) => (
-          <MenuBox
+          <M.MenuBox
             key={item.name}
+            // onClick={() => handleMenuClick(item)}
             onClick={() => handleMenuClick(item)}
-            
           >
           
             <div className="menu-info">
@@ -68,11 +86,14 @@ const MenuCategory = () => {
               </div>
               <div className="menu-price">{item.price}</div>
             </div>
+            {activeModal && (
+              <DetailModal isModalOpen={isModalOpen} closeModal={closeModal} menu={selectedMenu} />
+            )}
             
-          </MenuBox>
+          </M.MenuBox>
         ))}
       </div>
-    </MenuCategoryContainer>
+    </M.MenuCategoryContainer>
   );
 };
 
