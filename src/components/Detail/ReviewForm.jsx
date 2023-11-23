@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import * as D from './DetailStyle';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { faPaperPlane, faImage } from '@fortawesome/free-solid-svg-icons';
 import { FaStar } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 
@@ -11,9 +11,26 @@ const ReviewForm = ({ onReviewSubmit }) => {
     const [username, setUsername] = useState('');
     const [rating, setRating] = useState(0);
     const [content, setContent] = useState('');
+    const [imgSrc, setImgSrc] = useState(null);
 
     const handleStarClick = (selectedRating) => {
         setRating(selectedRating);
+    };
+
+    const handleImageChange = (e) => {
+        // 이미지가 선택되었을 때
+        const file = e.target.files[0];
+        const reader = new FileReader();
+
+        reader.onloadend = () => {
+            setImgSrc(reader.result);
+        };
+
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            setImgSrc(null);
+        }
     };
 
     const handleSubmit = (e) => {
@@ -25,6 +42,7 @@ const ReviewForm = ({ onReviewSubmit }) => {
             username,
             rating,
             content,
+            image: imgSrc,
         };
 
         onReviewSubmit(newReview);
@@ -33,6 +51,7 @@ const ReviewForm = ({ onReviewSubmit }) => {
         setUsername('');
         setRating(0);
         setContent('');
+        setImgSrc(null);
         }
     };
 
@@ -81,9 +100,23 @@ const ReviewForm = ({ onReviewSubmit }) => {
                         />
                     </D.ReviewTextContainer>
                     
-                    <button type="submit">
-                        <FontAwesomeIcon icon={faPaperPlane} />
-                    </button> 
+                    <D.ReviewButton>
+                        <label htmlFor="imageInput">
+                            <FontAwesomeIcon icon={faImage} size="2x" />
+                        </label>
+                        <input
+                            id="imageInput"
+                            type="file"
+                            accept="image/*"
+                            onChange={handleImageChange}
+                            style={{ display: 'none' }} 
+                        />
+
+                        <button type="submit">
+                            <FontAwesomeIcon icon={faPaperPlane} />
+                        </button> 
+                    </D.ReviewButton>
+                    
                 </form>
 
                 
