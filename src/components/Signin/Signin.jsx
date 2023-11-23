@@ -20,6 +20,12 @@ const Signin = () => {
         return;
       }
 
+      // 이메일이 특정 도메인으로 끝나는지 검사
+      if (!email.endsWith('@duksung.ac.kr')) {
+        console.error('올바른 이메일 형식을 입력해주세요.');
+        return;
+      }
+
         // axios를 사용한 POST 요청
         const response = await axios.post('http://localhost:3000/app/users', {
           email,
@@ -28,7 +34,7 @@ const Signin = () => {
           nickname,
         });
   
-        if (response.status === 201) {
+        if (response.status === 200) {
           // 회원가입 성공 시 로그인 페이지로 이동
           navigate('/login');
         } else {
@@ -38,8 +44,13 @@ const Signin = () => {
       } catch (error) {
         // 서버 요청 중 에러 처리
         console.error('Error during sign-up:', error.response?.data || error.message || error);
+
+          // 서버에서 반환한 상세한 오류 메시지 출력
+          if (error.response) {
+            console.error('Server response:', error.response.data);
+          }
       }
-    };
+  };
   
     return (
       <C.Container>
@@ -67,6 +78,7 @@ const Signin = () => {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  placeholder='6자리 이상 입력해주세요.'
                 />
               </L.LoginRow>
               <L.LoginRow>
@@ -75,6 +87,7 @@ const Signin = () => {
                   type="text"
                   value={phonenum}
                   onChange={(e) => setPhonenum(e.target.value)}
+                  placeholder='01011112222'
                 />
               </L.LoginRow>
               <L.LoginRow>
