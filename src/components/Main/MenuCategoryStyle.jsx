@@ -42,6 +42,8 @@ export const MenuBox = styled.div`
     cursor: pointer;
     text-align: center;
     overflow: visible; // 이미지가 테두리에 걸치게
+    z-index: 1; // 모달 항상 위로 가게
+    
 
     img {
         max-width: 100px;
