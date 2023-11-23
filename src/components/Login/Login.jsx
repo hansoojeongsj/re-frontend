@@ -4,6 +4,9 @@ import * as C from './../Main/ContainerStyle';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useAuth } from './AuthContext'; // AuthContext의 useAuth 훅 import
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export default function Login() {
   const { login } = useAuth(); // isLoggedIn 변수를 사용하지 않으므로 제거
@@ -34,8 +37,18 @@ export default function Login() {
   
         // 로그인 상태를 갱신
         login();
+
+        toast.success('로그인 성공!', {
+          autoClose: 3000,
+          position: toast.POSITION.TOP_CENTER,
+        });
+        
       } else {
         // 로그인 실패 시
+        toast.error('로그인 실패.. 이메일과 비밀번호를 확인해 주세요', {
+          autoClose: 3000,
+          position: toast.POSITION.TOP_CENTER,
+        });
         console.error('Login failed:', data);
       }
     } catch (error) {
@@ -76,6 +89,7 @@ export default function Login() {
             <L.LoginButton onClick={handleLogin} as={Link} to="/">
               LogIn
             </L.LoginButton>
+            
           </L.IvoryBox>
           <L.SigninButton as={Link} to="/signin">
             회원가입

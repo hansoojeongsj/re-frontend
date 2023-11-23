@@ -65,8 +65,14 @@ export const IvoryBox = styled.div`
 
 export const LoginRow = styled.div`
   display: flex;
-  align-items: center;
+  align-items: column;
   margin-bottom: 20px; /* 필요에 따라 조정 */
+`;
+
+export const ErrorMessage = styled.div`
+  color: #FFAC33;
+  font-size: 14px;
+  margin-top: 5px;
 `;
 
 export const LoginContent = styled.label`
@@ -93,6 +99,7 @@ export const InputBox = styled.input`
   color: #FFAC33;
   max-width: 600px; /* 최대 너비 설정 */
 `;
+
 
 
 export const LoginButton = styled.button`
@@ -156,3 +163,4 @@ export const SigninButton = styled.button`
   }
 
 `;
+
