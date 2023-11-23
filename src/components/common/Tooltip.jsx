@@ -12,7 +12,7 @@ const TooltipWrapper = styled.div`
   transition: opacity 0.3s ease;
 `;
 
-const Tooltip = ({ text, visible, position, children }) => {
+const Tooltip = ({ text, visible, position }) => {
   const tooltipStyle = {
     top: position.top,
     left: position.left,
@@ -22,7 +22,6 @@ const Tooltip = ({ text, visible, position, children }) => {
   return (
     <TooltipWrapper style={tooltipStyle}>
       {text}
-      {children}
       
     </TooltipWrapper>
 
@@ -38,7 +37,6 @@ Tooltip.propTypes = {
     top: PropTypes.number.isRequired,
     left: PropTypes.number.isRequired,
   }).isRequired, // position 속성은 객체이며 top 및 left 속성이 필수입니다.
-  children: PropTypes.node.isRequired, // children 속성은 어떤 종류의 React 노드든 허용됩니다.
 };
 
 

@@ -14,25 +14,56 @@ import Tooltip from './../common/Tooltip';
 import CartModal from '../common/Modal/CartModal'; // Modal 컴포넌트 import
 
 const EditProfileContent = () => {
+  const [nickname, setNickname] = useState('');
+  const [phonenum, setPhonenum] = useState('');
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const handleModifyButtonClick = async () => {
+    const yourAuthToken = localStorage.getItem('authToken');
+
+    // 서버로 수정 요청을 보내는 로직을 추가
+    
+    try {
+      const response = await fetch('http://localhost:3000/app/mypage/:userId', {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${yourAuthToken}`, // yourAuthToken을 실제 토큰으로 대체
+          /*yourAuthToken에는 사용자의 로그인 후 서버로부터 받은 실제 JWT 토큰 값을 넣어주시면 됩니다. */
+        },
+        body: JSON.stringify({
+          nickname,
+          phonenum,
+          currentPassword,
+          newPassword,
+        }),
+      });
+  
+      const data = await response.json();
+      console.log(data); // 서버의 응답을 콘솔에 출력하거나 다른 처리를 수행할 수 있습니다.
+    } catch (error) {
+      console.error('Error during user information update:', error);
+    }
+  };
   return (
     <div>
       <M.MypageRow>
         <M.MypageContent>NICKNAME</M.MypageContent>
-        <M.InputBox></M.InputBox>
+        <M.InputBox value={nickname} onChange={(e) => setNickname(e.target.value)} />
       </M.MypageRow>
       <M.MypageRow>
         <M.MypageContent>PHONE NUMBER</M.MypageContent>
-        <M.InputBox></M.InputBox>
+        <M.InputBox value={phonenum} onChange={(e) => setPhonenum(e.target.value)} />
       </M.MypageRow>
       <M.MypageRow>
         <M.MypageContent>current PASSWORD</M.MypageContent>
-        <M.InputBox></M.InputBox>
+        <M.InputBox type="password" value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} />
       </M.MypageRow>
       <M.MypageRow>
         <M.MypageContent>NEW PASSWORD</M.MypageContent>
-        <M.InputBox></M.InputBox>
+        <M.InputBox type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
       </M.MypageRow>
-      <M.ModifyButton>
+      <M.ModifyButton onClick={() => handleModifyButtonClick()}>
         수정하기
       </M.ModifyButton>    
     </div>
