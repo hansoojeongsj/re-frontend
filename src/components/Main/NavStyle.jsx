@@ -151,12 +151,18 @@ export const StyledCarousel = styled(Slider)`
 
     .slick-prev:before, .slick-next:before{ //얘는 양옆 버튼. 커스텀 해줘야 보임
         font-family: 'slick';
-        font-size: 40px;
+        font-size: 35px;
         line-height: 1;
         opacity: .75;
         color: #FFAC33;
         -webkit-font-smoothing: antialiased;
     }
+
+    @media screen and (max-width: 390px) {
+      .slick-prev:before,
+      .slick-next:before {
+        font-size: 20px;
+      }
 `;
 
 

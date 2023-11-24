@@ -45,6 +45,22 @@ export const MenuBox = styled.div`
     z-index: 1; // 모달 항상 위로 가게
     
 
+    @media screen and (max-width: 900px) {
+        width: 240px;
+        padding: 15px;
+    }
+
+    @media screen and (min-width: 650px) and (max-width: 800px) {
+        width: 220px;
+        padding: 20px;
+    }
+
+
+    @media screen  and (max-width: 650px) {
+        width: 180px;
+        padding: 10px; 
+    }
+
     img {
         max-width: 100px;
         //margin-bottom: 5px;
@@ -84,7 +100,7 @@ export const StyledButton = styled.button`  // 토글 카테고리
     margin: 5px;
     background: ${({ selected }) => (selected ? '#FFEACC' : 'transparent')};
     font-weight: bold;
-    font-size: ${({ buttonFontSize }) => buttonFontSize};
+    font-size: 20px;
     width: auto;  
     box-sizing: border-box;
     white-space: nowrap;   /* 텍스트 가로 */
