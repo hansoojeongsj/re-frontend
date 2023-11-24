@@ -1,21 +1,43 @@
 import PropTypes from 'prop-types'; // PropTypes 추가
 import * as D from './DetailModalStyle';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faTimes, faCirclePlus, faCircleMinus } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-// import { useEffect } from 'react';
-
+import { useState } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const DetailModal = ({ isModalOpen, closeModal, menu }) => {
     const navigate = useNavigate();
+    const [quantity, setQuantity] = useState(1);
 
     const handleMenuClick = () => {
         closeModal();
         navigate(`/detail/${menu.post_id}`);
     }
 
+    const handleDecrease = () => {
+        if (quantity > 1) {
+            setQuantity(quantity - 1);
+        }
+    };
+        
+    const handleIncrease = () => {
+        setQuantity(quantity + 1);
+    };
+        
+    const handleAddToCart = () => {
+        // 여기에 장바구니에 메뉴를 추가하는 로직을 구현하세요.
+        console.log(`Added ${quantity} ${menu.name}(s) to the cart`);
+        toast.success(`${quantity} ${menu.name}(s)를 장바구니에 추가했습니다. 장바구니를 확인하세요!`, {
+            autoClose: 3000,
+            position: toast.POSITION.TOP_CENTER,
+        });
+        closeModal();
+        navigate('/');
+    };
 
     return (
         <>
@@ -26,26 +48,26 @@ const DetailModal = ({ isModalOpen, closeModal, menu }) => {
                         <FontAwesomeIcon icon={faTimes} />
                     </D.CloseButton>
 
-                    <D.ModalTitle>{menu.id}</D.ModalTitle>
-                        <D.ModalTitle>{menu.name}</D.ModalTitle>
-                        <D.PayingMenu>
-                        <D.DivWrapper>
-                            <D.MKTitle>{menu.price}</D.MKTitle>
-                            <D.PayingListTitle>{menu.description}</D.PayingListTitle>
-                        </D.DivWrapper>
-                        <D.PayingCount>1개</D.PayingCount>
-                        </D.PayingMenu>
+                    {/* <D.MenuTitle>{menu.id}</D.MenuTitle> */}
+                        <D.MenuImage src={menu.image} alt={menu.name} />
+                        <D.MenuTitle>{menu.name}</D.MenuTitle>
+                        <D.InfoMenu>
+                            <D.MenuDescription>메뉴설명입니당 ㅎㅎㅎㅎㅎㅎ.알레르기 어쩌구</D.MenuDescription>
+                            {/* <D.PayingListTitle>{menu.description}</D.PayingListTitle> */}
+                            <D.MenuPrice>{menu.price}</D.MenuPrice>
+                        </D.InfoMenu>
 
-                        <D.PayingTotal>
-                        <D.PayingMenu>
-                            <D.BottomTitle>총 수량 </D.BottomTitle>
-                            <D.BottomNum> 2개</D.BottomNum>
-                        </D.PayingMenu>
-                        </D.PayingTotal>
+                        <D.MenuTotal>
+                            <D.MenuCount>
+                                <FontAwesomeIcon icon={faCircleMinus} onClick={handleDecrease} />
+                                <a>{quantity}</a>
+                                <FontAwesomeIcon icon={faCirclePlus} onClick={handleIncrease} />
+                            </D.MenuCount>
+                        </D.MenuTotal>
 
-                        <D.OkButton as={Link} to="/">
+                        <D.CartButton onClick={handleAddToCart}>
                             장바구니 담기
-                        </D.OkButton>
+                        </D.CartButton>
                         <D.showReviewText onClick={handleMenuClick}>
                             SHOW REVIEW
                         </D.showReviewText>
