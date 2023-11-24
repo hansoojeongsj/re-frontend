@@ -5,7 +5,7 @@ import * as D from './DetailStyle';
 import LogoImage from '/logo.png';
 import * as C from './../Main/ContainerStyle';
 import { Link } from 'react-router-dom';
-import Modal from '../common/Modal/CartModal';
+import CartModal from '../common/Modal/CartModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {  faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { FaStar } from 'react-icons/fa';
@@ -30,7 +30,6 @@ const RatingBar = ({ ratings }) => {
 
 export default function DetailPage() {
     const { post_id } = useParams();
-    const [isModalOpen, setModalOpen] = useState(false);
     const [reviews, setReviews] = useState([]);
 
     useEffect(() => {
@@ -38,12 +37,14 @@ export default function DetailPage() {
         setReviews(ReviewData);
     }, []); 
 
-    const openModal = () => {
-        setModalOpen(true);
+    const [activeModal, setActiveModal] = useState(null);
+
+    const openModal = (modalType) => {
+        setActiveModal(modalType);
     };
-    
+
     const closeModal = () => {
-        setModalOpen(false);
+        setActiveModal(null);
     };
 
     const ratings = [
@@ -86,18 +87,19 @@ export default function DetailPage() {
                     <D.TopContainer>
                         <D.BackButton as={Link} to="/">⬅ BACK TO MENU</D.BackButton>
                         <D.NavTagContainer>
-                            <D.NavTag onClick={openModal}>
+                            <D.NavTag onClick={() => openModal('cart')}>
                                 <FontAwesomeIcon icon={faShoppingCart} />
                             </D.NavTag>
+                            {activeModal === 'cart' && (
+                                <CartModal isModalOpen={activeModal === 'cart'} closeModal={closeModal} />
+                            )}
+
                         </D.NavTagContainer>
                         
                     </D.TopContainer>
                     <D.LogoContainer>
                             <D.LogoImage src={LogoImage} alt="로고" />
                         </D.LogoContainer>
-                    {isModalOpen && 
-                        <Modal isModalOpen={isModalOpen} closeModal={closeModal} />
-                    }
 
                     <D.MenuContainer>
                         <D.MenuName>{menuName}</D.MenuName>
@@ -158,3 +160,4 @@ export default function DetailPage() {
     );
 
 }
+
