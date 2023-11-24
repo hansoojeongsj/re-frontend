@@ -31,7 +31,7 @@ const DetailModal = ({ isModalOpen, closeModal, menu }) => {
     const handleAddToCart = () => {
         // 여기에 장바구니에 메뉴를 추가하는 로직을 구현하세요.
         console.log(`Added ${quantity} ${menu.name}(s) to the cart`);
-        toast.success(`${quantity} ${menu.name}(s)를 장바구니에 추가했습니다. 장바구니를 확인하세요!`, {
+        toast.success(`${menu.name} ${quantity}개를 장바구니에 추가했습니다. 장바구니를 확인하세요!`, {
             autoClose: 3000,
             position: toast.POSITION.TOP_CENTER,
         });
