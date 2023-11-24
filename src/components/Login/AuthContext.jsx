@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from 'react';
-import PropTypes from 'prop-types'; // prop-types import 추가
+import PropTypes from 'prop-types';
 
 const AuthContext = createContext();
 
@@ -7,6 +7,7 @@ export const AuthProvider = (props) => {
   const { children } = props;
 
   const [isLoggedIn, setLoggedIn] = useState(false);
+  const [userProfile, setUserProfile] = useState({}); // 추가: 사용자 정보를 저장할 상태
 
   const login = () => {
     // Perform your login logic here
@@ -18,8 +19,13 @@ export const AuthProvider = (props) => {
     setLoggedIn(false);
   };
 
+  // 추가: 사용자 정보 업데이트 함수
+  const updateUser = (userInfo) => {
+    setUserProfile(userInfo);
+  };
+
   return (
-    <AuthContext.Provider value={{ isLoggedIn, login, logout }}>
+    <AuthContext.Provider value={{ isLoggedIn, login, logout, userProfile, updateUser }}>
       {children}
     </AuthContext.Provider>
   );
