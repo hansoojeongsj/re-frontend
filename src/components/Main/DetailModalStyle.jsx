@@ -161,3 +161,32 @@ export const OkButton = styled.button`
 
     }
 `;
+
+
+export const showReviewText = styled.div`
+    color: black;
+    width: 40%;
+    height: 60px;
+    font-size: 15px;
+    font-weight: bold;
+    margin: 0 auto;
+    font-family: 'Pretendard', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:10px;
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s; /* 호버 시에 애니메이션을 부드럽게 적용하기 위한 transition */
+
+    &:hover {
+        text-decoration: underline;
+    }
+    
+    @media screen and (max-width: 600px){
+        width: 50%;
+        height: 60px;
+        font-size: 13px;
+
+    }
+`;
+
+
