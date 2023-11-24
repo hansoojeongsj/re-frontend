@@ -12,10 +12,8 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate(); // useNavigate instead of useHistory
-
   const handleLogin = async () => {
     try {
-
       const response = await fetch('http://localhost:3000/app/login', {
         method: 'POST',
         headers: {
@@ -26,25 +24,39 @@ export default function Login() {
           password,
         }),
       });
-
+  
       const data = await response.json();
-
+  
+      console.log('Login Response:', response);
+      console.log('Login Response Data:', data);
+  
       if (response.ok && data.code === 200) {
-        const { authToken } = data;
-        localStorage.setItem('authToken', authToken);
-        login();
-        toast.success('로그인 성공!', {
-          autoClose: 3000,
-          position: toast.POSITION.TOP_CENTER,
-        });
-        navigate('/');
-      }
-      else {
+        // 토큰 위치와 구조에 따라 수정
+        const authToken = data.result.jwt;
+  
+        if (authToken) {
+          localStorage.setItem('authToken', authToken);
+          login();
+          toast.success('로그인 성공!', {
+            autoClose: 3000,
+            position: toast.POSITION.TOP_CENTER,
+          });
+          navigate('/');
+          console.log('Your Auth Token:', authToken);
+
+        } else {
+          console.error('로그인 실패: 토큰이 정상적으로 반환되지 않았습니다.');
+          toast.error('로그인 실패. 이메일과 비밀번호를 확인해 주세요', {
+            autoClose: 3000,
+            position: toast.POSITION.TOP_CENTER,
+          });
+        }
+      } else {
+        console.error('로그인 실패:', data);
         toast.error('로그인 실패. 이메일과 비밀번호를 확인해 주세요', {
           autoClose: 3000,
           position: toast.POSITION.TOP_CENTER,
         });
-        console.error('Login failed:', data);
       }
     } catch (error) {
       console.error('Error during login:', error);
@@ -54,6 +66,7 @@ export default function Login() {
       });
     }
   };
+  
 
   return (
     <C.Container>
