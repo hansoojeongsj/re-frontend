@@ -44,7 +44,6 @@ export const MenuBox = styled.div`
     overflow: visible; // 이미지가 테두리에 걸치게
     z-index: 1; // 모달 항상 위로 가게
     
-
     @media screen and (max-width: 900px) {
         width: 240px;
         padding: 15px;
@@ -67,6 +66,10 @@ export const MenuBox = styled.div`
         border-radius: 40%;
         position: relative;
         top: -25px;
+
+        @media screen and (min-width: 315px) and (max-width: 480px) {
+            max-width: 90px;
+        }
     }
 
     .menu-info {  
@@ -85,12 +88,20 @@ export const MenuBox = styled.div`
         &:hover {
             color: #FFAC33;
         }
+
+        @media screen and (min-width: 315px) and (max-width: 480px) {
+            font-size: 1.5em;
+        }
     }
 
     .menu-price {
         margin-top: 10px;
         font-size: 1.6em;
         margin-bottom: 30px;
+
+        @media screen and (min-width: 315px) and (max-width: 480px) {
+            font-size: 1.4em;
+        }
     }
 
 `;
