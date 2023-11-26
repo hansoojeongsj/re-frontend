@@ -211,15 +211,84 @@ export const ReviewList = styled.div`
   height: 90px;
   background-color: white;
   border: 1.5px solid #FFAC33;
+  padding-left: 30px;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  text-align: left;
   border-radius: 30px;
-  margin: 20px auto; /* 수평 중앙 정렬을 위한 축약형 사용 */
+  margin: 18px auto;
+  align-items: flex-start;  // Align items to the top
+
   @media screen and (max-width:600px) {
     width: 100%;
+    padding-left: 15px;
 
   }
+`;
+export const ReviewListContainer=styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin: 6px;
+  
+`;
+export const ReviewImage = styled.img`
+  height: 85%; /* 높이를 80%로 조절 */
+  margin-right: 10px; /* 이미지와 텍스트 사이 간격 조절 */
+  border-radius: 5px;
+  margin:auto 0;
+`;
+export const ReviewId = styled.a`
+  font-weight: bold;
+  font-size: 18px;
+  @media screen and (max-width:600px) {
+    font-size: 15px;
+  }
+  @media screen and (max-width:420px) {
+    font-size: 12px;
+  }
+  @media screen and (max-width:350px) {
+    display: none;
+  }
+`;
+export const SubContent = styled.div`
+  margin-bottom: 1%;
+  @media screen and (max-width:420px) {
+    font-size: 12px;
+  }
+  @media screen and (max-width:390px) {
+    font-size: 10px;
+  }
+  @media screen and (max-width:360px) {
+    font-size: 8px;
+  }
+`;
+export const ReviewContent = styled.div`
+  font-weight: normal;
+  font-size: 15px;
+  height: 30px;
+  overflow-y: auto;  // Add scrollbar if content overflows
+  &::-webkit-scrollbar {
+  width: 5px; 
+}
+  &::-webkit-scrollbar-thumb {
+  background-color: #FFAC33;
+  border-radius: 5px;
+  backdrop-filter: blur(50px);
+}
+
+&::-webkit-scrollbar-track {
+  background-color: #FFF1DC;
+  border-radius: 5px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.2) inset;
+}
+
+  @media screen and (max-width:600px) {
+    font-size: 13px;
+  }
+  @media screen and (max-width:420px) {
+    font-size: 11px;
+  }
+  
 `;
 export const Pagination = styled.div`
   margin-top: 20px;
