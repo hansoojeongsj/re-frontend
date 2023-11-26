@@ -16,3 +16,9 @@ export const ReviewData = [
         image: '/bamsik-image.jpg',
     },
 ];
+
+// ReviewData를 기반으로 ratings의 초기값 설정
+export const initialRatings = Array.from({ length: 5 }, (_, index) => ({
+    rating: index + 1,
+    count: ReviewData.filter(review => review.rating === index + 1).length,
+}));

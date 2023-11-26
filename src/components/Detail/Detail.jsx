@@ -10,27 +10,33 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {  faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { FaStar } from 'react-icons/fa';
 import ReviewForm from './ReviewForm';
-import { ReviewData } from './Reviewdata';
+import { ReviewData, initialRatings } from './Reviewdata';
 
-const RatingBar = ({ ratings }) => {
-    const totalRatings = ratings.reduce((acc, rating) => acc + rating.count, 0);
-
+const RatingBar = ({ ratings, totalVotes }) => {
+    //const totalVotes = ratings.reduce((sum, rating) => sum + rating.count, 0);
     return (
         <D.ReviewRatingBar>
-            {ratings.map((rating, index) => (
-                <span key={index}>
-                    <span className="grey-bar"></span>
-                    <span className="yellow-bar" style={{ width: `${(rating.count / totalRatings) * 100}%` }}></span>
+            {ratings.slice().reverse().map((rating) => (
+                <span key={rating.rating}>
+                    <div className="bar-label">{rating.rating}</div>
+                    <div className="bar-container">
+                        <div
+                        className="yellow-bar"
+                        style={{
+                            width: totalVotes !== 0 ? `${(rating.count / totalVotes) * 100}%` : '0%',
+                        }}
+                        ></div>
+                    </div>
                 </span>
             ))}
         </D.ReviewRatingBar>
     );
 };
 
-
 export default function DetailPage() {
     const { post_id } = useParams();
     const [reviews, setReviews] = useState([]);
+    const [ratings, setRatings] = useState(initialRatings);
 
     useEffect(() => {
         // 여기서 리뷰 데이터를 불러와서 상태에 설정
@@ -47,14 +53,6 @@ export default function DetailPage() {
         setActiveModal(null);
     };
 
-    const ratings = [
-        { rating: 1, count: 0 },
-        { rating: 2, count: 1 },
-        { rating: 3, count: 0 },
-        { rating: 4, count: 1 },
-        { rating: 5, count: 5 },
-    ];
-
 
     // categories 배열에서 post_id에 해당하는 메뉴 객체 찾기
     const selectedMenu = categories
@@ -67,8 +65,24 @@ export default function DetailPage() {
 
 
     const handleReviewSubmit = (newReview) => {
-        setReviews([...reviews, newReview]);
-        console.log('Submitting review to the backend:', newReview);  // console 테스트
+        const reviewWithId = { ...newReview, id: generateUniqueId() }
+        setReviews(prevReviews => [...prevReviews, reviewWithId]);
+        console.log('Submitting review to the backend:', reviewWithId);  // console 테스트
+
+        const newAverageRating = calculateAverageRating();
+        const updatedRatings = ratings.map(rating => ({
+            ...rating,
+            key: rating,  // 오류 해결 위해서 key 일단 넣음 
+            count: rating.rating === newReview.rating
+                ? rating.count + 1
+                : rating.count
+        }));
+
+        setRatings(updatedRatings);
+    };
+
+    const generateUniqueId = () => {  // 새로운 id 생성 (임시)
+        return Math.random().toString(36).substring(2) + Date.now().toString(36);
     };
 
     const calculateAverageRating = () => { // 평점 평균
@@ -79,6 +93,8 @@ export default function DetailPage() {
         const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
         return totalRating / reviews.length;
     };
+
+
 
     return (
         <C.Container>
@@ -125,9 +141,9 @@ export default function DetailPage() {
                                     </div>
                                 </D.ReviewAvg>
                                 <D.ReviewRatingBar>
-                                    <RatingBar ratings={ratings} />
+                                    <RatingBar ratings={ratings} totalVotes={reviews.length} />
                                 </D.ReviewRatingBar>
-                    
+
                             </D.ReviewAvgContainer>
                         <D.ReviewLineBottom><hr /></D.ReviewLineBottom>
                         <D.ReviewList>

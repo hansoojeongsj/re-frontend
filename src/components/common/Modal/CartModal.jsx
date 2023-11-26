@@ -31,6 +31,7 @@ const Modal = ({ isModalOpen, closeModal }) => {
     { name: 'Item 7', price: 1200 },
   ]);
 
+
   const handleModalWrapperClick = (e) => {
     if (e.target.classList.contains('modal-wrapper')) {
       closeModal();

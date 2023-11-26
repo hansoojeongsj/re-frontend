@@ -5,6 +5,11 @@ import { faPaperPlane, faImage } from '@fortawesome/free-solid-svg-icons';
 import { FaStar } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 
+const generateUniqueId = () => {
+    return Math.random().toString(36).substring(2) + Date.now().toString(36);
+};
+
+
 const ReviewForm = ({ onReviewSubmit }) => {
     const [reviewText, setReviewText] = useState('');
 
@@ -39,6 +44,7 @@ const ReviewForm = ({ onReviewSubmit }) => {
         // 유효성 검사 등을 수행하고 이후에 리뷰를 전송
         if (username && rating > 0 && content) {
         const newReview = {
+            id: generateUniqueId(),
             username,
             rating,
             content,

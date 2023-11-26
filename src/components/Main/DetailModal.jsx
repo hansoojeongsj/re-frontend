@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-const DetailModal = ({ isModalOpen, closeModal, menu }) => {
+const DetailModal = ({ isModalOpen, closeModal, menu}) => {
     const navigate = useNavigate();
     const [quantity, setQuantity] = useState(1);
 
@@ -27,16 +27,19 @@ const DetailModal = ({ isModalOpen, closeModal, menu }) => {
     const handleIncrease = () => {
         setQuantity(quantity + 1);
     };
-        
+    
+
     const handleAddToCart = () => {
         // 여기에 장바구니에 메뉴를 추가하는 로직을 구현하세요.
         console.log(`Added ${quantity} ${menu.name}(s) to the cart`);
+
+
         toast.success(`${menu.name} ${quantity}개를 장바구니에 추가했습니다. 장바구니를 확인하세요!`, {
             autoClose: 3000,
             position: toast.POSITION.TOP_CENTER,
         });
         closeModal();
-        navigate('/');
+        // navigate('/');
     };
 
     return (
@@ -60,7 +63,7 @@ const DetailModal = ({ isModalOpen, closeModal, menu }) => {
                         <D.MenuTotal>
                             <D.MenuCount>
                                 <FontAwesomeIcon icon={faCircleMinus} onClick={handleDecrease} />
-                                <a>{quantity}</a>
+                                {quantity}
                                 <FontAwesomeIcon icon={faCirclePlus} onClick={handleIncrease} />
                             </D.MenuCount>
                         </D.MenuTotal>
@@ -83,6 +86,7 @@ DetailModal.propTypes = {
     isModalOpen: PropTypes.bool.isRequired,
     closeModal: PropTypes.func.isRequired,
     menu: PropTypes.object,
+    addCartItem: PropTypes.func.isRequired,
 };
 
 export default DetailModal;

@@ -139,13 +139,12 @@ export const ReviewLineBottom = styled.div`
 
 export const ReviewAvgContainer = styled.div`
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    align-items: center;
     
 `
 
 export const ReviewAvg = styled.div`
-    margin-left: 230px;
-    margin-top: 40px;
     flex-direction: column;
     align-items: center;
 
@@ -173,40 +172,39 @@ export const ReviewAvg = styled.div`
 `;
 
 export const ReviewRatingBar = styled.div`
+    display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 30px;
-    margin-right: 400px;
+    margin-left: 20px;
 
     span {
-        display: block;
-        height: 20px;
-        width: 100%;
-        position: relative;
-        overflow: hidden;
-        margin-bottom: 8px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-right: 20px;
+        margin-bottom: 10px;
 
-        .grey-bar {
-            background: #FFFAF2;
-            height: 100%;
-            width: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
+
+        .bar-label {
+            font-size: 14px;
+            margin-bottom: 5px;
+            margin-right: 10px;
         }
 
-        .yellow-bar {
-            background-color: #FFAC33;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            display: block;
+        .bar-container {
+            width: 60px;
+            height: 10px;
+            position: relative;
+
+            .yellow-bar {
+                background-color: #FFAC33; 
+                width: ${(props) => props.percent || '0%'};
+                height: 100%;
+                border-radius: 5px;
+            }   
         }
     }
 `;
-
-
 
 export const ReviewList = styled.div`
     display: flex;
