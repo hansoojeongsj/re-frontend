@@ -6,8 +6,9 @@ const AuthContext = createContext();
 export const AuthProvider = (props) => {
   const { children } = props;
 
-  const [isLoggedIn, setLoggedIn] = useState(false);
-  const [userProfile, setUserProfile] = useState({}); // 추가: 사용자 정보를 저장할 상태
+  // 초기 상태는 서버로부터 받아온 사용자 정보와 로그인 여부를 사용
+  const [isLoggedIn, setLoggedIn] = useState(/* 서버에서 받아온 초기 로그인 상태 */);
+  const [userProfile, setUserProfile] = useState(/* 서버에서 받아온 초기 사용자 정보 */);
 
   const login = () => {
     // Perform your login logic here
@@ -17,9 +18,10 @@ export const AuthProvider = (props) => {
   const logout = () => {
     // Perform your logout logic here
     setLoggedIn(false);
+    // 추가: 로그아웃 시 사용자 정보 초기화
+    setUserProfile({});
   };
 
-  // 추가: 사용자 정보 업데이트 함수
   const updateUser = (userInfo) => {
     setUserProfile(userInfo);
   };

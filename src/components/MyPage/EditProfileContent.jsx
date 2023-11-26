@@ -1,45 +1,90 @@
 import { useState } from 'react';
-import * as M from './MyPageStyle'; // MyPageStyle 파일에 정의된 스타일을 가져옵니다.
+import * as M from './MyPageStyle';
 import { useAuth } from './../Login/AuthContext';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const EditProfileContent = () => {
-  const { userProfile, updateUser } = useAuth();
-  const [nickname, setNickname] = useState(userProfile.nickname || '');
-  const [phonenum, setPhonenum] = useState(userProfile.phonenum || '');
+  const { updateUser } = useAuth() || {};
+  const [nickname, setNickname] = useState('');
+  const [phonenum, setPhonenum] = useState('');
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
 
-  const handleModifyButtonClick = async () => {
-    const yourAuthToken = localStorage.getItem('authToken');
 
+  const handleModifyButtonClick = async () => {
     try {
-      const response = await fetch('http://localhost:3000/app/mypage/:userId', {
+      const authToken = localStorage.getItem('authToken');
+
+      // Check if the required fields are filled
+      if (!nickname || !phonenum || !currentPassword || !newPassword) {
+        toast.error('모든 항목을 입력해주세요.');
+        return;
+      }
+
+      // Check the current password
+      const checkPasswordResponse = await fetch(`http://localhost:3000/app/mypage/`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${yourAuthToken}`,
+          'x-access-token': authToken,
         },
         body: JSON.stringify({
           nickname,
           phonenum,
-          currentPassword,
-          newPassword,
+          currentpassword: currentPassword, 
+          newpassword: newPassword,
         }),
       });
-
-      const data = await response.json();
-
-      if (response.status === 200) {
-        updateUser({
-          ...userProfile,
-          nickname: data.nickname,
-          phonenum: data.phonenum,
-        });
+      const errorData = await checkPasswordResponse.json();
+      if (errorData.code === 404) {
+        toast.error('비밀번호가 잘못 입력되었습니다.');
+        return;
+      }else if (errorData.code !== 200) {
+        toast.error('일시적인 오류가 발생했습니다.');
+        return;
       }
+  
+      // Update user information
+      const updatePasswordResponse = await fetch('http://localhost:3000/app/mypage/', {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-access-token': authToken,
+        },
+        body: JSON.stringify({
+          nickname,
+          phonenum,
+          currentpassword: currentPassword,
+          newpassword: newPassword,
+        }),
+      });
+      console.log(updatePasswordResponse);
 
-      console.log(data);
+      console.log('Update Password Response:', await updatePasswordResponse.json());
+      if (updatePasswordResponse.ok) {
+        // Client-side update
+        updateUser({
+          nickname,
+          phonenum,
+        });
+
+        // Successful update notification
+        toast.success('정보수정이 완료되었습니다!');
+        const updatedUserInfo = {
+          nickname,
+          phonenum,
+        };
+        console.log('정보 수정 완료', updatedUserInfo);
+
+      } else {
+        // Update failure handling
+        toast.error('정보 수정을 실패했습니다.');
+      }
     } catch (error) {
-      console.error('Error during user information update:', error);
+      // Unexpected error handling
+      console.error('오류 발생:', error);
+      toast.error('오류가 발생했습니다. ');
     }
   };
 
@@ -50,7 +95,7 @@ const EditProfileContent = () => {
         <M.InputBox
           value={nickname}
           onChange={(e) => setNickname(e.target.value)}
-          placeholder={nickname ? `${nickname}` : 'Your saved nickname'}
+          placeholder={nickname}
         />
       </M.MypageRow>
       <M.MypageRow>
@@ -58,7 +103,6 @@ const EditProfileContent = () => {
         <M.InputBox
           value={phonenum}
           onChange={(e) => setPhonenum(e.target.value)}
-          placeholder={phonenum ? `${phonenum}` : 'Your saved phone number'}
         />
       </M.MypageRow>
       <M.MypageRow>

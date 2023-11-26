@@ -4,18 +4,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faSignInAlt, faShoppingCart, faSearch ,faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
 import * as N from './NavStyle';
 import LogoImage from '/logo.png';
-import TodayMenuImage from '/today-menu.jpg';
 import { useAuth } from './../Login/AuthContext';
 import CartModal from './../common/Modal/CartModal';
 import Tooltip from './../common/Tooltip';
 import CarouselComponent from './Carousel';
 
 const Nav = () => {
-  const { isLoggedIn, logout } = useAuth();
+  const { isLoggedIn, logout } = useAuth(); // user 정보 가져오기 추가
   const [isModalOpen, setModalOpen] = useState(false);
   const [tooltipVisible, setTooltipVisible] = useState(false);
   const [tooltipPosition, setTooltipPosition] = useState({ top: 0, left: 0 });
-
   const openModal = () => {
     setModalOpen(true);
   };
@@ -45,6 +43,7 @@ const Nav = () => {
     <N.NavWrapper>
       <N.NavContent>
         <a href="/">
+          
           <N.LogoImage src={LogoImage} alt="로고 이미지" />
         </a>
         <N.SearchWrapper>
@@ -57,7 +56,7 @@ const Nav = () => {
         </N.SearchWrapper>
         
         <N.NavTagContainer>
-          <N.NavTag as={Link} to="/mypage">
+        <N.NavTag as={Link} to="/mypage">
             <FontAwesomeIcon icon={faUser} />
           </N.NavTag>
           {isLoggedIn ? (

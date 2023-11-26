@@ -17,7 +17,7 @@ function AppNavigation() {
           <Route path="/" element={<Main />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signin" element={<Signin />} />  
-          <Route path="/mypage" element={<MyPage />} />
+          <Route path="/mypage" element={<MyPage />} /> {/* :userid 파라미터 추가 */}
           <Route path="/paying" element={<Paying />} />
           <Route path="/detail/:post_id" element={<Detail />} />
         </Routes>

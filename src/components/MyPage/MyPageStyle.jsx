@@ -158,6 +158,14 @@ export const InputBox = styled.input`
   font-size: 20px;
   color: #FFAC33;
   max-width: 600px; /* 최대 너비 설정 */
+  @media screen and (max-width: 600px) {
+    font-size: 15px;
+  }
+  @media screen and (max-width: 420px) {
+    font-size: 12px;
+    width: 90%;
+
+  }
 `;
 
 export const ModifyButton=styled.button`
