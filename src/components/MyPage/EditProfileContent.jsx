@@ -18,7 +18,10 @@ const EditProfileContent = () => {
 
       // Check if the required fields are filled
       if (!nickname || !phonenum || !currentPassword || !newPassword) {
-        toast.error('모든 항목을 입력해주세요.');
+        toast.error('모든 항목을 입력해주세요.', {
+          autoClose: 3000,
+          position: toast.POSITION.TOP_CENTER,
+        });
         return;
       }
 
@@ -38,11 +41,16 @@ const EditProfileContent = () => {
       });
       const errorData = await checkPasswordResponse.json();
       if (errorData.code === 404) {
-        toast.error('비밀번호가 잘못 입력되었습니다.');
+        toast.error('비밀번호가 잘못 입력되었습니다.', {
+          autoClose: 3000,
+          position: toast.POSITION.TOP_CENTER,
+        });
         return;
       }else if (errorData.code !== 200) {
-        toast.error('일시적인 오류가 발생했습니다.');
-        return;
+        toast.error('일시적인 오류가 발생했습니다.', {
+          autoClose: 3000,
+          position: toast.POSITION.TOP_CENTER,
+        });
       }
   
       // Update user information
@@ -70,7 +78,10 @@ const EditProfileContent = () => {
         });
 
         // Successful update notification
-        toast.success('정보수정이 완료되었습니다!');
+        toast.success('정보수정이 완료되었습니다!', {
+          autoClose: 3000,
+          position: toast.POSITION.TOP_CENTER,
+        });
         const updatedUserInfo = {
           nickname,
           phonenum,
@@ -79,12 +90,18 @@ const EditProfileContent = () => {
 
       } else {
         // Update failure handling
-        toast.error('정보 수정을 실패했습니다.');
+        toast.error('정보 수정을 실패했습니다.', {
+          autoClose: 3000,
+          position: toast.POSITION.TOP_CENTER,
+        });
       }
     } catch (error) {
       // Unexpected error handling
       console.error('오류 발생:', error);
-      toast.error('오류가 발생했습니다. ');
+      toast.error('오류가 발생했습니다. ', {
+        autoClose: 3000,
+        position: toast.POSITION.TOP_CENTER,
+      });
     }
   };
 
