@@ -13,6 +13,7 @@ import Tooltip from './../common/Tooltip';
 
 import CartModal from '../common/Modal/CartModal'; // Modal 컴포넌트 import
 import PayingModal from './PayingModal';
+import PayingImg from '/public/babybamsik.jpg'
 
 export default function Paying() {
 
@@ -116,7 +117,22 @@ export default function Paying() {
           <P.PayingContainer>
             <P.TopContent>
               <P.PayingContent>
-                여긴 장바구니 담은거
+                <P.PayingList>
+                  <P.PayingMenu>
+                  <P.PayingImg src={PayingImg} alt={PayingImg}/>
+
+                    <P.DivWrapper>
+                      <P.MKTitle>한우사골마라탕
+                      <br />
+
+                      </P.MKTitle>
+                      <P.PayingListTitle>마라탕</P.PayingListTitle>
+                      </P.DivWrapper>
+                      <P.PayingCount>1개</P.PayingCount>
+                    <P.PayingPrice>6000원</P.PayingPrice>
+                  </P.PayingMenu>
+                </P.PayingList>
+                <P.PayingList></P.PayingList>
 
               </P.PayingContent>
             </P.TopContent>

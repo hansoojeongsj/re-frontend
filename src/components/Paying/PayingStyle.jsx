@@ -150,7 +150,44 @@ export const TopContent = styled.div`
     justify-content: center; /* Center the containers when screen width is below 575px */
   }
 `;
+export const PayingList = styled.div`
+  justify-content: space-between;
 
+`;
+export const PayingImg = styled.img`
+  width: 100px;
+  border-radius: 30%;
+
+`;
+export const PayingMenu = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%; /* 또는 적절한 폭 설정 */
+  padding: 10px; /* 적절한 패딩 설정 */
+  font-size: 17px;
+  `;
+export const DivWrapper = styled.div`
+  white-space: pre-line;
+`;
+export const MKTitle = styled.a`
+  width: 100px;
+  text-align: center;
+`;
+export const PayingListTitle = styled.a`
+  width: 100px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  text-align: center;
+`;
+export const PayingCount = styled.a`
+  display: flex;
+  align-items: center;
+`;
+export const PayingPrice = styled.a`
+  display: flex;
+  align-items: center;
+  `;
 export const BottomContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
