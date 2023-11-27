@@ -104,6 +104,7 @@ export const IvoryBox = styled.div`
 export const PayingContainer = styled.div`
   width: 100%;
   align-items: center;
+  
 `;
 
 export const PayingContent = styled.div`
@@ -112,7 +113,6 @@ export const PayingContent = styled.div`
   min-height: 70px;
   background-color: white;
   border: 1.5px solid #FFAC33;
-  justify-content: center;
   border-radius: 30px;
   margin-bottom: 20px;
   font-size: 15px;
@@ -126,6 +126,8 @@ export const PayingContent = styled.div`
   @media screen and (max-width: 376px) {
     font-size: 9px;
     padding: 5%;
+    justify-content: center; /* Center the containers when screen width is below 575px */
+
   }
 
   @media screen and (max-width: 900px) {
@@ -140,53 +142,138 @@ export const PayingContent = styled.div`
   }
 
 `;
+
 export const TopContent = styled.div`
+  width: 100%;
+  height: auto;
+  background-color: white;
+  border: 1.5px solid #FFAC33;
+  border-radius: 30px;
+  margin-bottom: 20px;
+  font-size: 18px;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around; /* Center the containers and provide space around them */
-  margin-top: 20px; /* Add some top margin for better separation */
-  max-width: 100%;
-  @media screen and (max-width: 575px) {
-    justify-content: center; /* Center the containers when screen width is below 575px */
+  padding: 10px;
+  justify-content: center;
+  min-width: 220px;
+  
+  @media screen and (max-width: 380px) {
+    font-size: 9px;
+  }
+  @media screen and (max-width: 600px) {
+    padding-left: 2px;
+    
+  }
+  @media screen and (max-width: 900px) {
+    font-size: 13px;
+  }
+  @media screen and (max-width: 1200px) {
+    font-size: 16px;
   }
 `;
 export const PayingList = styled.div`
-  justify-content: space-between;
+  width: 100%;
+  height: auto;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1%;
+  font-size: 18px;
+  display: flex;
 
+  @media screen and (max-width: 400px) {
+    font-size: 9px;
+  }
+  @media screen and (max-width: 900px) {
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 13px;
+  }
+
+  @media screen and (max-width: 1200px) {
+    font-size: 16px;
+  }
 `;
 export const PayingImg = styled.img`
-  width: 100px;
-  border-radius: 30%;
-
+  max-width: 100px;
+  width: 100%;
+  min-width: 10px;
+  border-radius: 20%;
+  
+  @media screen and (max-width: 460px) {
+    display: none;
+}
 `;
+
 export const PayingMenu = styled.div`
   display: flex;
-  justify-content: space-between;
-  width: 100%; /* 또는 적절한 폭 설정 */
-  padding: 10px; /* 적절한 패딩 설정 */
+  width: 100%;
+  padding: 10px; 
   font-size: 17px;
+  justify-content: space-between;
+
+  @media screen and (max-width: 600px) {
+    justify-content: center; /* Center the containers when screen width is below 575px */
+    flex-wrap: wrap;
+    padding: 2px; 
+  }
   `;
-export const DivWrapper = styled.div`
-  white-space: pre-line;
-`;
+
 export const MKTitle = styled.a`
-  width: 100px;
-  text-align: center;
+  width: auto;
+  margin-left: 5px;
+  @media screen and (max-width: 450px) {
+    font-size: 11px;
+  }
+  @media screen and (max-width: 600px) {
+    font-size: 13px;
+  }
+
+`;
+export const Inner = styled.div`
+  display: flex;
+`;
+export const Inner2 = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+  height: 30px;
 `;
 export const PayingListTitle = styled.a`
   width: 100px;
   font-weight: bold;
   display: flex;
-  align-items: center;
-  text-align: center;
+  margin-left: 5px;
+
+  @media screen and (max-width: 400px) {
+    font-size: 13px;
+  }
+  @media screen and (max-width: 600px) {
+    font-size: 15px;
+  }
+
 `;
+
 export const PayingCount = styled.a`
   display: flex;
   align-items: center;
+  min-width:20px;
+  @media screen and (max-width: 400px) {
+    font-size: 12px;
+  }
+  @media screen and (max-width: 600px) {
+    font-size: 13px;
+  }
 `;
 export const PayingPrice = styled.a`
   display: flex;
   align-items: center;
+  min-width: 50px;
+  margin-left: 10px;
+  @media screen and (max-width: 400px) {
+    font-size: 12px;
+  }
+  @media screen and (max-width: 600px) {
+    font-size: 13px;
+  }
   `;
 export const BottomContainer = styled.div`
   display: flex;

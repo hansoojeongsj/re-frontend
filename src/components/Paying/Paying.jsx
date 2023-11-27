@@ -13,7 +13,7 @@ import Tooltip from './../common/Tooltip';
 
 import CartModal from '../common/Modal/CartModal'; // Modal 컴포넌트 import
 import PayingModal from './PayingModal';
-import PayingImg from '/public/babybamsik.jpg'
+import PayingImg from '/babybamsik.jpg'
 
 export default function Paying() {
 
@@ -115,27 +115,24 @@ export default function Paying() {
           <P.Title>Paying</P.Title>
           <P.IvoryBox>
           <P.PayingContainer>
+          <P.BottomContainer>
+
             <P.TopContent>
-              <P.PayingContent>
-                <P.PayingList>
-                  <P.PayingMenu>
-                  <P.PayingImg src={PayingImg} alt={PayingImg}/>
-
-                    <P.DivWrapper>
-                      <P.MKTitle>한우사골마라탕
-                      <br />
-
-                      </P.MKTitle>
+            <P.PayingList>
+                <P.PayingMenu>
+                  <P.Inner>
+                      <P.PayingImg src={PayingImg} alt={PayingImg}/>
+                      <P.Inner2>
+                      <P.MKTitle>한우사골마라탕</P.MKTitle>
                       <P.PayingListTitle>마라탕</P.PayingListTitle>
-                      </P.DivWrapper>
-                      <P.PayingCount>1개</P.PayingCount>
-                    <P.PayingPrice>6000원</P.PayingPrice>
-                  </P.PayingMenu>
-                </P.PayingList>
-                <P.PayingList></P.PayingList>
-
-              </P.PayingContent>
+                    </P.Inner2>
+                  </P.Inner >
+                  <P.PayingCount>1개</P.PayingCount>
+                  <P.PayingPrice>6000원</P.PayingPrice>
+                </P.PayingMenu>
+              </P.PayingList>
             </P.TopContent>
+            </P.BottomContainer>
 
             <P.BottomContainer>
             <P.LeftContainer>
