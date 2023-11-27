@@ -86,7 +86,6 @@ DetailModal.propTypes = {
     isModalOpen: PropTypes.bool.isRequired,
     closeModal: PropTypes.func.isRequired,
     menu: PropTypes.object,
-    addCartItem: PropTypes.func.isRequired,
 };
 
 export default DetailModal;
