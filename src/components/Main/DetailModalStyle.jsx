@@ -118,6 +118,8 @@ export const MenuCount = styled.a`
     display: flex;
     align-items: center;
     margin-top: 27px;
+    gap: 10px;
+    font-size: 25px;
 
     a{
         margin-left: 10px;
