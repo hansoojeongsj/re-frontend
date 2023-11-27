@@ -3,7 +3,7 @@ import * as M from './MyPageStyle';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar} from '@fortawesome/free-solid-svg-icons';
 
-import ReviewImg from './../../../public/babybamsik.jpg'
+import ReviewImg from '/public/babybamsik.jpg'
 const ReviewManagementContent = () => {
   const yellowStars = Math.floor(Math.random() * 5) + 1; // 1부터 5까지의 랜덤한 수
 
