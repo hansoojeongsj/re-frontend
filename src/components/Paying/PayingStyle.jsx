@@ -299,7 +299,6 @@ export const RightContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
 `;
 
 
@@ -344,7 +343,13 @@ export const NumberTitle = styled.a`
   white-space: nowrap;
   font-weight: bold;
   margin-bottom: 10px;
-  font-size: 15px;
+  font-size: 16px;
+  width: 70px;
+  
+  a{
+    font-weight: normal;
+    justify-content: space-between;
+  }
 `;
 
 export const NumberInput = styled.input`
@@ -410,5 +415,57 @@ export const RadioWrapper = styled.div`
         background-color: #FFAC33;
       }
     }
+    span{
+      @media screen and (max-width: 400px) {
+        font-size: 10px;
+      }
+      @media screen and (max-width: 600px) {
+        font-size: 12px;
+      }
+      @media screen and (max-width: 800px) {
+        font-size: 14px;
+      }
+    }
   }
+`;
+export const TotalTitle = styled.div`
+  font-size: 16px;
+  font-weight: bold;
+`;
+
+export const TotalNum = styled.div`
+  font-weight: normal;
+`;
+
+export const TotalInfo = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%; /* 또는 적절한 폭 설정 */
+  padding: 10px; /* 적절한 패딩 설정 */
+  font-size: 16px;
+  `;
+export const TotalContent=styled.div`
+width: 100%;
+height: 100%;
+background-color: white;
+border: 1.5px solid #FFAC33;
+border-radius: 30px;
+font-size: 16px;
+padding: 10%;
+justify-content: space-between;
+display: flex;
+min-width: 220px;
+flex-direction: column;
+align-items: flex-start;
+
+@media screen and (max-width: 376px) {
+  font-size: 9px;
+  padding: 5%;
+  justify-content: center;
+}
+
+@media screen and (max-width: 900px) {
+  padding: 10%;
+  font-size: 13px;
+}
 `;

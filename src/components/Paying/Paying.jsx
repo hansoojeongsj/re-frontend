@@ -130,6 +130,28 @@ export default function Paying() {
                   <P.PayingCount>1개</P.PayingCount>
                   <P.PayingPrice>6000원</P.PayingPrice>
                 </P.PayingMenu>
+                <P.PayingMenu>
+                  <P.Inner>
+                      <P.PayingImg src={PayingImg} alt={PayingImg}/>
+                      <P.Inner2>
+                      <P.MKTitle>한우사골마라탕</P.MKTitle>
+                      <P.PayingListTitle>마라탕</P.PayingListTitle>
+                    </P.Inner2>
+                  </P.Inner >
+                  <P.PayingCount>1개</P.PayingCount>
+                  <P.PayingPrice>6000원</P.PayingPrice>
+                </P.PayingMenu>
+                <P.PayingMenu>
+                  <P.Inner>
+                      <P.PayingImg src={PayingImg} alt={PayingImg}/>
+                      <P.Inner2>
+                      <P.MKTitle>한우사골마라탕</P.MKTitle>
+                      <P.PayingListTitle>마라탕</P.PayingListTitle>
+                    </P.Inner2>
+                  </P.Inner >
+                  <P.PayingCount>1개</P.PayingCount>
+                  <P.PayingPrice>6000원</P.PayingPrice>
+                </P.PayingMenu>
               </P.PayingList>
             </P.TopContent>
             </P.BottomContainer>
@@ -185,12 +207,21 @@ export default function Paying() {
                 </P.LeftContainer>
 
                 <P.RightContainer>
-                  <P.PayingContent>
+                  <P.TotalContent>
                     <P.NumberTitle>
                       결제 상세
                     </P.NumberTitle>
+                    <P.TotalInfo>
 
-                  </P.PayingContent>
+                    <P.TotalTitle>총 수량</P.TotalTitle>
+                      <P.TotalNum>2개</P.TotalNum>
+                    </P.TotalInfo>
+
+                    <P.TotalInfo>
+                      <P.TotalTitle>총 가격</P.TotalTitle>
+                      <P.TotalNum>10000원</P.TotalNum>
+                    </P.TotalInfo>
+                  </P.TotalContent>
                 </P.RightContainer>
             </P.BottomContainer>
           </P.PayingContainer>
