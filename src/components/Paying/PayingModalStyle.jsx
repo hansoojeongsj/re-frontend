@@ -86,7 +86,7 @@ export const PayingMenu = styled.div`
   justify-content: space-between;
   width: 100%; /* 또는 적절한 폭 설정 */
   padding: 10px; /* 적절한 패딩 설정 */
-  font-size: 17px;
+  font-size: 18px;
   `;
 export const DivWrapper = styled.div`
   white-space: pre-line;
@@ -94,6 +94,8 @@ export const DivWrapper = styled.div`
 export const MKTitle = styled.a`
   width: 100px;
   text-align: center;
+  font-size: 16px;
+
 `;
 export const PayingListTitle = styled.a`
   width: 100px;

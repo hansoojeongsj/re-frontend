@@ -26,10 +26,7 @@ export default function Login() {
       });
   
       const data = await response.json();
-  
-      console.log('Login Response:', response);
-      console.log('Login Response Data:', data);
-  
+    
       if (response.ok && data.code === 200) {
         // 토큰 위치와 구조에 따라 수정
         const authToken = data.result.jwt;

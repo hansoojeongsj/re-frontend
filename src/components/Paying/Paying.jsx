@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState,  useEffect} from 'react';
 import { Link } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,16 +13,110 @@ import Tooltip from './../common/Tooltip';
 
 import CartModal from '../common/Modal/CartModal'; // Modal 컴포넌트 import
 import PayingModal from './PayingModal';
-import PayingImg from '/babybamsik.jpg'
 
 export default function Paying() {
+  const { isLoggedIn, logout } = useAuth();
+
+  const [cartItems, setCartItems] = useState([]);
+  const [cartTotalPrice, setCartTotalPrice] = useState(0);
+  const authToken = localStorage.getItem('authToken');
 
   const [paymentMethod, setPaymentMethod] = useState('general');
+  const [orderDetails, setOrderDetails] = useState(null);
+
+  const fetchCartList = async () => {
+    try {
+      const response = await fetch(`http://localhost:3000/app/cartlist/`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-access-token': authToken,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      console.log('response:',response);
+      console.log('authToken:',authToken);
+
+      const result = await response.json();
+      console.log('result:', result);
+
+      const receivedCartItems = result || [];
+      setCartItems(receivedCartItems);
+
+    } catch (error) {
+      console.error('Error fetching cart list:', error);
+    }
+  };
+  
+  const handleCalculateTotalPrice = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/app/calcCart', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-access-token': authToken,
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+  
+      const result = await response.json();
+
+      // 로그로 응답 데이터 확인
+      console.log('응답 데이터:', result);
+  
+      // 응답 데이터 구조에 맞게 코드 수정
+      const totalPrice = result[0][0]['sum(f.price*c.count)'];
+
+      if (typeof totalPrice === 'number') {
+        setCartTotalPrice(totalPrice);
+        console.log('총 가격:', totalPrice);
+      } else if((totalPrice === null)) {
+        setCartTotalPrice(0);
+      } else {
+        console.error('올바르지 않은 응답 데이터:', result);
+      }
+    } catch (error) {
+      console.error('카트 가격 계산 중 에러 발생:', error);
+    }
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (isLoggedIn) {
+        await fetchCartList();
+        await handleCalculateTotalPrice();
+      }
+    };
+
+    fetchData();
+  }, [isLoggedIn]);
+
+const cartItemsCount = Array.isArray(cartItems.result)
+? cartItems.result.reduce((sum, item) => {
+    const getCountArray = item.getCount;
+
+    if (Array.isArray(getCountArray) && getCountArray.length > 0) {
+      const countItem = getCountArray[0];
+
+      if (countItem && typeof countItem.count === 'number') {
+        return sum + countItem.count;
+      }
+    }
+
+    return sum;
+  }, 0)
+: 0;
 
   const handlePaymentChange = (method) => {
     setPaymentMethod(method);
   };
-  const { isLoggedIn, logout } = useAuth();
 
   const [tooltipVisible, setTooltipVisible] = useState(false);
   const [tooltipPosition, setTooltipPosition] = useState({ top: 0, left: 0 });
@@ -43,14 +137,27 @@ export default function Paying() {
 
   const [activeModal, setActiveModal] = useState(null);
 
+
   const openModal = (modalType) => {
-    setActiveModal(modalType);
+    if (modalType === 'paying') {
+      // 주문 정보 구성
+      const orderDetails = cartItems.result.map((item) => ({
+        foodId: item.getCount[0].id,
+        foodName: item.getFoodName.title,
+        quantity: cartItemsCount,
+        price: cartTotalPrice,
+      }));
+      setActiveModal(modalType);
+      setOrderDetails(orderDetails); // 이 부분이 추가되었습니다.
+    } else {
+      setActiveModal(modalType);
+    }
   };
 
   const closeModal = () => {
     setActiveModal(null);
   };
-  const [editablePhoneNumber, setEditablePhoneNumber] = useState('010-0000-7455');
+  const [editablePhoneNumber, setEditablePhoneNumber] = useState('01011119999');
   const [isEditingPhoneNumber, setIsEditingPhoneNumber] = useState(false);
 
   const handleEditPhoneNumber = () => {
@@ -115,47 +222,49 @@ export default function Paying() {
           <P.Title>Paying</P.Title>
           <P.IvoryBox>
           <P.PayingContainer>
+          {isLoggedIn ? (
+
           <P.BottomContainer>
 
             <P.TopContent>
-            <P.PayingList>
-                <P.PayingMenu>
-                  <P.Inner>
-                      <P.PayingImg src={PayingImg} alt={PayingImg}/>
-                      <P.Inner2>
-                      <P.MKTitle>한우사골마라탕</P.MKTitle>
-                      <P.PayingListTitle>마라탕</P.PayingListTitle>
-                    </P.Inner2>
-                  </P.Inner >
-                  <P.PayingCount>1개</P.PayingCount>
-                  <P.PayingPrice>6000원</P.PayingPrice>
-                </P.PayingMenu>
-                <P.PayingMenu>
-                  <P.Inner>
-                      <P.PayingImg src={PayingImg} alt={PayingImg}/>
-                      <P.Inner2>
-                      <P.MKTitle>한우사골마라탕</P.MKTitle>
-                      <P.PayingListTitle>마라탕</P.PayingListTitle>
-                    </P.Inner2>
-                  </P.Inner >
-                  <P.PayingCount>1개</P.PayingCount>
-                  <P.PayingPrice>6000원</P.PayingPrice>
-                </P.PayingMenu>
-                <P.PayingMenu>
-                  <P.Inner>
-                      <P.PayingImg src={PayingImg} alt={PayingImg}/>
-                      <P.Inner2>
-                      <P.MKTitle>한우사골마라탕</P.MKTitle>
-                      <P.PayingListTitle>마라탕</P.PayingListTitle>
-                    </P.Inner2>
-                  </P.Inner >
-                  <P.PayingCount>1개</P.PayingCount>
-                  <P.PayingPrice>6000원</P.PayingPrice>
-                </P.PayingMenu>
-              </P.PayingList>
-            </P.TopContent>
-            </P.BottomContainer>
+            {cartItemsCount > 0 ? (
 
+            <P.PayingList>
+              {cartItems.result.map((item) => (
+
+                <P.PayingMenu key={item}>
+                <P.Inner>
+                  <P.PayingImg src={item.getFoodName.image} alt={item.name}/>
+                  <P.Inner2>
+                    <P.MKTitle>파스타</P.MKTitle>
+                    <P.PayingListTitle>{item.getFoodName.title}</P.PayingListTitle>
+                  </P.Inner2>
+                </P.Inner >
+              <P.PayingCount>{cartItemsCount}개</P.PayingCount>
+              <P.PayingPrice>{cartTotalPrice}원</P.PayingPrice>
+            </P.PayingMenu>
+              ))}
+
+              </P.PayingList>
+            ) : (
+              <p style={{ fontSize: '19px', fontWeight: 'normal' }}>
+                담은 메뉴가 없습니다.<br></br>
+                </p>
+            )}
+            </P.TopContent>
+            
+            </P.BottomContainer>
+          ) : (
+            <p style={{
+              fontSize: '19px',
+              fontWeight: 'bold',
+              textAlign: 'center',  // 가운데 정렬
+              color: '#FFAC33',    // 글씨 색
+            }}>
+              로그인 후 이용해주세요.
+            </p>
+          )}
+            {isLoggedIn && (
             <P.BottomContainer>
             <P.LeftContainer>
 
@@ -214,24 +323,29 @@ export default function Paying() {
                     <P.TotalInfo>
 
                     <P.TotalTitle>총 수량</P.TotalTitle>
-                      <P.TotalNum>2개</P.TotalNum>
+                      <P.TotalNum>{cartItemsCount}개</P.TotalNum>
                     </P.TotalInfo>
 
                     <P.TotalInfo>
                       <P.TotalTitle>총 가격</P.TotalTitle>
-                      <P.TotalNum>10000원</P.TotalNum>
+                      <P.TotalNum>{cartTotalPrice}원</P.TotalNum>
                     </P.TotalInfo>
                   </P.TotalContent>
                 </P.RightContainer>
             </P.BottomContainer>
+            )}
           </P.PayingContainer>
+          {isLoggedIn && (
+
           <P.PayingButton onClick={() => openModal('paying')}>결제하기</P.PayingButton>
-          {activeModal === 'paying' && (
-            <PayingModal isModalOpen={activeModal === 'paying'} closeModal={closeModal} />
           )}
+          {activeModal === 'paying' && (
+            <PayingModal isModalOpen={activeModal === 'paying'} closeModal={closeModal} orderDetails={orderDetails} />
+            )}
           {activeModal === 'cart' && (
             <CartModal isModalOpen={activeModal === 'cart'} closeModal={closeModal} />
           )}
+          
         </P.IvoryBox>
 
       </P.ContentContainer>
