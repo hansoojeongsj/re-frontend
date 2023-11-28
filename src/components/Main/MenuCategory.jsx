@@ -133,6 +133,7 @@ const MenuCategory = () => {
                       onClick={() => handleMenuClick(item)}
                     >
                       <div className="menu-info">
+                      <img src={item.image} alt={item.title} /> 
                         <div className="menu-name">
                           <strong>{item.title}</strong>
                         </div>

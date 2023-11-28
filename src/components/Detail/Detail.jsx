@@ -37,11 +37,27 @@ export default function DetailPage() {
     const { post_id } = useParams();
     const [reviews, setReviews] = useState([]);
     const [ratings, setRatings] = useState(initialRatings);
+    const [menuData, setMenuData] = useState(null);
 
     useEffect(() => {
         // 여기서 리뷰 데이터를 불러와서 상태에 설정
         setReviews(ReviewData);
-    }, []); 
+
+        fetchMenuData(post_id);
+    }, [post_id]); 
+
+    const fetchMenuData = async (postId) => {
+        try {
+            const response = await fetch(`http://localhost:3000/app/getfood/${postId}`);
+            if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = await response.json();
+            setMenuData(data);
+            } catch (error) {
+                console.error('Error fetching menu details:', error);
+        }
+    };
 
     const [activeModal, setActiveModal] = useState(null);
 
@@ -118,8 +134,8 @@ export default function DetailPage() {
                         </D.LogoContainer>
 
                     <D.MenuContainer>
-                        <D.MenuName>{menuName}</D.MenuName>
-                        {menuImage && <D.MenuImage src={menuImage} alt={menuName} />}
+                        <D.MenuName>{menuData ? menuData.name : 'Not Found'}</D.MenuName>
+                        {menuData && <D.MenuImage src={menuData.image} alt={menuData.name} />}
                         <D.MenuPrice>{menuPrice}</D.MenuPrice>
                         <D.MenuDescription>①난류(가금류),②우유,③메밀,④땅콩,⑤대두,⑥밀,⑦고등어,⑧게,⑨새우,⑩돼지고기,⑪복숭아, ⑫토마토 등과 이들 식품의 성분을 함유한 식품 또는 식품 첨가물</D.MenuDescription>
                     </D.MenuContainer>

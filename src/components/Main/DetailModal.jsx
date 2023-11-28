@@ -17,9 +17,22 @@ const DetailModal = ({ isModalOpen, closeModal, menu}) => {
     const navigate = useNavigate();
     const [quantity, setQuantity] = useState(1);
 
-    const handleMenuClick = () => {
+    const handleMenuClick = async() => {
         closeModal();
-        navigate(`/detail/${menu.post_id}`);
+        try {
+            const response = await fetch(`http://localhost:3000/app/getfood/${menu.id}`);
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+        
+            const data = await response.json();
+            console.log('Fetched Menu Details:', data);
+        
+            navigate(`/detail/${menu.id}`);
+            } catch (error) {
+                console.error('Error fetching menu details:', error);
+            }
     }
 
     const handleDecrease = () => {
