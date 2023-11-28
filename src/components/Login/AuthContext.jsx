@@ -24,10 +24,14 @@ export const AuthProvider = (props) => {
 
   const updateUser = (userInfo) => {
     setUserProfile(userInfo);
+    if (userInfo && userInfo.id) {
+      setUserId(userInfo.id);
+    }
   };
+  const [userId, setUserId] = useState(/* 서버에서 받아온 초기 사용자 ID */);
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, login, logout, userProfile, updateUser }}>
+    <AuthContext.Provider value={{ isLoggedIn, login, logout, userProfile, updateUser, userId }}>
       {children}
     </AuthContext.Provider>
   );
