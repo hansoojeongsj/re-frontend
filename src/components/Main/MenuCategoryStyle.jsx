@@ -62,7 +62,6 @@ export const MenuBox = styled.div`
 
     img {
         max-width: 100px;
-        //margin-bottom: 5px;
         border-radius: 40%;
         position: relative;
         top: -25px;
