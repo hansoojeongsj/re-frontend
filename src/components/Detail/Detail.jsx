@@ -10,55 +10,40 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {  faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { FaStar } from 'react-icons/fa';
 import ReviewForm from './ReviewForm';
-import { ReviewData, initialRatings } from './Reviewdata';
+// import { ReviewData, initialRatings } from './Reviewdata';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useAuth } from '../Login/AuthContext';
 
-const RatingBar = ({ ratings, totalVotes }) => {
-    //const totalVotes = ratings.reduce((sum, rating) => sum + rating.count, 0);
-    return (
-        <D.ReviewRatingBar>
-            {ratings.slice().reverse().map((rating) => (
-                <span key={rating.rating}>
-                    <div className="bar-label">{rating.rating}</div>
-                    <div className="bar-container">
-                        <div
-                        className="yellow-bar"
-                        style={{
-                            width: totalVotes !== 0 ? `${(rating.count / totalVotes) * 100}%` : '0%',
-                        }}
-                        ></div>
-                    </div>
-                </span>
-            ))}
-        </D.ReviewRatingBar>
-    );
-};
+// const RatingBar = ({ ratings, totalVotes }) => {
+    
+    
+//     return (
+//         <D.ReviewRatingBar>
+//             {ratings.slice().reverse().map((rating) => (
+//                 <span key={rating.rating}>
+//                     <div className="bar-label">{rating.rating}</div>
+//                     <div className="bar-container">
+//                         <div
+//                         className="yellow-bar"
+//                         style={{
+//                             width: totalVotes !== 0 ? `${(rating.count / totalVotes) * 100}%` : '0%',
+//                         }}
+//                         ></div>
+//                     </div>
+//                 </span>
+//             ))}
+//         </D.ReviewRatingBar>
+//     );
+// };
 
 export default function DetailPage() {
     const { post_id } = useParams();
     const [reviews, setReviews] = useState([]);
-    const [ratings, setRatings] = useState(initialRatings);
+    const [ratings, setRatings] = useState(null);
     const [menuData, setMenuData] = useState(null);
 
-    useEffect(() => {
-        // 여기서 리뷰 데이터를 불러와서 상태에 설정
-        setReviews(ReviewData);
-
-        fetchMenuData(post_id);
-    }, [post_id]); 
-
-    const fetchMenuData = async (postId) => {
-        try {
-            const response = await fetch(`http://localhost:3000/app/getfood/${postId}`);
-            if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            const data = await response.json();
-            setMenuData(data);
-            } catch (error) {
-                console.error('Error fetching menu details:', error);
-        }
-    };
-
+    
     const [activeModal, setActiveModal] = useState(null);
 
     const openModal = (modalType) => {
@@ -69,49 +54,112 @@ export default function DetailPage() {
         setActiveModal(null);
     };
 
+    useEffect(() => {
+        const fetchMenuData = async () => {
+            try {
+                const response = await fetch(`http://localhost:3000/app/getfood/${post_id}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                const data = await response.json();
+                setMenuData(data);
+    
+                // 리뷰를 불러오는 부분 추가
+                if (!reviews.length) {
+                    const reviewsResponse = await fetch(`http://localhost:3000/app/comments/${post_id}`);
+                    if (!reviewsResponse.ok) {
+                        throw new Error(`HTTP error! Status: ${reviewsResponse.status}`);
+                    }
+                    const reviewsData = await reviewsResponse.json();
+        
+                    // 리뷰 데이터가 배열인지 확인 후 설정
+                    if (Array.isArray(reviewsData.result)) {
+                        setReviews(reviewsData.result);
+                    } else {
+                        console.error('리뷰 데이터가 배열이 아닙니다:', reviewsData);
+                    }
+                }
+                
+            } catch (error) {
+                console.error('Error fetching menu details:', error);
+            }
+        };
+    
+        fetchMenuData();
+    }, [post_id, reviews]);
 
-    // categories 배열에서 post_id에 해당하는 메뉴 객체 찾기
-    const selectedMenu = categories
-        .flatMap(category => category.menu)
-        .find(menu => menu.post_id === post_id);
+    
+    useEffect(() => {
+        const newRatings = calculateAverageRating(reviews);
+        setRatings(newRatings);
+    }, [reviews]); 
 
-    const menuName = selectedMenu ? selectedMenu.name : "Not Found";
-    const menuImage = selectedMenu ? selectedMenu.image : null;
-    const menuPrice = selectedMenu ? selectedMenu.price : "Not Found";
-
-
-    const handleReviewSubmit = (newReview) => {
-        const reviewWithId = { ...newReview, id: generateUniqueId() }
-        setReviews(prevReviews => [...prevReviews, reviewWithId]);
-        console.log('Submitting review to the backend:', reviewWithId);  // console 테스트
-
-        const newAverageRating = calculateAverageRating();
-        const updatedRatings = ratings.map(rating => ({
-            ...rating,
-            key: rating,  // 오류 해결 위해서 key 일단 넣음 
-            count: rating.rating === newReview.rating
-                ? rating.count + 1
-                : rating.count
-        }));
-
-        setRatings(updatedRatings);
-    };
-
-    const generateUniqueId = () => {  // 새로운 id 생성 (임시)
-        return Math.random().toString(36).substring(2) + Date.now().toString(36);
-    };
-
-    const calculateAverageRating = () => { // 평점 평균
-        if (reviews.length === 0) {
+    const calculateAverageRating = () => { // 평점평균
+        // console.log("calculateAverageRating", reviews);
+        if (!reviews || reviews.length === 0) {
             return 0;
         }
 
-        const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
-        return totalRating / reviews.length;
+        const validReviews = reviews.filter((review) => !isNaN(review.star));
+        const totalRating = validReviews.reduce((sum, review) => sum + review.star, 0);
+        const averageRating = totalRating / reviews.length;
+    
+        console.log('Average Rating:', averageRating);
+    
+        return isNaN(averageRating) ? 0 : averageRating;;
+    };
+
+    const { isLoggedIn, userId } = useAuth();
+    const authToken = localStorage.getItem('authToken');
+
+    const handleReviewSubmit = async (newReview) => {
+        if (!isLoggedIn) {
+            // 사용자가 로그인되지 않은 경우, 메시지 표시하거나 로그인 페이지로 리디렉션할 수 있습니다.
+            toast.error(`로그인 후 이용해 주세요`, {
+                autoClose: 3000,
+                position: toast.POSITION.TOP_CENTER,
+            });
+        } else {
+            try {
+                console.log('userId: ',userId);
+                const response = await fetch(`http://localhost:3000/app/comments/${post_id}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-access-token': authToken, 
+                    },
+                    body: JSON.stringify({
+                        content: newReview.content,
+                        star: newReview.rating,
+                        image: newReview.image || null,
+                    }),
+                });
+        
+                if (!response.ok) {
+                    throw new Error(`HTTP 오류! 상태: ${response.status}`);
+                }
+        
+                const createdReview = await response.json();
+                const updatedReviews = [...reviews, createdReview];
+                
+                setReviews(updatedReviews);
+
+                console.log('Updated Reviews:', updatedReviews);
+
+                // setReviews 호출 후에 setRatings 호출
+                const newRatings = calculateAverageRating(updatedReviews);
+                setRatings(newRatings);
+
+            } catch (error) {
+                console.error('백엔드에 리뷰 제출 중 오류 발생:', error);
+            }
+        }
     };
 
 
 
+
+    // console.log('Reviews:', reviews);
     return (
         <C.Container>
             <C.WhiteBox>
@@ -136,7 +184,7 @@ export default function DetailPage() {
                     <D.MenuContainer>
                         <D.MenuName>{menuData ? menuData.title : 'Not Found'}</D.MenuName>
                         {menuData && <D.MenuImage src={menuData.image} alt={menuData.name} />}
-                        <D.MenuPrice>{menuPrice}</D.MenuPrice>
+                        <D.MenuPrice>{menuData ? `${menuData.price}원` : 'Not Found'}</D.MenuPrice>
                         <D.MenuDescription>①난류(가금류),②우유,③메밀,④땅콩,⑤대두,⑥밀,⑦고등어,⑧게,⑨새우,⑩돼지고기,⑪복숭아, ⑫토마토 등과 이들 식품의 성분을 함유한 식품 또는 식품 첨가물</D.MenuDescription>
                     </D.MenuContainer>
 
@@ -157,33 +205,44 @@ export default function DetailPage() {
                                     </div>
                                 </D.ReviewAvg>
                                 <D.ReviewRatingBar>
-                                    <RatingBar ratings={ratings} totalVotes={reviews.length} />
+                                    {/* <RatingBar ratings={ratings} totalVotes={reviews.length} /> */}
                                 </D.ReviewRatingBar>
 
                             </D.ReviewAvgContainer>
                         <D.ReviewLineBottom><hr /></D.ReviewLineBottom>
                         <D.ReviewList>
-                            {reviews.map((review) => (
-                                <div key={review.id}>
-                                    <p className="username">{review.username}</p>
-                                    <p className="date">{review.date}</p>
-                                    <div className='star-container'>
-                                        {[1, 2, 3, 4, 5].map((star) => (
-                                            <FaStar
-                                                key={star}
-                                                size="20"
-                                                color={star <= review.rating ? '#FFAC33' : '#DDDDDD'}
+                            {Array.isArray(reviews) && reviews.length > 0 ? (
+                                reviews.map((review) => (
+                                    <div key={review.id}>
+                                        <p className="username">{review.nickname}</p>
+                                        <p className="date">{review.date}</p>
+                                        <div className='star-container'>
+                                            {[1, 2, 3, 4, 5].map((star) => (
+                                                <FaStar
+                                                    key={star}
+                                                    size="20"
+                                                    color={star <= review.star ? '#FFAC33' : '#DDDDDD'}
+                                                />
+                                            ))}
+                                        </div>
+                                        <p className="content">{review.content}</p>
+                                        {/* 이미지가 있을 때만 출력 */}
+                                        {console.log('Image Data:', review.image)}
+                                        {review.image !== null && (
+                                            <img
+                                                key={review.image}
+                                                src={review.image}
+                                                alt="Review"
                                             />
-                                        ))}
+                                        )}
                                     </div>
-                                    <p className="content">{review.content}</p>
-                                    {/* 이미지가 있을 때만 출력 */}
-                                    {review.image && <img src={review.image} alt="Review" />}
-                                </div>
-                            ))}
+                                ))
+                            ) : (
+                                <p style={{fontSize:'16px', marginBottom: '20px'}}>작성된 리뷰가 없습니다.</p>
+                            )}
                         </D.ReviewList>
                         {/* 폼으로 리뷰 작성 */}
-                        <ReviewForm onReviewSubmit={handleReviewSubmit} />
+                        <ReviewForm onReviewSubmit={handleReviewSubmit} postId={post_id} isLoggedIn={isLoggedIn}/>
                     </D.ReviewContainer>
 
                 </D.ContentContainer>
@@ -192,4 +251,3 @@ export default function DetailPage() {
     );
 
 }
-

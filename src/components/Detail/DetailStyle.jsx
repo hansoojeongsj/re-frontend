@@ -321,32 +321,9 @@ export const ReviewTextContainer= styled.div`
     flex-direction: column;
     justify-content: flex-start;
     margin-left: 30px;
+    margin-top: 20px;
 
 `
-
-export const ReviewNameInput = styled.input`
-    flex-grow: 1;
-    height: 100%;
-    border: none;
-    background-color: transparent;
-    outline: none;
-    resize: none; /* 사용자 크기 조정 비활성화 */
-    font-size: 16px; 
-    font-weight: bold;
-    flex-direction: column;
-    color: black;
-
-    &:focus {
-        outline: none;
-    }
-    &::placeholder {
-        color: #000000;
-    }
-    @media screen and (max-width: 412px) {
-        font-size: 13px; /* 작은 화면에서 폰트 크기 조절 */
-    }
-`;
-
 export const ReviewContentInput = styled.textarea`
     font-family: 'Pretendard', sans-serif;
     width: 100%;

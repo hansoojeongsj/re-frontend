@@ -137,7 +137,7 @@ const MenuCategory = () => {
                         <div className="menu-name">
                           <strong>{item.title}</strong>
                         </div>
-                        <div className="menu-price">{item.price}</div>
+                        <div className="menu-price">{item.price}원</div>
                       </div>
                     </M.MenuBox>
                   ))
