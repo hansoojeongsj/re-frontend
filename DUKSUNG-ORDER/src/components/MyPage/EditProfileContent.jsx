@@ -11,7 +11,7 @@ const EditProfileContent = () => {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
 
-
+//
   const handleModifyButtonClick = async () => {
     try {
       const authToken = localStorage.getItem('authToken');
