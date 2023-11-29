@@ -5,7 +5,7 @@ import { faPaperPlane, faImage } from '@fortawesome/free-solid-svg-icons';
 import { FaStar } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 import { useAuth } from '../Login/AuthContext';
-
+//커밋..
 const ReviewForm = ({ onReviewSubmit, postId }) => {
     const [rating, setRating] = useState(0);
     const [content, setContent] = useState('');
