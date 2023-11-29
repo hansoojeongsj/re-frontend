@@ -1,6 +1,5 @@
 import { useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
-import { categories } from '../Main/data';
 import * as D from './DetailStyle';
 import LogoImage from '/logo.png';
 import * as C from './../Main/ContainerStyle';
@@ -10,37 +9,48 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {  faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { FaStar } from 'react-icons/fa';
 import ReviewForm from './ReviewForm';
-// import { ReviewData, initialRatings } from './Reviewdata';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAuth } from '../Login/AuthContext';
 
-// const RatingBar = ({ ratings, totalVotes }) => {
-    
-    
-//     return (
-//         <D.ReviewRatingBar>
-//             {ratings.slice().reverse().map((rating) => (
-//                 <span key={rating.rating}>
-//                     <div className="bar-label">{rating.rating}</div>
-//                     <div className="bar-container">
-//                         <div
-//                         className="yellow-bar"
-//                         style={{
-//                             width: totalVotes !== 0 ? `${(rating.count / totalVotes) * 100}%` : '0%',
-//                         }}
-//                         ></div>
-//                     </div>
-//                 </span>
-//             ))}
-//         </D.ReviewRatingBar>
-//     );
-// };
+
+const RatingBar = ({ reviews }) => {
+    const [frequency, setFrequency] = useState([0, 0, 0, 0, 0]);
+
+    useEffect(() => {
+        // 리뷰 데이터에서 별점 빈도수 계산
+        const newFrequency = [0, 0, 0, 0, 0];
+        reviews.forEach((review) => {
+            newFrequency[review.star - 1]++;
+        });
+        setFrequency(newFrequency);
+    }, [reviews]);
+
+    // 별점 바 그리기
+    const ratingBars = frequency.map((count, index) => (
+        <span key={index + 1}>
+        <div className="bar-label">{index + 1}점</div>
+        <div className="bar-container">
+            <div
+            className="yellow-bar"
+            style={{ width: `${(count / reviews.length) * 100}%` }}
+            ></div>
+        </div>
+        </span>
+    ));
+
+    return (
+        <div className="rating-bar-container">
+            {ratingBars}
+        </div>
+    );
+};
+
 
 export default function DetailPage() {
     const { post_id } = useParams();
     const [reviews, setReviews] = useState([]);
-    const [ratings, setRatings] = useState(null);
+    const [ratings, setRatings] = useState([]);
     const [menuData, setMenuData] = useState(null);
 
     
@@ -88,13 +98,8 @@ export default function DetailPage() {
         fetchMenuData();
     }, [post_id, reviews]);
 
-    
-    useEffect(() => {
-        const newRatings = calculateAverageRating(reviews);
-        setRatings(newRatings);
-    }, [reviews]); 
-
     const calculateAverageRating = () => { // 평점평균
+        console.log('Reviews:', reviews);
         // console.log("calculateAverageRating", reviews);
         if (!reviews || reviews.length === 0) {
             return 0;
@@ -102,12 +107,21 @@ export default function DetailPage() {
 
         const validReviews = reviews.filter((review) => !isNaN(review.star));
         const totalRating = validReviews.reduce((sum, review) => sum + review.star, 0);
-        const averageRating = totalRating / reviews.length;
-    
+        const averageRating = totalRating / validReviews.length;
+
+        console.log('Total Rating:', totalRating);
         console.log('Average Rating:', averageRating);
+
     
         return isNaN(averageRating) ? 0 : averageRating;;
     };
+
+    useEffect(() => {
+        const newRatings = calculateAverageRating(reviews);
+        setRatings(newRatings);
+    }, [reviews]); 
+
+    
 
     const { isLoggedIn, userId } = useAuth();
     const authToken = localStorage.getItem('authToken');
@@ -156,10 +170,6 @@ export default function DetailPage() {
         }
     };
 
-
-
-
-    // console.log('Reviews:', reviews);
     return (
         <C.Container>
             <C.WhiteBox>
@@ -205,7 +215,7 @@ export default function DetailPage() {
                                     </div>
                                 </D.ReviewAvg>
                                 <D.ReviewRatingBar>
-                                    {/* <RatingBar ratings={ratings} totalVotes={reviews.length} /> */}
+                                    <RatingBar reviews={reviews} />
                                 </D.ReviewRatingBar>
 
                             </D.ReviewAvgContainer>
