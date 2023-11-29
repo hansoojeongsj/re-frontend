@@ -215,7 +215,7 @@ const cartItemsCount = Array.isArray(cartItems.result)
                     ) : (
                       <>
                         장바구니가 비어 있습니다.<br />
-                        다른 메시지나 컴포넌트를 여기에 추가하세요.
+                        장바구니는 하나의 메뉴만 담을 수 있습니다.
                       </>
                     )}
                   </p>
