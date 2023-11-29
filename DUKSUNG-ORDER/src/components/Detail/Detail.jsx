@@ -135,6 +135,7 @@ export default function DetailPage() {
             });
         } else {
             try {
+                await handleReviewSubmit(newReview);
                 console.log('userId: ',userId);
                 const response = await fetch(`http://localhost:3000/app/comments/${post_id}`, {
                     method: 'POST',
@@ -164,8 +165,11 @@ export default function DetailPage() {
                 const newRatings = calculateAverageRating(updatedReviews);
                 setRatings(newRatings);
 
+                return Promise.resolve();
+
             } catch (error) {
                 console.error('백엔드에 리뷰 제출 중 오류 발생:', error);
+                return Promise.reject(error);
             }
         }
     };
@@ -240,7 +244,7 @@ export default function DetailPage() {
                                         {console.log('Image Data:', review.image)}
                                         {review.image !== null && (
                                             <img
-                                                key={review.image}
+                                                key={new Date().getTime()}
                                                 src={review.image}
                                                 alt="Review"
                                             />
