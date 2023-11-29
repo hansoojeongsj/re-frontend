@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSignInAlt, faShoppingCart, faUserPen, faComment, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { faSignInAlt, faShoppingCart, faUserPen, faComment, faSignOutAlt,faRectangleList } from '@fortawesome/free-solid-svg-icons';
 
 import * as C from './../Main/ContainerStyle';
 import LogoImage from './../Login/logo.png';
@@ -14,11 +14,12 @@ import Tooltip from './../common/Tooltip';
 import CartModal from '../common/Modal/CartModal'; // Modal 컴포넌트 import
 import EditProfileContent from './EditProfileContent'; // 새로운 파일을 import
 import ReviewManagementContent from './ReviewManagementContent'; // 새로운 파일을 import
-
+import OrderManagement from './OrderManagement';
 
 export default function MyPage() {
   const [isEditing, setIsEditing] = useState(true);
   const [isReviewManaging, setIsReviewManaging] = useState(false);
+  const [isOrdering, setIsOrdering] = useState(false);
   const { isLoggedIn, logout } = useAuth();
   const [isModalOpen, setModalOpen] = useState(false);
   const [tooltipVisible, setTooltipVisible] = useState(false);
@@ -27,13 +28,21 @@ export default function MyPage() {
   const handleEditButtonClick = () => {
     setIsEditing(true);
     setIsReviewManaging(false);
+    setIsOrdering(false);
   };
 
   const handleReviewManageButtonClick = () => {
     setIsEditing(false);
     setIsReviewManaging(true);
-  };
+    setIsOrdering(false);
 
+  };
+  const handleOrderManagementButtonClick = () => {
+    setIsEditing(false);
+    setIsReviewManaging(false);
+    setIsOrdering(true);
+
+  };
   const openModal = () => {
     setModalOpen(true);
   };
@@ -122,10 +131,18 @@ export default function MyPage() {
                     <br />
                     리뷰 관리
                   </M.MypageButton>
+                  <M.MypageButton
+                    onClick={handleOrderManagementButtonClick}
+                    selected={isOrdering}>
+                    <FontAwesomeIcon icon={faRectangleList} />
+                    <br />
+                    주문 관리
+                  </M.MypageButton>
                 </M.ButtonContainer>
 
                 {isEditing && <EditProfileContent />}
                 {isReviewManaging && <ReviewManagementContent />}
+                {isOrdering && <OrderManagement/>}
               </>
             ) : (
               <M.LoginMessage>
