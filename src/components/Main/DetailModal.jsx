@@ -109,9 +109,8 @@ const DetailModal = ({ isModalOpen, closeModal, menu}) => {
                         <D.MenuImage src={menu.image} alt={menu.name} />
                         <D.MenuTitle>{menu.title}</D.MenuTitle>
                         <D.InfoMenu>
-                            <D.MenuDescription>메뉴설명입니당 ㅎㅎㅎㅎㅎㅎ.알레르기 어쩌구</D.MenuDescription>
-                            {/* <D.PayingListTitle>{menu.description}</D.PayingListTitle> */}
-                            <D.MenuPrice>{menu.price}</D.MenuPrice>
+                            <D.MenuDescription>{menu.content}</D.MenuDescription>
+                            <D.MenuPrice>{menu.price}원</D.MenuPrice>
                         </D.InfoMenu>
 
                         <D.MenuTotal>
