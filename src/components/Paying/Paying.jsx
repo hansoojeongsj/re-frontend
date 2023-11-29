@@ -137,22 +137,51 @@ const cartItemsCount = Array.isArray(cartItems.result)
 
   const [activeModal, setActiveModal] = useState(null);
 
-
-  const openModal = (modalType) => {
+  const openModal = async (modalType) => {
     if (modalType === 'paying') {
       // 주문 정보 구성
       const orderDetails = cartItems.result.map((item) => ({
-        foodId: item.getCount[0].id,
+        cartId: item.getCount[0].id,
         foodName: item.getFoodName.title,
         quantity: cartItemsCount,
         price: cartTotalPrice,
       }));
       setActiveModal(modalType);
-      setOrderDetails(orderDetails); // 이 부분이 추가되었습니다.
+      setOrderDetails(orderDetails);
+  console.log('orderDetails',orderDetails);
+      try {
+        const selectedCartItem = cartItems.result[0];
+  
+        if (!selectedCartItem || !selectedCartItem.getCount || !selectedCartItem.getFoodName) {
+          console.error('Invalid cart item structure');
+          return;
+        }
+  
+        const response = await fetch(`http://localhost:3000/app/addAccount/${selectedCartItem.getCount[0].id}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-access-token': authToken,
+          },
+          body: JSON.stringify({
+            cartId: selectedCartItem.getCount[0].id,
+            totalprice: cartTotalPrice,
+          }),
+        });
+  
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+  
+      } catch (error) {
+        console.error('Error adding account:', error);
+      }
+  
     } else {
       setActiveModal(modalType);
     }
   };
+  
 
   const closeModal = () => {
     setActiveModal(null);
