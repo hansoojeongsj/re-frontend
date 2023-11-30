@@ -11,7 +11,7 @@ const EditProfileContent = () => {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
 
-//
+
   const handleModifyButtonClick = async () => {
     try {
       const authToken = localStorage.getItem('authToken');
@@ -40,8 +40,6 @@ const EditProfileContent = () => {
         }),
       });
       const errorData = await checkPasswordResponse.json();
-      console.log('Check Password Response:', errorData);
-      
       if (errorData.code === 404) {
         toast.error('비밀번호가 잘못 입력되었습니다.', {
           autoClose: 3000,
