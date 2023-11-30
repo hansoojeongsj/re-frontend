@@ -265,3 +265,6 @@ export default function DetailPage() {
     );
 
 }
+
+
+// 커밋용

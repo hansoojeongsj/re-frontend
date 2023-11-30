@@ -241,6 +241,7 @@ const cartItemsCount = Array.isArray(cartItems.result)
   );
 };
 
+
 Modal.propTypes = {
   isModalOpen: PropTypes.bool.isRequired,
   closeModal: PropTypes.func.isRequired,
