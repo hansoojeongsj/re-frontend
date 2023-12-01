@@ -102,6 +102,8 @@ export const ButtonContainer = styled.div`
   display: flex;
   align-items: center; /* 세로 정렬을 위한 설정 */
   margin-bottom: 15px;
+  justify-content: center; /* 가로 정렬을 위한 설정 */
+
   @media screen and (max-width: 380px) {
     width: 250px;
   }
