@@ -4,8 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import {useState,  useEffect} from 'react';
 import { useNavigate  } from 'react-router-dom';
-import cartItems from '../common/Modal/CartModal';
-import setCartItems from '../common/Modal/CartModal';
 
 const PayingModal = ({ isModalOpen, closeModal, orderDetails }) => {
   const [orderNumber, setOrderNumber] = useState(null);

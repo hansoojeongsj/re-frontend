@@ -23,6 +23,7 @@ export default function Paying() {
 
   const [paymentMethod, setPaymentMethod] = useState('general');
   const [orderDetails, setOrderDetails] = useState(null);
+  const [cartIsCleared, setCartIsCleared] = useState(0);
 
   const fetchCartList = async () => {
     try {
@@ -38,12 +39,21 @@ export default function Paying() {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
+
       console.log('response:',response);
       console.log('authToken:',authToken);
 
       const result = await response.json();
-      console.log('result:', result);
 
+      console.log('result:', result);
+      if (result && result.result && result.result[0] && result.result[0].getCount[0]) {
+        const isCleared = result.result[0].getCount[0].is_cleared;
+        setCartIsCleared(isCleared);
+        console.log('isCleared:', isCleared);
+        setCartTotalPrice(0);
+        setCartItems(0); // setCartIsCleared 이후에 호출
+      }
+      
       const receivedCartItems = result || [];
       setCartItems(receivedCartItems);
 
@@ -194,13 +204,10 @@ const cartItemsCount = Array.isArray(cartItems.result)
   };
 
   const handleSavePhoneNumber = () => {
-    // 여기에서 입력값을 어떻게 처리할지 정의하십시오.
-    // 이 예시에서는 그냥 상태를 업데이트하지만, 실제로는 서버로 전송하거나 다른 작업이 필요할 수 있습니다.
     setIsEditingPhoneNumber(false);
   };
 
   const handlePhoneNumberChange = (e) => {
-    // 숫자와 -만 입력 허용 (정규표현식 사용)
     const value = e.target.value.replace(/[^0-9-]/g, '').slice(0, 15);
     setEditablePhoneNumber(value);
   };
@@ -256,7 +263,7 @@ const cartItemsCount = Array.isArray(cartItems.result)
           <P.BottomContainer>
 
             <P.TopContent>
-            {cartItemsCount > 0 ? (
+            {cartItemsCount > 0 && cartIsCleared === 0 ? (
 
             <P.PayingList>
               {cartItems.result.map((item) => (
@@ -277,7 +284,16 @@ const cartItemsCount = Array.isArray(cartItems.result)
               </P.PayingList>
             ) : (
               <p style={{ fontSize: '19px', fontWeight: 'normal' }}>
-                담은 메뉴가 없습니다.<br></br>
+                    {cartIsCleared === 1 ? (
+                      <>
+                        담은 메뉴가 없습니다.
+                      </>
+                    ) : (
+                      <>
+                        담은 메뉴가 없습니다.
+
+                      </>
+                    )}
                 </p>
             )}
             </P.TopContent>
@@ -349,24 +365,49 @@ const cartItemsCount = Array.isArray(cartItems.result)
                     <P.NumberTitle>
                       결제 상세
                     </P.NumberTitle>
-                    <P.TotalInfo>
+                    {cartItemsCount > 0 && cartIsCleared === 0 ? (
+                    <>
+                      <P.TotalInfo>
+                        <P.TotalTitle>총 수량</P.TotalTitle>
+                        <P.TotalNum>{cartItemsCount}개</P.TotalNum>
+                      </P.TotalInfo>
 
-                    <P.TotalTitle>총 수량</P.TotalTitle>
-                      <P.TotalNum>{cartItemsCount}개</P.TotalNum>
-                    </P.TotalInfo>
+                      <P.TotalInfo>
+                        <P.TotalTitle>총 가격</P.TotalTitle>
+                        <P.TotalNum>{cartTotalPrice}원</P.TotalNum>
+                      </P.TotalInfo>
+                    </>
+                  ) : (
+                    cartIsCleared === 1 ? (
+                      <>
+                        <P.TotalInfo>
+                          <P.TotalTitle>총 수량</P.TotalTitle>
+                          <P.TotalNum>0개</P.TotalNum>
+                        </P.TotalInfo>
 
-                    <P.TotalInfo>
-                      <P.TotalTitle>총 가격</P.TotalTitle>
-                      <P.TotalNum>{cartTotalPrice}원</P.TotalNum>
-                    </P.TotalInfo>
+                        <P.TotalInfo>
+                          <P.TotalTitle>총 가격</P.TotalTitle>
+                          <P.TotalNum>0원</P.TotalNum>
+                        </P.TotalInfo>
+                      </>
+                    ) : null // handle other cases if needed
+                  )}
                   </P.TotalContent>
                 </P.RightContainer>
             </P.BottomContainer>
             )}
           </P.PayingContainer>
           {isLoggedIn && (
-
-          <P.PayingButton onClick={() => openModal('paying')}>결제하기</P.PayingButton>
+            <P.PayingButton
+              onClick={() => {
+                if (cartIsCleared === 0) {
+                  openModal('paying');
+                }
+              }}
+              disabled={cartIsCleared === 1}
+            >
+              결제하기
+            </P.PayingButton>
           )}
           {activeModal === 'paying' && (
             <PayingModal isModalOpen={activeModal === 'paying'} closeModal={closeModal} orderDetails={orderDetails} />
