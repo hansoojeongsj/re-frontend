@@ -102,6 +102,11 @@ export const ButtonContainer = styled.div`
   display: flex;
   align-items: center; /* 세로 정렬을 위한 설정 */
   margin-bottom: 15px;
+  justify-content: center; /* 가로 정렬을 위한 설정 */
+
+  @media screen and (max-width: 380px) {
+    width: 250px;
+  }
 `;
 
 export const MypageButton = styled.button`
@@ -119,6 +124,20 @@ export const MypageButton = styled.button`
   &:hover {
     background-color: #FFAC33;
     border-color: #FFF1DC;
+  }
+  @media screen and (max-width: 380px) {
+    width: 30px;
+    height: 80px;
+    font-size: 9px;
+    margin: 10px;
+
+  }
+  @media screen and (max-width: 400px) {
+    width: 50px;
+    height: 80px;
+    font-size: 13px;
+    margin: 10px;
+
   }
   @media screen and (max-width: 600px) {
     width: 80px;
@@ -184,6 +203,7 @@ export const ModifyButton=styled.button`
   margin: 0 auto;
   font-family: 'Pretendard', sans-serif;
   margin-top: 15px;
+  
   @media screen and (max-width: 600px) {
     width: 100%;
     max-width: 100px;
@@ -219,6 +239,7 @@ export const ReviewList = styled.div`
   align-items: flex-start;  // Align items to the top
 
   @media screen and (max-width:600px) {
+    
     width: 100%;
     padding-left: 15px;
 
@@ -341,5 +362,8 @@ export const LoginMessage = styled.div`
   font-weight: bold;
   @media screen and (max-width: 600px) {
     font-size: 16px;
+  }
+  @media screen and (max-width: 400px) {
+    font-size: 14px;
   }
 `;

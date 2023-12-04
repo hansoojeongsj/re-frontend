@@ -20,10 +20,13 @@ export default function MyPage() {
   const [isEditing, setIsEditing] = useState(true);
   const [isReviewManaging, setIsReviewManaging] = useState(false);
   const [isOrdering, setIsOrdering] = useState(false);
-  const { isLoggedIn, logout } = useAuth();
+  const { isLoggedIn, logout, user } = useAuth();
   const [isModalOpen, setModalOpen] = useState(false);
   const [tooltipVisible, setTooltipVisible] = useState(false);
   const [tooltipPosition, setTooltipPosition] = useState({ top: 0, left: 0 });
+  const isAdmin = user && user.isAdmin;
+
+  const showOrderManagement = isLoggedIn && isAdmin && isOrdering;
 
   const handleEditButtonClick = () => {
     setIsEditing(true);
@@ -131,18 +134,23 @@ export default function MyPage() {
                     <br />
                     리뷰 관리
                   </M.MypageButton>
-                  <M.MypageButton
-                    onClick={handleOrderManagementButtonClick}
-                    selected={isOrdering}>
-                    <FontAwesomeIcon icon={faRectangleList} />
-                    <br />
-                    주문 관리
-                  </M.MypageButton>
-                </M.ButtonContainer>
+                  
+              {isAdmin && ( // isAdmin이 true일 때만 버튼을 표시
+                <M.MypageButton
+                  onClick={handleOrderManagementButtonClick}
+                  selected={isOrdering}
+                >
+                  <FontAwesomeIcon icon={faRectangleList} />
+                  <br />
+                  주문 관리
+                </M.MypageButton>
+              )}
+            </M.ButtonContainer>
+
 
                 {isEditing && <EditProfileContent />}
                 {isReviewManaging && <ReviewManagementContent />}
-                {isOrdering && <OrderManagement/>}
+                {showOrderManagement && <OrderManagement/>}
               </>
             ) : (
               <M.LoginMessage>

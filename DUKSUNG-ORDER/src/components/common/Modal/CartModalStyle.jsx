@@ -147,7 +147,7 @@ export const PayingButton = styled.button`
   font-size: 18px;
   width: 90%;
   height: 70px;
-  font-size: 30px;
+  font-size: 26px;
   border-radius: 50px;
   font-weight: bold;
   margin: 0 auto;
@@ -164,10 +164,25 @@ export const PayingButton = styled.button`
     color: #FFAC33;
     box-shadow: 0px 4px 4px 2px rgba(255, 172, 51, 0.25); /* 그림자 효과 */
   }
+  @media screen and (max-width: 500px){
+
+font-size: 16px;
+
+}
+  @media screen and (max-width: 600px){
+
+    font-size: 18px;
+
+  }
   @media screen and (max-width: 600px){
     width: 60%;
     height: 60px;
-    font-size: 25px;
+    font-size: 21px;
+
+  }
+  @media screen and (max-width: 800px){
+
+    font-size: 22px;
 
   }
 `;
