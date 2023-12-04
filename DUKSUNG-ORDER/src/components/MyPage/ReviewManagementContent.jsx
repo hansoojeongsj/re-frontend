@@ -1,78 +1,114 @@
-import  { useState } from 'react';
+import  { useState, useEffect } from 'react';
 import * as M from './MyPageStyle'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar} from '@fortawesome/free-solid-svg-icons';
+import PropTypes from 'prop-types';
+import { useAuth } from './../Login/AuthContext';
 
-import ReviewImg from '/babybamsik.jpg'
-const ReviewManagementContent = () => {
-  const yellowStars = Math.floor(Math.random() * 5) + 1; // 1부터 5까지의 랜덤한 수
-
-  const itemsPerPage = 5;
+const ReviewManagementContent = ({userId}) => {
+  const [reviews, setReviews] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
 
-  const totalEntries = 44;
-  const totalPages = Math.ceil(totalEntries / itemsPerPage);
+  const authToken = localStorage.getItem('authToken');
+  console.log('AuthToken:', authToken);
 
-  const getCurrentPageEntries = () => {
-    
+
+
+
+  useEffect(() => {
+    const fetchUserReviews = async () => {
+      try {
+        
+        // 서버에서 현재 사용자가 작성한 리뷰 데이터 가져오기
+        const response = await fetch(`http://localhost:3000/app/mypage/`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-access-token': authToken,
+          },
+        });
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const reviewsData = await response.json();
+        console.log('Reviews Data:', reviewsData);
+
+        setReviews(reviewsData.result); // 실제 리뷰 데이터 
+
+      } catch (error) {
+        console.error('Error fetching user reviews:', error);
+      }
+    };
+
+    fetchUserReviews();
+  }, [userId, authToken]);
+
+
+  const getCurrentPageReviews = () => {
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    const reversedEntries = [...entries].reverse();
-    return reversedEntries.slice(startIndex, endIndex);
+    const reversedReviews = [...reviews].reverse();
+    return reversedReviews.slice(startIndex, endIndex);
   };
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
 
-  const entries = Array.from({ length: totalEntries }).map((_, index) => ({
-    id: index + 1,
-    // 나머지 항목 정보
-    
-  }));
 
   return (
     <M.ReviewContainer>
-    {getCurrentPageEntries().map((entry) => (
-      <M.ReviewList key={entry.id}>
-        <M.ReviewImage src={ReviewImg} alt={entry.id}/>
-        <M.ReviewListContainer>
-
-          <M.ReviewId>{entry.id} 한수정</M.ReviewId>
-          <M.SubContent>
-            {[...Array(5)].map((_, index) => (
-              <FontAwesomeIcon icon={faStar}
-                key={index}
-                color={index < yellowStars ? '#FFAC33' : '#DDDDDD'}
-              />
-            ))}
-            {new Date().toLocaleDateString()}
-          </M.SubContent>
-          <M.ReviewContent>
-            너무 맛있어요.            너무 맛있어요.
-            너무 맛있어요.
-            너무 맛있어요.
-
-            </M.ReviewContent>
-          </M.ReviewListContainer>
-      </M.ReviewList>
-    ))}
-      
-      {/* 페이지네이션 컴포넌트 추가 */}
-      <M.Pagination>
-        <ul>
-          {Array.from({ length: totalPages }).map((_, index) => (
-            <li
-              key={index}
-              onClick={() => handlePageChange(index + 1)}
-              className={currentPage === index + 1 ? 'active' : ''}>
-              {index + 1}
-            </li>
+      {reviews.length === 0 ? (
+      <M.NoReviewMessage>작성한 리뷰가 없습니다.</M.NoReviewMessage>
+    ) : (
+        <>
+          {getCurrentPageReviews().map((review, index) => (
+            <M.ReviewList key={index}>
+              <M.ReviewImage src={review.image} alt={review.id}/>
+              <M.ReviewListContainer>
+                <M.ReviewId>{review.id} {review.nickname}</M.ReviewId>
+                <M.SubContent>
+                  {[...Array(5)].map((_, index) => (
+                        <FontAwesomeIcon icon={faStar}
+                          key={index}
+                          color={index < review.star? '#FFAC33' : '#DDDDDD'}
+                        />
+                    ))}
+                  <span style={{ marginLeft: '5px' }}>{/* 간격 조절 */}</span>
+                  {review.date}
+                </M.SubContent>
+                <M.ReviewContent>{review.content}</M.ReviewContent>
+                </M.ReviewListContainer>
+            </M.ReviewList>
           ))}
-        </ul>
-      </M.Pagination>
+
+          {/* 페이지네이션 컴포넌트 추가 */}
+          <M.Pagination>
+            <ul>
+                {Array.from({ length: Math.ceil(reviews.length / itemsPerPage) }).map((_, index) => (
+                  <li
+                    key={index}
+                    onClick={() => handlePageChange(index + 1)}
+                    className={currentPage === index + 1 ? 'active' : ''}
+                  >
+                    {index + 1}
+                  </li>
+                ))}
+            </ul>
+          </M.Pagination>
+        </>
+      )}
     </M.ReviewContainer>
   );
 };
+
+ReviewManagementContent.propTypes = {
+  isLoggedIn: PropTypes.bool,
+  userId: PropTypes.string,
+};
+
 
 export default ReviewManagementContent;

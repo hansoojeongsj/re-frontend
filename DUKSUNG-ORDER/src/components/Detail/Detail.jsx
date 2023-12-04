@@ -99,7 +99,7 @@ export default function DetailPage() {
     }, [post_id, reviews]);
 
     const calculateAverageRating = () => { // 평점평균
-        console.log('Reviews:', reviews);
+        //console.log('Reviews:', reviews);
         // console.log("calculateAverageRating", reviews);
         if (!reviews || reviews.length === 0) {
             return 0;

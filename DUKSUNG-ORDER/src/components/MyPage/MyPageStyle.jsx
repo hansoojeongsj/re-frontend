@@ -367,3 +367,12 @@ export const LoginMessage = styled.div`
     font-size: 14px;
   }
 `;
+
+export const NoReviewMessage = styled.div`
+  font-weight: bold;
+  font-size: 15px;
+  height: 30px;
+  color: black;
+  text-align:center;
+  margin-top: 10px;
+`
