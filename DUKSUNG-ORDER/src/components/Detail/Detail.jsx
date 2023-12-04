@@ -252,7 +252,7 @@ export default function DetailPage() {
                                     </div>
                                 ))
                             ) : (
-                                <p style={{fontSize:'16px', marginBottom: '20px'}}>작성된 리뷰가 없습니다.</p>
+                                <p style={{fontSize:'16px', marginBottom: '20px', fontWeight: 'bold'}}>작성된 리뷰가 없습니다.</p>
                             )}
                         </D.ReviewList>
                         {/* 폼으로 리뷰 작성 */}
