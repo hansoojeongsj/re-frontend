@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignInAlt, faShoppingCart, faUserPen, faComment, faSignOutAlt,faRectangleList } from '@fortawesome/free-solid-svg-icons';
@@ -25,6 +25,8 @@ export default function MyPage() {
   const [tooltipVisible, setTooltipVisible] = useState(false);
   const [tooltipPosition, setTooltipPosition] = useState({ top: 0, left: 0 });
   const isAdmin = user && user.isAdmin;
+
+  const userId = user ? user.id : null;
 
   const showOrderManagement = isLoggedIn && isAdmin && isOrdering;
 
@@ -147,9 +149,8 @@ export default function MyPage() {
               )}
             </M.ButtonContainer>
 
-
                 {isEditing && <EditProfileContent />}
-                {isReviewManaging && <ReviewManagementContent />}
+                {isReviewManaging && <ReviewManagementContent userId={userId} />}
                 {showOrderManagement && <OrderManagement/>}
               </>
             ) : (

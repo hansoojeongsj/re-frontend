@@ -99,7 +99,7 @@ export default function DetailPage() {
     }, [post_id, reviews]);
 
     const calculateAverageRating = () => { // 평점평균
-        console.log('Reviews:', reviews);
+        //console.log('Reviews:', reviews);
         // console.log("calculateAverageRating", reviews);
         if (!reviews || reviews.length === 0) {
             return 0;
@@ -196,9 +196,9 @@ export default function DetailPage() {
                         </D.LogoContainer>
 
                     <D.MenuContainer>
-                        <D.MenuName>{menuData ? menuData.title : 'Not Found'}</D.MenuName>
-                        {menuData && <D.MenuImage src={menuData.image} alt={menuData.name} />}
-                        <D.MenuPrice>{menuData ? `${menuData.price}원` : 'Not Found'}</D.MenuPrice>
+                        <D.MenuName>{menuData ? menuData.getFood[0].title : 'Not Found'}</D.MenuName>
+                        {menuData && <D.MenuImage src={menuData.getFood[0].image} alt={menuData.name} />}
+                        <D.MenuPrice>{menuData ? `${menuData.getFood[0].price}원` : 'Not Found'}</D.MenuPrice>
                         <D.MenuDescription>①난류(가금류),②우유,③메밀,④땅콩,⑤대두,⑥밀,⑦고등어,⑧게,⑨새우,⑩돼지고기,⑪복숭아, ⑫토마토 등과 이들 식품의 성분을 함유한 식품 또는 식품 첨가물</D.MenuDescription>
                     </D.MenuContainer>
 
@@ -266,5 +266,3 @@ export default function DetailPage() {
 
 }
 
-
-// 커밋용
