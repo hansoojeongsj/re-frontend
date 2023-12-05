@@ -66,6 +66,25 @@ export default function DetailPage() {
     };
 
     useEffect(() => {
+        const fetchReviews = async () => {
+            try {
+                const reviewsResponse = await fetch(`http://localhost:3000/app/comments/${post_id}`);
+                if (!reviewsResponse.ok) {
+                    throw new Error(`HTTP error! Status: ${reviewsResponse.status}`);
+                }
+                const reviewsData = await reviewsResponse.json();
+    
+                // 리뷰 데이터가 배열인지 확인 후 설정
+                if (Array.isArray(reviewsData.result)) {
+                    setReviews(reviewsData.result);
+                } else {
+                    console.error('리뷰 데이터가 배열이 아닙니다:', reviewsData);
+                }
+            } catch (error) {
+                console.error('Error fetching reviews:', error);
+            }
+        };
+
         const fetchMenuData = async () => {
             try {
                 const response = await fetch(`http://localhost:3000/app/getfood/${post_id}`);
@@ -75,21 +94,7 @@ export default function DetailPage() {
                 const data = await response.json();
                 setMenuData(data);
     
-                // 리뷰를 불러오는 부분 추가
-                if (!reviews.length) {
-                    const reviewsResponse = await fetch(`http://localhost:3000/app/comments/${post_id}`);
-                    if (!reviewsResponse.ok) {
-                        throw new Error(`HTTP error! Status: ${reviewsResponse.status}`);
-                    }
-                    const reviewsData = await reviewsResponse.json();
-        
-                    // 리뷰 데이터가 배열인지 확인 후 설정
-                    if (Array.isArray(reviewsData.result)) {
-                        setReviews(reviewsData.result);
-                    } else {
-                        console.error('리뷰 데이터가 배열이 아닙니다:', reviewsData);
-                    }
-                }
+                fetchReviews();
                 
             } catch (error) {
                 console.error('Error fetching menu details:', error);
@@ -166,6 +171,8 @@ export default function DetailPage() {
                 const newRatings = calculateAverageRating(updatedReviews);
                 setRatings(newRatings);
 
+                fetchReviews();
+                
                 return Promise.resolve();
 
             } catch (error) {
