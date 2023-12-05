@@ -29,7 +29,7 @@ const RatingBar = ({ reviews }) => {
     // 별점 바 그리기
     const ratingBars = frequency.map((count, index) => (
         <span key={index + 1}>
-        <div className="bar-label">{index + 1}점</div>
+        <div className="bar-label">{5 - index}점</div>
         <div className="bar-container">
             <div
             className="yellow-bar"

@@ -2,7 +2,7 @@ import React from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import TodayMenuImage from '/todaymenu2.png';
+import TodayMenuImage from '/todaymenu3.png';
 import SchoolImage from '/school.jpg'; 
 import { StyledCarousel } from './NavStyle';
 

@@ -157,7 +157,7 @@ export const StyledCarousel = styled(Slider)`
 
     .carousel-inner {
       width: 100%;
-      height: 350px; /* 이미지 높이 변경 */
+      height: 200px; /* 이미지 높이 변경 */
       padding-left: 20px;
     }
 
