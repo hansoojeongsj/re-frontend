@@ -21,8 +21,9 @@ const RatingBar = ({ reviews }) => {
         // 리뷰 데이터에서 별점 빈도수 계산
         const newFrequency = [0, 0, 0, 0, 0];
         reviews.forEach((review) => {
-            newFrequency[review.star - 1]++;
+            newFrequency[5 - review.star]++;
         });
+        console.log('Frequency:', newFrequency);
         setFrequency(newFrequency);
     }, [reviews]);
 
@@ -226,8 +227,8 @@ export default function DetailPage() {
                         <D.ReviewLineBottom><hr /></D.ReviewLineBottom>
                         <D.ReviewList>
                             {Array.isArray(reviews) && reviews.length > 0 ? (
-                                reviews.map((review) => (
-                                    <div key={review.id}>
+                                reviews.map((review, index) => (
+                                    <div key={index}>
                                         <p className="username">{review.nickname}</p>
                                         <p className="date">{review.date}</p>
                                         <div className='star-container'>
