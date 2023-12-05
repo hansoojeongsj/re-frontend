@@ -9,6 +9,19 @@ export const NavWrapper = styled.div`
   @media screen and (max-width: 370px){
     padding: 1em;
   }
+  
+  .search-results-container {
+    display: flex;
+    justify-content: left;
+    margin-top: 10px;
+    font-size: 15px;
+    flex-wrap: wrap;
+    gap: 13px;
+    margin-bottom: 10px;
+  font-weight: bolder;
+  cursor: pointer;
+
+  }
 `;
 
 export const NavContent = styled.div`
@@ -69,7 +82,6 @@ export const GrayBox = styled.div`
   font-size: 20px; 
   padding-left: 10px;
   margin-right: 15px; 
-
   }
 `;
 
@@ -163,7 +175,8 @@ export const StyledCarousel = styled(Slider)`
       .slick-next:before {
         font-size: 20px;
       }
-`;
+    }
+  `
 
 
 
