@@ -1,4 +1,5 @@
 <img src="https://github.com/sogongteam9/re-frontend/blob/main/DUKSUNG-ORDER/public/logo.png" width="150" height="150">
+
 ### 2023 덕성여자대학교 소프트웨어공학 학식 9해조, 덕성오더 Repo입니다 <br> 
 
 # Front-end developer 소개
